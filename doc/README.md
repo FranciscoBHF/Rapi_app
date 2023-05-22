@@ -33,7 +33,7 @@ erDiagram
     }
     PlatoPedido{
         Medium_unsigned idPlato PK,FK
-        Medium_unsigned idPedido PK,FK
+        Medium_unsigned numero PK,FK
         tinyint_unsigned cantPlatos
         decimal(7_2) detalle 
     }
