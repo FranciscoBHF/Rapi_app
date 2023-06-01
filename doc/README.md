@@ -3,8 +3,8 @@ erDiagram
     Restaurante{
         Smallint_unsigned  domicilio PK
         varchar(45) restaurant
-        varchar(45) email
-        char(64) pasword UK
+        varchar(45) email UK
+        char(64) password 
 
     }
     Plato{
@@ -23,7 +23,7 @@ erDiagram
         char(64) password
     }
     Pedido{
-        int numero PK
+        Medium_unsigned numero PK
         Smallint_unsigned domicilio FK
         Medium_unsigned idCliente FK
         datetime fecha
