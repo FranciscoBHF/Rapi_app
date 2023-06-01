@@ -4,7 +4,7 @@ erDiagram
         Smallint_unsigned  domicilio PK
         varchar(45) restaurant
         varchar(45) email
-        varchar(64) pasword
+        char(64) pasword UK
 
     }
     Plato{
@@ -17,10 +17,10 @@ erDiagram
     }   
     Cliente{
         MEDIUMINT_UNSIGNED idCliente PK
-        varchar(45) email 
+        varchar(45) email UK
         varchar(45) cliente
         varchar(45) apellido
-        varchar(64) password
+        char(64) password
     }
     Pedido{
         int numero PK
