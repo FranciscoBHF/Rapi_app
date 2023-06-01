@@ -1,12 +1,12 @@
-drop database if exists comidapp;
-create database comidapp;
-use comidapp;
+drop database if exists 5to_comidapp;
+create database 5to_comidapp;
+use 5to_comidapp;
 CREATE table Restaurante
 (
 restaurante varchar(45),
 domicilio varchar(45) not null,
-email varchar(45) not null,
-pasword varchar(64),
+email varchar(45) not null unique,
+pasword char(64),
 primary key (domicilio)
 );
 create table Plato
@@ -24,10 +24,10 @@ REFERENCES Restaurante(domicilio)
 create table Cliente
 (
 idCliente mediumint unsigned,
-email varchar(45) not null ,
+email varchar(45) not null unique,
 cliente varchar(45),
 apellido varchar(45),
-pasword varchar(45),
+pasword char(64),
 primary key (idCliente)
 );
 create table Pedido
