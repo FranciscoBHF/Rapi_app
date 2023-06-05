@@ -27,7 +27,6 @@ erDiagram
         Smallint_unsigned domicilio FK
         Medium_unsigned idCliente FK
         datetime fecha
-        decimal(7_2) precio_total 
         float valoracion 
         varchar(45) descripcion
     }
