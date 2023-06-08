@@ -35,7 +35,6 @@ create table Pedido
 idCliente mediumint unsigned,
 numero mediumint unsigned not null,
 domicilio varchar(45),
-idPlatoPedido int,
 idPlato int,
 fecha datetime,
 valoracion float(10)not null,
