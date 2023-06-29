@@ -57,3 +57,9 @@ references Plato(idPlato),
 constraint fk_PlatoPedi foreign key(numero)
 references Pedido(numero)
 );
+Delimiter $$
+Create procedure RegistrarCliente (in unidCliente mediumint unsigned, in unemail varchar(45),in uncliente varchar(45), in unapellido varchar(45),in unpasword char(64))
+begin
+	Insert into Cliente (idCliente,email,cliente,apellido,pasword)
+	values (unidCliente,unemail,uncliente,unapellido,SHA2(unpasword,256));
+end $$
