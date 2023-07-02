@@ -76,7 +76,15 @@ begin
 	INSERT into PlatoPedido (idPlato,numero,cantPlatos,detalle)
 	values (unidPlato,unnumero,uncantPlatos,undetalle);
 END
-CREATE FUNCTION GananciaResto (undomicilio, unfecha1, unfecha2) returns FLOAT 
-reads sql data
+DELIMITER $$
+CREATE FUNCTION GananciaResto (undomicilio SMALLINT UNSIGNED, unfecha1 DATETIME, unfecha2 DATETIME) returns FLOAT  reads sql data
 BEGIN
+	declare resultado FLOAT;
+	select sum(precio*count(plato)) into resultado
+	from Plato P
+	join Restaurante R on P.domicilio = R.domicilio
+	WHERE Domicilio = undomicilio
+	and fecha BETWEEN unfecha1 and unfecha2;
 	
+	return resultado$$
+END
