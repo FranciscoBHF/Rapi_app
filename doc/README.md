@@ -8,7 +8,7 @@ erDiagram
 
     }
     Plato{
-        int idPlato PK
+        medium_unsigned idPlato PK
         Smallint_unsigned domicilio FK
         varchar(45) plato
         varchar(45) descripcion
