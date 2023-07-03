@@ -88,3 +88,11 @@ BEGIN
 	
 	return resultado$$
 END
+DELIMITER $$
+CREATE Procedure Buscar (in Cadena varchar(45))
+BEGIN
+	Select Plato
+	from Plato P
+	JOIN Restaurante R on P.domicilio = R.domicilio
+	where match (nombre, descripcion, restaurante) AGAINST (Cadena);
+END
