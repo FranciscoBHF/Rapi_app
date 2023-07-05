@@ -1,4 +1,3 @@
--- Active: 1687984008391@@127.0.0.1@3306
 drop database if exists 5to_comidapp;
 create database 5to_comidapp;
 use 5to_comidapp;
@@ -67,17 +66,26 @@ begin
 	values (unidCliente,unemail,uncliente,unapellido,SHA2(unpasword,256));
 end$$
 DELIMITER $$
-CREATE PROCEDURE AltaRestaurante(in unrestaurante varchar(45), in unpasword char(64), in unemail varchar(45))$$
-CREATE PROCEDURE AltaPlato(In unidPlato mediumint UNSIGNED,in undomicilio SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcionP VARCHAR(45),in unprecio DECIMAL(7,2),in undisponible bool)$$
-CREATE PROCEDURE AltaPedido(in unnumero mediumint UNSIGNED, in unfecha DATETIME, in unvaloracion FLOAT,in undescripcionPE VARCHAR(45))$$
-CREATE PROCEDURE AltaPlatoPedido(in uncantPlatos TINYINT UNSIGNED,in undetalle DECIMAL(7,2))
+CREATE PROCEDURE AltaRestaurante(in unrestaurante varchar(45), in unpasword char(64), in unemail varchar(45))
 begin
 	Insert into Restaurante (Domicilio,restaurante,email,pasword)
 	VALUES (undomicilio,unrestaurante,unemail,unpasword);
+end$$
+DELIMITER $$
+CREATE PROCEDURE AltaPlato(In unidPlato mediumint UNSIGNED,in undomicilio SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcionP VARCHAR(45),in unprecio DECIMAL(7,2),in undisponible bool)
+begin
 	Insert into Plato (idPlato, domicilio, Plato, descripcion, precio, disponible)
 	values (unidPlato, undomicilio, unplato, undescripcionP, unprecio, undisponible);
+end$$
+DELIMITER $$
+CREATE PROCEDURE AltaPedido(in unnumero mediumint UNSIGNED, in unfecha DATETIME, in unvaloracion FLOAT,in undescripcionPE VARCHAR(45))
+begin 
 	insert into Pedido(numero,domicilio,idCliente,fecha,valoracion,descripcion)
 	values(unnumero,undomicilio,unidCliente,unfecha,unvaloracion,undescripcionPE);
+end$$
+DELIMITER $$
+CREATE PROCEDURE AltaPlatoPedido(in uncantPlatos TINYINT UNSIGNED,in undetalle DECIMAL(7,2))
+begin
 	INSERT into PlatoPedido (idPlato,numero,cantPlatos,detalle)
 	values (unidPlato,unnumero,uncantPlatos,undetalle);
 END$$
