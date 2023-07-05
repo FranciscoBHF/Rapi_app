@@ -1,3 +1,4 @@
+-- Active: 1687984008391@@127.0.0.1@3306
 drop database if exists 5to_comidapp;
 create database 5to_comidapp;
 use 5to_comidapp;
@@ -66,7 +67,10 @@ begin
 	values (unidCliente,unemail,uncliente,unapellido,SHA2(unpasword,256));
 end$$
 DELIMITER $$
-CREATE PROCEDURE AltaTodo (In unidPlato mediumint UNSIGNED,in undomicilio SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcionP VARCHAR(45),in unprecio DECIMAL(7,2),in undisponible bool,in uncantPlatos TINYINT UNSIGNED,in undetalle DECIMAL(7,2),in unnumero mediumint UNSIGNED, in unfecha DATETIME, in unvaloracion FLOAT, in unrestaurante varchar(45), in unpasword char(64), in unemail varchar(45),in undescripcionPE VARCHAR(45))
+CREATE PROCEDURE AltaRestaurante(in unrestaurante varchar(45), in unpasword char(64), in unemail varchar(45))$$
+CREATE PROCEDURE AltaPlato(In unidPlato mediumint UNSIGNED,in undomicilio SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcionP VARCHAR(45),in unprecio DECIMAL(7,2),in undisponible bool)$$
+CREATE PROCEDURE AltaPedido(in unnumero mediumint UNSIGNED, in unfecha DATETIME, in unvaloracion FLOAT,in undescripcionPE VARCHAR(45))$$
+CREATE PROCEDURE AltaPlatoPedido(in uncantPlatos TINYINT UNSIGNED,in undetalle DECIMAL(7,2))
 begin
 	Insert into Restaurante (Domicilio,restaurante,email,pasword)
 	VALUES (undomicilio,unrestaurante,unemail,unpasword);
