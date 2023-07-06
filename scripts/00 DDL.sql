@@ -1,3 +1,4 @@
+-- Active: 1687984008391@@127.0.0.1@3306@5to_comidapp
 drop database if exists 5to_comidapp;
 create database 5to_comidapp;
 use 5to_comidapp;
@@ -114,7 +115,8 @@ BEGIN
 	Select Plato
 	from Plato P
 	JOIN Restaurante R on P.domicilio = R.domicilio
-	where match (Plato, descripcion, restaurante) AGAINST (Cadena IN BOOLEAN MODE);
+	where match (Plato, descripcion) AGAINST (Cadena IN BOOLEAN MODE)
+	or WHERE match (restaurante) AGAINST (Cadena in boolean mode);
 END$$
 
 CALL RegistrarCliente1(1, 'roberto@gmail.com', 'roberto', 'guaymayen', '321')$$
