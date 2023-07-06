@@ -128,7 +128,4 @@ CALL AltaPlatoPedido(1,1,4,1000.50)$$
 CALL AltaPlatoPedido(1,2,4,1000.50)$$
 
 CALL  Buscar('Las palmitas')$$
-	from Plato P
-	JOIN Restaurante R on P.domicilio = R.domicilio
-	where match (Plato, descripcion, restaurante) AGAINST (Cadena);
 END$$
