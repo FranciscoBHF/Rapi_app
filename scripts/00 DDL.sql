@@ -1,14 +1,14 @@
--- Active: 1687984008391@@127.0.0.1@3306@5to_comidapp
 drop database if exists 5to_comidapp;
 create database 5to_comidapp;
 use 5to_comidapp;
 CREATE table Restaurante
 (
+idRestaurant SMALLINT UNSIGNED,  
 restaurante varchar(45),
-domicilio SMALLINT UNSIGNED not null,
+domicilio varchar(45) not null,
 email varchar(45) not null unique,
 pasword char(64),
-primary key (domicilio),
+primary key (idRestaurant),
 FULLTEXT (restaurante )
 );
 create table Plato
@@ -16,12 +16,12 @@ create table Plato
 Plato varchar(45),
 descripcion varchar (45),
 precio decimal(7,2),
-domicilio SMALLINT UNSIGNED,
+idRestaurant SMALLINT UNSIGNED,
 disponible bool,
 idPLato mediumint unsigned,
 primary key(idPlato),
-CONSTRAINT FK_Restaurante_Plato FOREIGN KEY (domicilio)
-REFERENCES Restaurante(domicilio),
+CONSTRAINT FK_Restaurante_Plato FOREIGN KEY (idRestaurant)
+REFERENCES Restaurante(idRestaurant),
 FULLTEXT (Plato,descripcion)
 );
 create table Cliente
@@ -37,14 +37,14 @@ create table Pedido
 (
 idCliente mediumint unsigned,
 numero mediumint unsigned not null,
-domicilio SMALLINT UNSIGNED,
+idRestaurant SMALLINT UNSIGNED,
 idPlato int,
 fecha datetime,
 valoracion float(10)not null,
 descripcion varchar(45)not null,
 primary key (numero),
-constraint fk_Restaurante_Pedido foreign key(domicilio)
-references Restaurante(domicilio),
+constraint fk_Restaurante_Pedido foreign key(idRestaurant)
+references Restaurante(idRestaurant),
 constraint FK_Cliente_idCliente foreign key(idCliente)
 references Cliente(idCliente)
 );
@@ -69,24 +69,24 @@ begin
 end$$
 
 DELIMITER $$
-CREATE PROCEDURE AltaRestaurante(in unrestaurante varchar(45),in undomicilio SMALLINT UNSIGNED,in unpasword char(64), in unemail varchar(45))
+CREATE PROCEDURE AltaRestaurante(in unidRestaurant SMALLINT UNSIGNED,in unrestaurante varchar(45),in undomicilio varchar(45),in unpasword char(64), in unemail varchar(45))
 begin
-	Insert into Restaurante (Domicilio,restaurante,email,pasword)
-	VALUES (undomicilio,unrestaurante,unemail,unpasword);
+	Insert into Restaurante (idRestaurant, domicilio,restaurante,email,pasword)
+	VALUES (unidRestaurant,undomicilio, unrestaurante, unemail, unpasword);
 end$$
 
 DELIMITER $$
-CREATE PROCEDURE AltaPlato(In unidPlato mediumint UNSIGNED,in undomicilio SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcionP VARCHAR(45),in unprecio DECIMAL(7,2),in undisponible bool)
+CREATE PROCEDURE AltaPlato(In unidPlato mediumint UNSIGNED,in unidRestaurant SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcionP VARCHAR(45),in unprecio DECIMAL(7,2),in undisponible bool)
 begin
-	Insert into Plato (idPlato, domicilio, Plato, descripcion, precio, disponible)
-	values (unidPlato, undomicilio, unplato, undescripcionP, unprecio, undisponible);
+	Insert into Plato (idPlato, idRestaurant, Plato, descripcion, precio, disponible)
+	values (unidPlato, unidRestaurant, unplato, undescripcionP, unprecio, undisponible);
 end$$
 
 DELIMITER $$
-CREATE PROCEDURE AltaPedido(in unnumero mediumint UNSIGNED, in unfecha DATETIME, in unvaloracion FLOAT,in undescripcionPE VARCHAR(45),in undomicilio SMALLINT UNSIGNED,in unidCliente mediumint unsigned)
+CREATE PROCEDURE AltaPedido(in unnumero mediumint UNSIGNED, in unfecha DATETIME, in unvaloracion FLOAT,in undescripcionPE VARCHAR(45),in unidRestaurant SMALLINT UNSIGNED,in unidCliente mediumint unsigned)
 begin 
-	insert into Pedido(numero,domicilio,idCliente,fecha,valoracion,descripcion)
-	values(unnumero,undomicilio,unidCliente,unfecha,unvaloracion,undescripcionPE);
+	insert into Pedido(numero,idRestaurant,idCliente,fecha,valoracion,descripcion)
+	values(unnumero,unidRestaurant,unidCliente,unfecha,unvaloracion,undescripcionPE);
 end$$
 
 DELIMITER $$
@@ -96,31 +96,30 @@ begin
 	values (unidPlato,unnumero,uncantPlatos,undetalle);
 END$$
 DELIMITER $$
-CREATE FUNCTION GananciaResto (undomicilio SMALLINT UNSIGNED, unfecha1 DATETIME, unfecha2 DATETIME) returns FLOAT  reads sql data
+CREATE FUNCTION GananciaResto (unidRestaurant SMALLINT UNSIGNED, unfecha1 DATETIME, unfecha2 DATETIME) returns FLOAT  reads sql data
 BEGIN
 	declare resultado FLOAT;
 
 	select sum(detalle*cantPlatos) into resultado
 	from PlatoPedido P
 	join Pedido p2 on p2.numero = P.numero 
-	WHERE Domicilio = undomicilio
+	WHERE idRestaurant = unidRestaurant
 	and fecha BETWEEN unfecha1 and unfecha2;
 	
 	return resultado;
 END$$
 DELIMITER $$
-DROP PROCEDURE Buscar $$
 CREATE Procedure Buscar (in Cadena varchar(45))
 BEGIN
 	Select Plato
 	from Plato P
-	JOIN Restaurante R on P.domicilio = R.domicilio
+	JOIN Restaurante R on P.idRestaurant = R.idRestaurant
 	where match (Plato, descripcion) AGAINST (Cadena IN BOOLEAN MODE)
-	or WHERE match (restaurante) AGAINST (Cadena in boolean mode);
+	or match (restaurante) AGAINST (Cadena in boolean mode);
 END$$
 
 CALL RegistrarCliente1(1, 'roberto@gmail.com', 'roberto', 'guaymayen', '321')$$
-CALL AltaRestaurante('Las palmitas',1,'pe','LasPalmitas@gmail.com')$$
+CALL AltaRestaurante(1, 'Las palmitas','pepelepu500','pe','LasPalmitas@gmail.com')$$
 CALL AltaPlato(1,1,'pizz-a','Una pizza clasita con queso y salsa', 500, TRUE)$$
 CALL AltaPedido( 1, '2000-02-29' , 2.5 , 'res papas con chedar y una pizz-a',1,1)$$
 CALL AltaPedido( 2, '2000-03-10' , 2.5 , 'res papas con chedar y una pizz-a',1,1)$$
@@ -128,4 +127,4 @@ CALL AltaPlatoPedido(1,1,4,1000.50)$$
 CALL AltaPlatoPedido(1,2,4,1000.50)$$
 
 CALL  Buscar('Las palmitas')$$
-END$$
+
