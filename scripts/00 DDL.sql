@@ -60,6 +60,18 @@ references Plato(idPlato),
 constraint fk_PlatoPedi foreign key(numero)
 references Pedido(numero)
 );
+create table VentaResto
+(
+idRestaurant SMALLINT UNSIGNED,
+idPlato mediumint unsigned,
+fecha datetime,
+monto DECIMAL(9,2),
+constraint pk_VentaResto primary key(idRestaurant,idPlato,fecha),
+constraint Fk_VentaRestaurant foreign key (idRestaurant)
+references Restaurante(idRestaurant),
+constraint fk_VentaPlato foreign key (idPlato)
+references Plato(idPlato)
+);
 
 DELIMITER $$
 Create procedure RegistrarCliente1 (in unidCliente mediumint unsigned, in unemail varchar(45),in uncliente varchar(45), in unapellido varchar(45),in unpasword char(64))
@@ -127,4 +139,3 @@ CALL AltaPlatoPedido(1,1,4,1000.50)$$
 CALL AltaPlatoPedido(1,2,4,1000.50)$$
 
 CALL  Buscar('Las palmitas')$$
-
