@@ -1,7 +1,8 @@
 ```mermaid
 erDiagram
     Restaurante{
-        Smallint_unsigned  domicilio PK
+        Smallint_unsigned  idrestaurante PK
+        varchar(45) domicilio 
         varchar(45) restaurant
         varchar(45) email UK
         char(64) password 
@@ -9,7 +10,7 @@ erDiagram
     }
     Plato{
         medium_unsigned idPlato PK
-        Smallint_unsigned domicilio FK
+        Smallint_unsigned idrestaurante FK
         varchar(45) plato
         varchar(45) descripcion
         decimal(7_2) precio
@@ -24,7 +25,7 @@ erDiagram
     }
     Pedido{
         Medium_unsigned numero PK
-        Smallint_unsigned domicilio FK
+        Smallint_unsigned  idrestaurante FK
         Medium_unsigned idCliente FK
         datetime fecha
         float valoracion 
@@ -36,9 +37,18 @@ erDiagram
         tinyint_unsigned cantPlatos
         decimal(7_2) detalle 
     }
+    VentaResto{
+        datetime fecha PK
+        Smallint_unsigned  idrestaurante PK,Fk
+        Medium_unsigned idPlato PK,FK
+        decimal(9_2) monto 
+    }
     Plato }|--|| Restaurante : ""
     Pedido }|--|| Restaurante : ""
     PlatoPedido }|--|| Plato : ""
     PlatoPedido }|--|| Pedido : ""
     Pedido }|--|| Cliente : ""
+    VentaResto }|--|| Restaurante : ""
+    VentaResto }|--|| Plato : ""
+
 ```
