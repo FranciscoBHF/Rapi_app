@@ -38,7 +38,8 @@ erDiagram
         decimal(7_2) detalle 
     }
     VentaResto{
-        datetime fecha PK
+        tinyint_unsigned mes PK
+        int ano PK
         Smallint_unsigned  idrestaurante PK,Fk
         Medium_unsigned idPlato PK,FK
         decimal(9_2) monto 
@@ -49,6 +50,6 @@ erDiagram
     PlatoPedido }|--|| Plato : ""
     PlatoPedido }|--|| Pedido : ""
     Pedido }|--|| Cliente : ""
-    VentaResto }|--|| Plato : ""
+    VentaResto }|--|| PlatoPedido : ""
 
 ```
