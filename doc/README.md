@@ -43,12 +43,12 @@ erDiagram
         Medium_unsigned idPlato PK,FK
         decimal(9_2) monto 
     }
+    VentaResto }|--|| Restaurante : ""
     Plato }|--|| Restaurante : ""
     Pedido }|--|| Restaurante : ""
     PlatoPedido }|--|| Plato : ""
     PlatoPedido }|--|| Pedido : ""
     Pedido }|--|| Cliente : ""
-    VentaResto }|--|| Restaurante : ""
     VentaResto }|--|| Plato : ""
 
 ```
