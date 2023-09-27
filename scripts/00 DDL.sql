@@ -144,20 +144,21 @@ DELIMITER $$
 CREATE TRIGGER IncrementarMontoVenta AFTER INSERT ON PlatoPedido FOR EACH ROW
 BEGIN
     DECLARE ventaExistente INT;
+   	DEcLARe varRestaurante Smallint;
     SELECT COUNT(*) INTO ventaExistente
     FROM VentaResto
-    WHERE idRestaurant = NEW.idRestaurant
+    WHERE idRestaurant = VentaResto.NEW.idRestaurant
     AND idPlato = NEW.idPlato
     AND fecha = CURDATE();
     IF ventaExistente > 0 THEN
         UPDATE VentaResto
         SET monto = monto + (NEW.detalle * NEW.cantPlatos)
-        WHERE idRestaurant = NEW.idRestaurant
+        WHERE idRestaurant = VentaResto.NEW.idRestaurant
         AND idPlato = NEW.idPlato
         AND fecha = CURDATE();
     ELSE
         INSERT INTO VentaResto (idRestaurant, idPlato, fecha, monto)
-        VALUES (NEW.idRestaurant, NEW.idPlato, CURDATE(), (NEW.detalle * NEW.cantPlatos));
+        VALUES (VentaResto.NEW.idRestaurant, NEW.idPlato, CURDATE(), (NEW.detalle * NEW.cantPlatos));
     END IF;
 END$$
 DELIMITER $$
@@ -167,7 +168,7 @@ FOR EACH ROW
 BEGIN
     UPDATE VentaResto
     SET monto = monto - (OLD.detalle * OLD.cantPlatos)
-    WHERE idRestaurant = OLD.idRestaurant
+    WHERE idRestaurant = VentaResto.OLD.idRestaurant
     AND idPlato = OLD.idPlato
     AND fecha = CURDATE();
 END$$
