@@ -144,7 +144,6 @@ DELIMITER $$
 CREATE TRIGGER IncrementarMontoVenta AFTER INSERT ON PlatoPedido FOR EACH ROW
 BEGIN
     DECLARE ventaExistente INT;
-   	DEcLARe varRestaurante Smallint;
     SELECT COUNT(*) INTO ventaExistente
     FROM VentaResto
     WHERE idRestaurant = VentaResto.NEW.idRestaurant
