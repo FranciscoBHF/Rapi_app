@@ -144,6 +144,9 @@ CALL  Buscar('Las palmitas')$$
 DELIMITER $$
 CREATE TRIGGER IncrementarMontoVenta AFTER INSERT ON PlatoPedido FOR EACH ROW
 BEGIN
+	declare VarMes tinyint UNSIGNED;
+	declare VarAno year;
+	set 
 	if (exists (SELECT *
     	FROM VentaResto
     	WHERE idPlato = NEW.idPlato
@@ -153,7 +156,7 @@ BEGIN
         	SET monto = monto + NEW.detalle
         	WHERE idPlato = NEW.idPlato
             and mes = MONTH(CURRENT_DATE())
-        	and ano = YEAR(CURRENT_DATE()) ;
+        	and ano = YEAR(CURRENT_DA TE()) ;
 	ELSE
         	INSERT INTO VentaResto (idRestaurant, idPlato, mes, ano, monto)
         	VALUES (idRestaurant, NEW.idPlato, mes, ano , (NEW.detalle * NEW.cantPlatos));
