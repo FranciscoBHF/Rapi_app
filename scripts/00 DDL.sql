@@ -64,13 +64,14 @@ create table VentaResto
 (
 idRestaurant SMALLINT UNSIGNED,
 idPlato mediumint unsigned,
-fecha datetime,
+mes tinyint unsigned,
+ano YEAR,
 monto DECIMAL(9,2),
-constraint pk_VentaResto primary key(idRestaurant,idPlato,fecha),
+constraint pk_VentaResto primary key(idRestaurant,idPlato,mes,ano),
 constraint Fk_VentaRestaurant foreign key (idRestaurant)
 references Restaurante(idRestaurant),
-constraint fk_VentaPlato foreign key (idPlato)
-references Plato(idPlato)
+constraint fk_VentaPlatoPedido foreign key (idPlato)
+references PlatoPedido(idPlato)
 );
 
 DELIMITER $$
@@ -143,31 +144,28 @@ CALL  Buscar('Las palmitas')$$
 DELIMITER $$
 CREATE TRIGGER IncrementarMontoVenta AFTER INSERT ON PlatoPedido FOR EACH ROW
 BEGIN
-    DECLARE ventaExistente INT;
-    SELECT COUNT(*) INTO ventaExistente
-    FROM VentaResto
-    WHERE idRestaurant = VentaResto.NEW.idRestaurant
-    AND idPlato = NEW.idPlato
-    AND fecha = CURDATE();
-    IF ventaExistente > 0 THEN
-        UPDATE VentaResto
-        SET monto = monto + (NEW.detalle * NEW.cantPlatos)
-        WHERE idRestaurant = VentaResto.NEW.idRestaurant
-        AND idPlato = NEW.idPlato
-        AND fecha = CURDATE();
-    ELSE
-        INSERT INTO VentaResto (idRestaurant, idPlato, fecha, monto)
-        VALUES (VentaResto.NEW.idRestaurant, NEW.idPlato, CURDATE(), (NEW.detalle * NEW.cantPlatos));
+	if (exists (SELECT *
+    	FROM VentaResto
+    	WHERE idPlato = NEW.idPlato
+    	and mes = MONTH(CURRENT_DATE())
+        and ano = YEAR(CURRENT_DATE()) ))THEN
+        	UPDATE VentaResto
+        	SET monto = monto + NEW.detalle
+        	WHERE idPlato = NEW.idPlato
+            and mes = MONTH(CURRENT_DATE())
+        	and ano = YEAR(CURRENT_DATE()) ;
+	ELSE
+        	INSERT INTO VentaResto (idRestaurant, idPlato, mes, ano, monto)
+        	VALUES (idRestaurant, NEW.idPlato, mes, ano , (NEW.detalle * NEW.cantPlatos));
     END IF;
 END$$
 DELIMITER $$
-CREATE TRIGGER DecrementarMontoVenta
-AFTER DELETE ON PlatoPedido
+CREATE TRIGGER DecrementarMontoVenta AFTER DELETE ON PlatoPedido
 FOR EACH ROW
 BEGIN
     UPDATE VentaResto
-    SET monto = monto - (OLD.detalle * OLD.cantPlatos)
-    WHERE idRestaurant = VentaResto.OLD.idRestaurant
-    AND idPlato = OLD.idPlato
-    AND fecha = CURDATE();
+    SET monto = monto - OLD.detalle
+    WHERE idPlato = OLD.idPlato
+   	and mes = MONTH(CURRENT_DATE())
+    and ano = YEAR(CURRENT_DATE()) ;
 END$$
