@@ -6,7 +6,7 @@ classDiagram
         string domicilio
         char password
         string email 
-        Plato platos
+        list(Plato) platos
     }
     class Plato{
         int id
