@@ -6,6 +6,7 @@ classDiagram
         string domicilio
         char password
         string email 
+        Plato platos
     }
     class Plato{
         int id
@@ -13,6 +14,8 @@ classDiagram
         string descripcion
         float precio
         bool disponible
+        VentaResto provisional
+        PlatoPedido pedidos
     }
     class Cliente{
         int id
@@ -20,6 +23,7 @@ classDiagram
         string cliente
         string apellido
         string password
+        Pedido pedidos
     }
     class Pedido{
         int id
@@ -31,6 +35,7 @@ classDiagram
         int id
         int cantPlatos
         float detalle
+        Pedidos pedidos
     }
     class VentaResto{
         tinyint mes
