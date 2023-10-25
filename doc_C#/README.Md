@@ -15,7 +15,7 @@ classDiagram
         float precio
         bool disponible
         VentaResto provisional
-        PlatoPedido pedidos
+        list(PlatoPedido) pedidos
     }
     class Cliente{
         int id
@@ -23,7 +23,7 @@ classDiagram
         string cliente
         string apellido
         string password
-        Pedido pedidos
+        list(Pedido) pedidos
     }
     class Pedido{
         int id
@@ -35,7 +35,7 @@ classDiagram
         int id
         int cantPlatos
         float detalle
-        Pedidos pedidos
+        list(Pedidos) pedidos
     }
     class VentaResto{
         tinyint mes
