@@ -12,7 +12,7 @@ classDiagram
         int id
         string plato
         string descripcion
-        float precio
+        decimal precio
         bool disponible
         VentaResto provisional
         list(PlatoPedido) pedidos
@@ -34,13 +34,13 @@ classDiagram
     class PlatoPedido{
         int id
         int cantPlatos
-        float detalle
+        decimal detalle
         list(Pedidos) pedidos
     }
     class VentaResto{
         tinyint mes
         int año
-        float monto
+        decimal monto
     }
     Pedido --o Cliente
     PlatoPedido "1..n" --o Pedido 
