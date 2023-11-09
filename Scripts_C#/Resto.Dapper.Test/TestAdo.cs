@@ -1,7 +1,7 @@
 using Resto.Dapper;
 using Biblioteca;
 
-namespace Super.Test;
+namespace Resto.Dapper.Test;
 public class TestAdo
 {
     protected readonly IAdo Ado;
