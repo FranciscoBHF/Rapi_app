@@ -7,12 +7,12 @@ namespace Biblioteca
 {
     public class Cliente
     {
-        public int id {get ; set ;}
+        public uint id {get ; set ;}
         public string email {get ; set ;}
         public string cliente {get ; set ;}
         public string apellido {get ; set ;}
         public string password {get ; set ;}
-        public Cliente(int id, string email, string cliente, string apellido, string password)
+        public Cliente(uint id, string email, string cliente, string apellido, string password)
             {
                 this.id = id;
                 this.email = email;

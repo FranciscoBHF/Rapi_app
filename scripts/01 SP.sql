@@ -5,7 +5,7 @@ DELIMITER $$
 Create procedure RegistrarCliente1 (in unidCliente mediumint unsigned, in unemail varchar(45),in uncliente varchar(45), in unapellido varchar(45),in unpasword char(64))
 begin
 	Insert into Cliente (idCliente,email,cliente,apellido,pasword)
-	values (unidCliente,unemail,uncliente,unapellido,SHA2(unpasword,256));
+	values (unidCliente,unemail,uncliente,unapellido,unpasword);
 end$$
 
 DELIMITER $$
