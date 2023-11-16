@@ -17,7 +17,7 @@ CALL AltaPlato(6,3,'HAL','Una milanesa con salsa en el medio con forma circular'
 CALL AltaPedido( 1, '2000-02-29' , 2.5 , 'res papas con chedar y una pizz-a',1,1)$$
 CALL AltaPedido( 2, '2000-03-10' , 2.5 , 'res papas con chedar y una pizz-a',1,1)$$
 CALL AltaPlatoPedido(1,1,4,1000.50)$$
-CALL AltaPlatoPedido(1,2,4,1000.50)$$
+CALL AltaPlatoPedido(2,2,4,1000.50)$$
 
 CALL  Buscar('Las palmitas')$$
 

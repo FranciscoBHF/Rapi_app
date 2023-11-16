@@ -47,7 +47,7 @@ public class AdoDapper : IAdo
         = @"INSERT INTO restaurant VALUES (@email, @restaurant, @domicilio, @pasword)";
         public void AltaRestaurant(Restaurant restaurant, string pasword)
         => _conexion.Execute(
-                _queryAltaCliente,
+                _queryAltaResto,
                 new
                 {
                     email = restaurant.email,
@@ -56,8 +56,13 @@ public class AdoDapper : IAdo
                     pasword = pasword
                 }
             );
-    public Cliente? _queryAltaPorResto(string email, string pasword)
-        => _conexion.QueryFirstOrDefault<Cliente>(_queryRestoPass, new {unEmail = email, unPass = pasword});
+    public Restaurant _queryAltaPorResto(string email, string pasword)
+        => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new {unEmail = email, unPass = pasword});
+
+    public Restaurant? RestaurantPorPass(string email, string pass)
+    {
+        throw new NotImplementedException();
+    }
 
     #endregion
 
