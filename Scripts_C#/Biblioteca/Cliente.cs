@@ -1,24 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Biblioteca
+namespace Biblioteca;
+public class Cliente
 {
-    public class Cliente
-    {
-        public uint id {get ; set ;}
-        public string email {get ; set ;}
-        public string cliente {get ; set ;}
-        public string apellido {get ; set ;}
-        public string password {get ; set ;}
-        public Cliente(uint id, string email, string cliente, string apellido, string password)
-            {
-                this.id = id;
-                this.email = email;
-                this.cliente = cliente;
-                this.apellido = apellido;
-                this.password = password;
-            }
-    }
+    public uint id {get ; set ;}
+    public string email {get ; set ;}
+    public string cliente {get ; set ;}
+    public string apellido {get ; set ;}
+    public string password {get ; set ;}
+    public Cliente(uint idCliente, string email, string cliente, string apellido, string pasword)
+        {
+            this.id = idCliente;
+            this.email = email;
+            this.cliente = cliente;
+            this.apellido = apellido;
+            this.password = pasword;
+        }
 }

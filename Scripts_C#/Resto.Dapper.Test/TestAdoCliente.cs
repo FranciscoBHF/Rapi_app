@@ -10,6 +10,7 @@ public class TestAdoCliente : TestAdo
     [InlineData("Chema@gmail.com", "Chems", "Palete")]
     public void TraerCliente(string email, string cliente, string pasword)
     {
+        //TODO: pensar en traer el cliente, sin su contraseña cargada (ni su modelo).
         var prueba = Ado.ClientePorPass(email, pasword);
 
         Assert.NotNull(prueba);
