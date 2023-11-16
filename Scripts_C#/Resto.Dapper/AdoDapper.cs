@@ -39,31 +39,25 @@ public class AdoDapper : IAdo
     #region Restaurant ("Terminado")
     private static readonly string _queryRestoPass
         = @"select *
-        from restaurant
+        from Restaurante
         where email = @unemail
         and pasword = SHA2(@unpass, 256)
         LIMIT 1";
         private static readonly string _queryAltaResto
-        = @"INSERT INTO restaurant VALUES (@email, @restaurant, @domicilio, @pasword)";
-        public void AltaRestaurant(Restaurant restaurant, string pasword)
+        = @"INSERT INTO restaurant VALUES (@email, @restaurante, @domicilio, @pasword)";
+        public void AltaRestaurant(Restaurant restaurante, string pasword)
         => _conexion.Execute(
                 _queryAltaResto,
                 new
                 {
-                    email = restaurant.email,
-                    restaurant = restaurant.restaurant,
-                    domicilio = restaurant.domicilio,
+                    email = restaurante.email,
+                    restaurante = restaurante.restaurante,
+                    domicilio = restaurante.domicilio,
                     pasword = pasword
                 }
             );
-    public Restaurant _queryAltaPorResto(string email, string pasword)
+    public Restaurant? RestaurantPorPass(string email,string pasword)
         => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new {unEmail = email, unPass = pasword});
-
-    public Restaurant? RestaurantPorPass(string email, string pass)
-    {
-        throw new NotImplementedException();
-    }
-
     #endregion
 
 }
