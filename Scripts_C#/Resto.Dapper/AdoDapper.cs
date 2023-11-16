@@ -40,19 +40,19 @@ public class AdoDapper : IAdo
     private static readonly string _queryRestoPass
         = @"select *
         from Restaurante
-        where email = @unemail
+        where email = @unEmail
         and pasword = SHA2(@unpass, 256)
         LIMIT 1";
         private static readonly string _queryAltaResto
-        = @"INSERT INTO restaurant VALUES (@email, @restaurante, @domicilio, @pasword)";
+        = @"INSERT INTO restaurant VALUES (@restaurante, @domicilio, @email, @pasword)";
         public void AltaRestaurant(Restaurant restaurante, string pasword)
         => _conexion.Execute(
                 _queryAltaResto,
                 new
                 {
-                    email = restaurante.email,
                     restaurante = restaurante.restaurante,
                     domicilio = restaurante.domicilio,
+                    email = restaurante.email,
                     pasword = pasword
                 }
             );
