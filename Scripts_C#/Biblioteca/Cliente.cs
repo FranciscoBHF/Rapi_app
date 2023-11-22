@@ -5,13 +5,13 @@ public class Cliente
     public string email {get ; set ;}
     public string cliente {get ; set ;}
     public string apellido {get ; set ;}
-    public string password {get ; set ;}
+    public string pasword {get ; set ;}
     public Cliente(uint idCliente, string email, string cliente, string apellido, string pasword)
         {
             this.id = idCliente;
             this.email = email;
             this.cliente = cliente;
             this.apellido = apellido;
-            this.password = pasword;
+            this.pasword = pasword;
         }
 }

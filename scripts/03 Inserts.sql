@@ -5,9 +5,9 @@ DELIMITER $$
 CALL RegistrarCliente1(1, 'roberto@gmail.com', 'roberto', 'guaymayen', '321')$$
 Call  RegistrarCliente1 (2,  "Robert@gmail.com","Rupert", "orci", "Pelele")$$
 CALL RegistrarCliente1(3, 'Chema@gmail.com', 'Chems', 'Chep', 'Palete')$$
-CALL AltaRestaurante(1, 'pepelepu500','Las Palmitas','pe','LasPalmitas@gmail.com')$$
-CALL AltaRestaurante(2, 'Obo2000','La Rioja','LaRioja@gmail.com','Che')$$
-CALL AltaRestaurante(3, 'El Tango','Apollo773','Nashe@gmail.com','Odisea2001')$$
+CALL AltaRestaurante(1, 'Las Palmitas','pepelepu500','pe','LasPalmitas@gmail.com')$$
+CALL AltaRestaurante(2, 'La Rioja','Obo2000','Che','LaRioja@gmail.com')$$
+CALL AltaRestaurante(3, 'El Tango','EApollo773','Odisea2001','Nashe@gmail.com')$$
 CALL AltaPlato(1,1,'pizz-a','Una pizza clasita con queso y salsa', 500, TRUE)$$
 CALL AltaPlato(2,1,'empa-nada','Una empanada vacia', 900, TRUE)$$
 CALL AltaPlato(3,2,'El Rio','Sopa de carne con espinaca', 700, TRUE)$$
@@ -22,4 +22,4 @@ CALL AltaPlatoPedido(2,2,4,1000.50)$$
 CALL  Buscar('Las palmitas')$$
 
 SELECT *
-from Cliente
+from Restaurante

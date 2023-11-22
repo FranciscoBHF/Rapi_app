@@ -41,10 +41,10 @@ public class AdoDapper : IAdo
         = @"select *
         from Restaurante
         where email = @unEmail
-        and pasword = SHA2(@unpass, 256)
+        and pasword = SHA2(@unPass, 256)
         LIMIT 1";
         private static readonly string _queryAltaResto
-        = @"INSERT INTO restaurant VALUES (@restaurante, @domicilio, @email, @pasword)";
+        = @"INSERT INTO Restaurante VALUES (@restaurante, @domicilio, @email, @pasword)";
         public void AltaRestaurant(Restaurant restaurante, string pasword)
         => _conexion.Execute(
                 _queryAltaResto,

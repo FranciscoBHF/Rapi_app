@@ -2,12 +2,12 @@ namespace Biblioteca
 {
     public class Restaurant
     {
-        public uint id {get ; set ;}
+        public UInt16 id {get ; set ;}
         public string restaurante {get ; set ;}
         public string domicilio {get ; set ;}
         public string email {get ; set ;}
-        public char pasword {get ; set ;}
-        public Restaurant(uint idRestaurant, string restaurante, string domicilio, string email,char pasword)
+        public string pasword {get ; set ;}
+        public Restaurant(UInt16 idRestaurant, string restaurante, string domicilio, string email,string pasword)
         {
             this.id = idRestaurant;
             this.restaurante = restaurante;
