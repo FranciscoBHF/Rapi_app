@@ -17,4 +17,19 @@ public class TestAdoCliente : TestAdo
         Assert.Equal(cliente, prueba.cliente);
         Assert.Equal(email, prueba.email);
     }
+    [Fact]
+    public void AltaCliente()
+    {
+    uint idCliente = 4;
+    string email = "Francisco@gmail.com";
+    string cliente = "Francisco";
+    string apellido = "Basualdo";
+    string pasword = "Pituficulo";
+    
+    var cliente = Ado.ClientePorPass(email, pasword);
+
+    Assert.Null(cliente);
+
+    var nuevoBasualdo = new Cliente();
+    }
 }
