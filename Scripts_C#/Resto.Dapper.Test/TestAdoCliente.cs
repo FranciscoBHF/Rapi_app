@@ -26,10 +26,10 @@ public class TestAdoCliente : TestAdo
     string apellido = "Basualdo";
     string pasword = "Pituficulo";
     
-    var cliente = Ado.ClientePorPass(email, pasword);
+    var cliente1 = Ado.ClientePorPass(email, pasword);
 
     Assert.Null(cliente);
 
-    var nuevoBasualdo = new Cliente();
+    var nuevoBasualdo = new Cliente(email,cliente,apellido);
     }
 }
