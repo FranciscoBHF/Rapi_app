@@ -14,4 +14,11 @@ public class Cliente
             this.apellido = apellido;
             this.pasword = pasword;
         }
+
+    public Cliente(string email, string? cliente, string apellido)
+    {
+        this.email = email;
+        this.cliente = cliente;
+        this.apellido = apellido;
+    }
 }

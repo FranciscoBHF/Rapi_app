@@ -1,4 +1,3 @@
-using Resto.Dapper;
 using Biblioteca;
 
 namespace Resto.Dapper.Test;
@@ -17,10 +16,10 @@ public class TestAdoCliente : TestAdo
         Assert.Equal(cliente, prueba.cliente);
         Assert.Equal(email, prueba.email);
     }
+    
     [Fact]
     public void AltaCliente()
     {
-    uint idCliente = 4;
     string email = "Francisco@gmail.com";
     string cliente = "Francisco";
     string apellido = "Basualdo";
@@ -28,8 +27,16 @@ public class TestAdoCliente : TestAdo
     
     var cliente1 = Ado.ClientePorPass(email, pasword);
 
-    Assert.Null(cliente);
+    Assert.Null(cliente1);
 
     var nuevoBasualdo = new Cliente(email,cliente,apellido);
+
+    Ado.AltaCliente (nuevoBasualdo, pasword);
+
+    var mismoCliente = Ado.ClientePorPass (email, pasword);
+
+    Assert.NotNull(mismoCliente);
+    Assert.Equal(cliente, mismoCliente.cliente);
+    Assert.Equal(apellido, mismoCliente.apellido);
     }
 }

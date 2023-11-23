@@ -2,17 +2,26 @@ DELIMITER $$
 use 5to_comidapp $$
 
 DELIMITER $$
-Create procedure RegistrarCliente1 (in unidCliente mediumint unsigned, in unemail varchar(45),in uncliente varchar(45), in unapellido varchar(45),in unpasword char(64))
+DROP PROCEDURE IF EXISTS altaCliente $$
+CREATE PROCEDURE altaCliente (OUT unIdCliente MEDIUMINT UNSIGNED, unEmail VARCHAR(45)
+							, unCliente VARCHAR(45), apellido VARCHAR(45), unPasword char(45))
+BEGIN
+	INSERT INTO Cliente (email, cliente, apellido, pasword) 
+				VALUE (unEmail, unCliente, unApellido, unPasword);
+	SET unIdCliente = LAST_INSERT_ID();
+END $$
+DELIMITER $$
+Create procedure RegistrarCliente1 (in unemail varchar(45),in uncliente varchar(45), in unapellido varchar(45),in unpasword char(64))
 begin
-	Insert into Cliente (idCliente,email,cliente,apellido,pasword)
-	values (unidCliente,unemail,uncliente,unapellido,unpasword);
+	Insert into Cliente (email,cliente,apellido,pasword)
+	values (unemail,uncliente,unapellido,unpasword);
 end$$
 
 DELIMITER $$
-CREATE PROCEDURE AltaRestaurante(in unidRestaurant SMALLINT UNSIGNED,in unrestaurante varchar(45),in undomicilio varchar(45),in unpasword char(64), in unemail varchar(45))
+CREATE PROCEDURE AltaRestaurante(in unrestaurante varchar(45),in undomicilio varchar(45),in unpasword char(64), in unemail varchar(45))
 begin
-	Insert into Restaurante (idRestaurant, domicilio,restaurante,email,pasword)
-	VALUES (unidRestaurant,undomicilio, unrestaurante, unemail, unpasword);
+	Insert into Restaurante (domicilio,restaurante,email,pasword)
+	VALUES (undomicilio, unrestaurante, unemail, unpasword);
 end$$
 
 DELIMITER $$

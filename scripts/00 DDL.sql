@@ -3,7 +3,7 @@ create database 5to_comidapp;
 use 5to_comidapp;
 CREATE table Restaurante
 (
-idRestaurant SMALLINT UNSIGNED,  
+idRestaurant SMALLINT UNSIGNED AUTO_INCREMENT,  
 restaurante varchar(45),
 domicilio varchar(45) not null,
 email varchar(45) not null unique,
@@ -26,7 +26,7 @@ FULLTEXT (Plato,descripcion)
 );
 create table Cliente
 (
-idCliente mediumint unsigned,
+idCliente mediumint unsigned AUTO_INCREMENT,
 email varchar(45) not null unique,
 cliente varchar(45),
 apellido varchar(45),
