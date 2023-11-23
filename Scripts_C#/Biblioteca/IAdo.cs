@@ -5,4 +5,5 @@ public interface IAdo
     void AltaCliente (Cliente cliente, string pasword);
     List<Cliente> ObtenerCliente();
     Restaurant? RestaurantPorPass(string email, string pass);
+    void AltaRestaurant(Restaurant nuevoPapa, string pasword);
 }

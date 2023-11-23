@@ -16,4 +16,26 @@ public class TestAdoRestaurant : TestAdo
         Assert.Equal(restaurante, prueba.restaurante);
         Assert.Equal(email, prueba.email);
     }
+    [Fact]
+    public void AltaRestaurant()
+    {
+    string restaurante = "El PAPA";
+    string domicilio = "Baticano 356";
+    string email = "Jesus@hotmail.com";
+    string pasword = "Plegarias";
+    
+    var restaurante1 = Ado.RestaurantPorPass(email, pasword);
+
+    Assert.Null(restaurante1);
+
+    var nuevoPapa = new Restaurant(restaurante,domicilio,email);
+
+    Ado.AltaRestaurant (nuevoPapa, pasword);
+
+    var mismoRestaurant = Ado.RestaurantPorPass (email, pasword);
+
+    Assert.NotNull(mismoRestaurant);
+    Assert.Equal(restaurante, mismoRestaurant.restaurante);
+    Assert.Equal(domicilio, mismoRestaurant.domicilio);
+    }
 }

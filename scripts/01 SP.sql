@@ -25,6 +25,17 @@ begin
 end$$
 
 DELIMITER $$
+DROP PROCEDURE IF EXISTS altaRestauranteC $$
+CREATE PROCEDURE altaRestauranteC (OUT unIdRestaurante SMALLINT UNSIGNED, unrestaurante VARCHAR(45)
+							, undomicilio VARCHAR(45), unemail VARCHAR(45), unpasword char(45))
+BEGIN
+	INSERT INTO Restaurante (restaurante, domicilio, email, pasword) 
+				VALUE (unrestaurante, undomicilio, unemail, unpasword);
+	SET unIdRestaurante = LAST_INSERT_ID();
+END $$
+
+DELIMITER $$
+
 CREATE PROCEDURE AltaPlato(In unidPlato mediumint UNSIGNED,in unidRestaurant SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcionP VARCHAR(45),in unprecio DECIMAL(7,2),in undisponible bool)
 begin
 	Insert into Plato (idPlato, idRestaurant, Plato, descripcion, precio, disponible)
