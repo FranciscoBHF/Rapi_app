@@ -1,6 +1,4 @@
-using Resto.Dapper;
 using Biblioteca;
-using System.ComponentModel.Design;
 
 namespace Resto.Dapper.Test;
 public class TestAdoRestaurant : TestAdo
