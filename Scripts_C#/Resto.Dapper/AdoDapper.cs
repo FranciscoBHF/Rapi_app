@@ -42,8 +42,8 @@ public class AdoDapper : IAdo
     }
     public async Task AltaClienteAsync(Cliente cliente, string pasword)
     {
-        var Cliente = await _conexion.Query( _queryAltaCliente,
-                                                                new { unEmail= email, unCliente= cliente, unApellido= apellido,unPasword=pasword});
+        var Cliente = await _conexion.QueryFirstOrDefaultAsync( _queryAltaCliente,
+                                                                new {  unCliente= cliente, unPasword=pasword});
     }
     #endregion
 
