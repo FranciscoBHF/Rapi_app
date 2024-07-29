@@ -31,9 +31,20 @@ public class AdoDapper : IAdo
                 pasword = pasword
             }
         );
+    
     public Cliente? ClientePorPass(string email, string pasword)
         => _conexion.QueryFirstOrDefault<Cliente>(_queryClientePass, new { unEmail = email, unPass = pasword });
-
+    public async Task<Cliente?> ClientePorPassAsync(string email, string pass)
+    {
+        var cliente = await _conexion.QueryFirstOrDefaultAsync<Cliente>(  _queryClientePass,
+                                                                        new { unEmail = email, unPass = pass} );
+        return cliente;
+    }
+    public async Task AltaClienteAsync(Cliente cliente, string pasword)
+    {
+        var Cliente = await _conexion.Query( _queryAltaCliente,
+                                                                new { unEmail= email, unCliente= cliente, unApellido= apellido,unPasword=pasword});
+    }
     #endregion
 
     #region Restaurant ("Terminado")
@@ -58,6 +69,13 @@ public class AdoDapper : IAdo
         );
     public Restaurant? RestaurantPorPass(string email, string pasword)
         => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
+    
+    public async Task<Restaurant?> RestaurantPorPassAsync(string email, string pasword)
+    {
+        var restaurant = await _conexion.QueryFirstOrDefaultAsync<Restaurant>(_queryRestoPass,
+                                                                            new {unemail = email, unpasword = pasword});
+        return restaurant;
+    }
 
     public void AltaCliente(Cliente cliente)
     {
@@ -68,6 +86,8 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
+
+
     #endregion
 
 }
