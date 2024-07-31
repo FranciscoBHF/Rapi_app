@@ -42,8 +42,11 @@ public class AdoDapper : IAdo
     }
     public async Task AltaClienteAsync(Cliente cliente, string pasword)
     {
-        var Cliente = await _conexion.QueryFirstOrDefaultAsync( _queryAltaCliente,
-                                                                new {  unCliente= cliente, unPasword=pasword});
+        await _conexion.QueryAsync( _queryAltaCliente,new {  
+                Unemail = cliente.email,
+                Uncliente = cliente.cliente,
+                Unapellido = cliente.apellido,
+                Unpasword = pasword});
     }
     #endregion
 
@@ -87,7 +90,19 @@ public class AdoDapper : IAdo
         throw new NotImplementedException();
     }
 
-
     #endregion
 
+    public async Task AltaRestaurantAsync(Restaurant restaurante, string pasword)
+    {
+    var restaurant = await _conexion.QueryFirstOrDefaultAsync(
+            _queryAltaResto,
+            new
+            {
+                restaurante = restaurante.restaurante,
+                domicilio = restaurante.domicilio,
+                email = restaurante.email,
+                pasword = pasword
+            }
+        );
+    }
 }

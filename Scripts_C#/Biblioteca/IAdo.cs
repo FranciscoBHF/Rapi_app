@@ -9,4 +9,5 @@ public interface IAdo
     Restaurant? RestaurantPorPass(string email, string pass);
     Task<Restaurant?> RestaurantPorPassAsync(string email, string pass);
     void AltaRestaurant(Restaurant nuevoPapa, string pasword);
+    Task AltaRestaurantAsync(Restaurant restaurant, string pasword);
 }
