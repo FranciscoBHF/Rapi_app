@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resto.Dapper", "Resto.Dappe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resto.Dapper.Test", "Resto.Dapper.Test\Resto.Dapper.Test.csproj", "{1F102A15-D4CF-4664-BCAB-7B70EE2E5644}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resto.MVC", "Resto.MVC\Resto.MVC.csproj", "{372FBF1F-00B0-442A-9893-BB939B81E35D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1F102A15-D4CF-4664-BCAB-7B70EE2E5644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F102A15-D4CF-4664-BCAB-7B70EE2E5644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F102A15-D4CF-4664-BCAB-7B70EE2E5644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{372FBF1F-00B0-442A-9893-BB939B81E35D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{372FBF1F-00B0-442A-9893-BB939B81E35D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{372FBF1F-00B0-442A-9893-BB939B81E35D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{372FBF1F-00B0-442A-9893-BB939B81E35D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
