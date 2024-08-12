@@ -10,5 +10,5 @@ public interface IAdo
     Task<Restaurant?> RestaurantPorPassAsync(string email, string pass);
     void AltaRestaurant(Restaurant nuevoPapa, string pasword);
     Task AltaRestaurantAsync(Restaurant restaurant, string pasword);
-    Task <
+    Task <List<Plato>> buscarPlato(string nombre);
 }
