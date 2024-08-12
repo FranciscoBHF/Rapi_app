@@ -71,7 +71,7 @@ END$$
 DELIMITER $$
 CREATE Procedure Buscar (in Cadena varchar(45))
 BEGIN
-	Select Plato
+	Select Plato, descripcion, precio, disponible
 	from Plato P
 	JOIN Restaurante R on P.idRestaurant = R.idRestaurant
 	where match (Plato, descripcion) AGAINST (Cadena IN BOOLEAN MODE)
