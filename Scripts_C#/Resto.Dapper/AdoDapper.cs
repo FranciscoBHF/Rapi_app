@@ -105,4 +105,9 @@ public class AdoDapper : IAdo
             }
         );
     }
+
+    public Task<List<Plato>> buscarPlato(string nombre)
+    {
+        throw new NotImplementedException();
+    }
 }
