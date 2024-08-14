@@ -1,0 +1,32 @@
+@using Biblioteca
+@model IEnumerable
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Respuestas</title>
+</head>
+<body>
+    <h2>Personas que vienen a la fiesta</h2>
+    <table>
+        <thead>
+            <tr><th>Nombre</th><th>Apellido</th><th>Telefono</th></tr>
+        </thead>
+        <tbody>
+            @foreach (EjemploMVC.Models.Invitacion invitacion in Model)
+            {
+                <tr>
+                    <td>@invitacion.Nombre</td>
+                    <td>@invitacion.Apellido</td>
+                    <td>@invitacion.Telefono</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr />
+    <a asp-action="InvitacionForm">Ingresar otra respuesta</a><br />
+    <a asp-action="Index">Volver al Inicio</a>
+</body>
+</html>
