@@ -110,4 +110,12 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
+
+    public Task<List<Plato>> TodosPlatos()
+    {
+        throw new NotImplementedException();
+    }
+    private static readonly string _queryTodosPlatos
+        = @"select *
+        from Plato";
 }

@@ -11,4 +11,5 @@ public interface IAdo
     void AltaRestaurant(Restaurant nuevoPapa, string pasword);
     Task AltaRestaurantAsync(Restaurant restaurant, string pasword);
     Task <List<Plato>> buscarPlato(string nombre);
+    Task <List<Plato>> TodosPlatos();
 }
