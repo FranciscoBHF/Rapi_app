@@ -1,26 +1,37 @@
 using Microsoft.AspNetCore.Mvc;
 using Biblioteca;
+using System.Threading.Tasks;
 
-namespace SuperSimple.Mvc.Controllers;
-public class PlatoController : Controller
+namespace SuperSimple.Mvc.Controllers
 {
-    readonly IAdo _ado;
-
-    public PlatoController(IAdo ado) => _ado = ado;
-
-    [HttpGet]
-    public IActionResult Index()
-        => View(_ado.TodosPlatos);
-
-    [HttpGet]
-    public IActionResult Detalle(int id)
+    public class PlatoController : Controller
     {
-        var categoria = Repositorio.GetCategoria(id);
-        if (categoria is null)
-        {
-            return NotFound();
-        }
-        return View(categoria);
-    }
+        private readonly IAdo _ado;
 
+        public PlatoController(IAdo ado)
+        {
+            _ado = ado;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var platos = await _ado.TodosPlatos();
+            return View(platos);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Detalle(int id)
+        {
+            var platos = await _ado.TodosPlatos();
+            var plato = platos.FirstOrDefault(p => p.id == id);
+
+            if (plato == null)
+            {
+                return NotFound();
+            }
+
+            return View(plato);
+        }
+    }
 }

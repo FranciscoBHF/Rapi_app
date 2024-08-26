@@ -36,7 +36,7 @@ public class AdoDapper : IAdo
         => _conexion.QueryFirstOrDefault<Cliente>(_queryClientePass, new { unEmail = email, unPass = pasword });
     public async Task<Cliente?> ClientePorPassAsync(string email, string pass)
     {
-        var cliente = await _conexion.QueryFirstOrDefaultAsync<Cliente>(  _queryClientePass,
+        var cliente = await _conexion.QueryFirstOrDefaultAsync<Cliente>(_queryClientePass,
                                                                         new { unEmail = email, unPass = pass} );
         return cliente;
     }
@@ -92,30 +92,31 @@ public class AdoDapper : IAdo
 
     #endregion
 
-    public async Task AltaRestaurantAsync(Restaurant restaurante, string pasword)
-    {
-    var restaurant = await _conexion.QueryFirstOrDefaultAsync(
-            _queryAltaResto,
-            new
-            {
-                restaurante = restaurante.restaurante,
-                domicilio = restaurante.domicilio,
-                email = restaurante.email,
-                pasword = pasword
-            }
-        );
-    }
-
-    public Task<List<Plato>> buscarPlato(string nombre)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<Plato>> TodosPlatos()
-    {
-        throw new NotImplementedException();
-    }
+    #region Plato (Implementación)
     private static readonly string _queryTodosPlatos
         = @"select *
         from Plato";
+
+    private static readonly string _queryBuscarPlato
+        = @"select *
+            from Plato
+            where nombre like @nombre";
+
+    public async Task<List<Plato>> TodosPlatos()
+    {
+        var platos = await _conexion.QueryAsync<Plato>(_queryTodosPlatos);
+        return platos.ToList();
+    }
+
+    public async Task<List<Plato>> buscarPlato(string nombre)
+    {
+        var platos = await _conexion.QueryAsync<Plato>(_queryBuscarPlato, new { nombre = $"%{nombre}%" });
+        return platos.ToList();
+    }
+
+    public Task AltaRestaurantAsync(Restaurant restaurant, string pasword)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
 }
