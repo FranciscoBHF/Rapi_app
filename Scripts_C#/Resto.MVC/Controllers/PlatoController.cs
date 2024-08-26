@@ -6,24 +6,25 @@ namespace SuperSimple.Mvc.Controllers
 {
     public class PlatoController : Controller
     {
-        private readonly IAdo _ado;
+    protected readonly IAdo Ado;
+    private static readonly string _cadena =
+        @"Server=localhost;Database=5to_comidapp;Uid=5to_agbd;pwd=Trigg3rs!;Allow User Variables=True";
+    public PlatoController() 
+    {
+        Ado = new Resto.Dapper.AdoDapper(_cadena);
+    }
 
-        public PlatoController(IAdo ado)
-        {
-            _ado = ado;
-        }
-
-        [HttpGet]
+        [HttpGet("plato")]
         public async Task<IActionResult> Index()
         {
-            var platos = await _ado.TodosPlatos();
-            return View(platos);
+            var platos = await Ado.TodosPlatos();
+            return View("ListaPlatos", platos);
         }
 
         [HttpGet]
         public async Task<IActionResult> Detalle(int id)
         {
-            var platos = await _ado.TodosPlatos();
+            var platos = await Ado.TodosPlatos();
             var plato = platos.FirstOrDefault(p => p.id == id);
 
             if (plato == null)

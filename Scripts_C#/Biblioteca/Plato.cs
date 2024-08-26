@@ -2,18 +2,20 @@ namespace Biblioteca;
 
 public class Plato
 {
-    public int id {get ; set ;}
+    public uint id {get ; set ;}
     public string plato {get ; set ;}
     public string descripcion {get ; set ;}
-    public float precio {get ; set ;}
+    public decimal precio {get ; set ;}
+    public UInt16 idRestaurant {get ; set ;}
     public bool disponible {get ; set ;}
-    public Plato(int id, string plato, string descripcion, float precio, bool disponible)
+    public Plato(string plato, string descripcion, decimal precio,ushort idRestaurant ,bool disponible,uint idPlato)
     {
-        this.id = id;
         this.plato = plato;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.idRestaurant = idRestaurant;
         this.disponible = disponible;
+        this.id = idPlato;
     }
 
 }

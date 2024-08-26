@@ -1,0 +1,21 @@
+@using Biblioteca
+@model IEnumerable<Plato>
+
+<h1>Platos</h1>
+
+<table>
+    <thead>
+        <tr>
+            <td>Nombre
+            <td>
+    </thead>
+    <tbody>
+        @foreach (Plato plato in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Plato" asp-action="Detalle" asp-route-id="@plato.id">@plato.plato</a>
+                </td>
+            </tr>
+        }
+    </tbody>

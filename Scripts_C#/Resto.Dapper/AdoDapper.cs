@@ -31,22 +31,24 @@ public class AdoDapper : IAdo
                 pasword = pasword
             }
         );
-    
+
     public Cliente? ClientePorPass(string email, string pasword)
         => _conexion.QueryFirstOrDefault<Cliente>(_queryClientePass, new { unEmail = email, unPass = pasword });
     public async Task<Cliente?> ClientePorPassAsync(string email, string pass)
     {
         var cliente = await _conexion.QueryFirstOrDefaultAsync<Cliente>(_queryClientePass,
-                                                                        new { unEmail = email, unPass = pass} );
+                                                                        new { unEmail = email, unPass = pass });
         return cliente;
     }
     public async Task AltaClienteAsync(Cliente cliente, string pasword)
     {
-        await _conexion.QueryAsync( _queryAltaCliente,new {  
-                Unemail = cliente.email,
-                Uncliente = cliente.cliente,
-                Unapellido = cliente.apellido,
-                Unpasword = pasword});
+        await _conexion.QueryAsync(_queryAltaCliente, new
+        {
+            Unemail = cliente.email,
+            Uncliente = cliente.cliente,
+            Unapellido = cliente.apellido,
+            Unpasword = pasword
+        });
     }
     #endregion
 
@@ -72,11 +74,11 @@ public class AdoDapper : IAdo
         );
     public Restaurant? RestaurantPorPass(string email, string pasword)
         => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
-    
+
     public async Task<Restaurant?> RestaurantPorPassAsync(string email, string pasword)
     {
         var restaurant = await _conexion.QueryFirstOrDefaultAsync<Restaurant>(_queryRestoPass,
-                                                                            new {unemail = email, unpasword = pasword});
+                                                                            new { unemail = email, unpasword = pasword });
         return restaurant;
     }
 
@@ -102,11 +104,14 @@ public class AdoDapper : IAdo
             from Plato
             where nombre like @nombre";
 
+    // public async Task<List<Plato>> TodosPlatos()
+    // {
+    //     var platos = await _conexion.QueryAsync<Plato>(_queryTodosPlatos);
+    //     return platos.ToList();
+    // }
+
     public async Task<List<Plato>> TodosPlatos()
-    {
-        var platos = await _conexion.QueryAsync<Plato>(_queryTodosPlatos);
-        return platos.ToList();
-    }
+        => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
 
     public async Task<List<Plato>> buscarPlato(string nombre)
     {
