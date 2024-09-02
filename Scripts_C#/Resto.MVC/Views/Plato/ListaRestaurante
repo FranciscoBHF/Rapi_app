@@ -1,0 +1,3 @@
+@using Biblioteca
+@model IEnumerable<Plato>
+    <h1>    </h1>
