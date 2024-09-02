@@ -1,0 +1,53 @@
+@using Biblioteca
+@model IEnumerable<Restaurant>
+
+<h1>Platos</h1>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+<table>
+    <tr>
+        <thead>
+            Nombre
+        </thead>
+        <thead>
+            Descripcion
+        </thead>
+        <thead>
+            Disponibilidad
+        </thead>
+    </tr>
+        <thead>
+            hola
+        </thead>
+    @foreach (Restaurant restaurant in Model)
+    {
+        <tbody>
+            <th>
+                @restaurant.restaurante
+            </th>
+        
+            <td>
+                @plato.descripcion
+            </td>
+            @if (plato.disponible)
+            {
+                <td>Disponible</td>
+            }
+            else
+            {
+                <td>No Disponible</td>
+            }
+        </tbody>
+    }
