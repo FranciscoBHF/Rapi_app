@@ -13,11 +13,10 @@ namespace SuperSimple.Mvc.Controllers
     {
         Ado = new Resto.Dapper.AdoDapper(_cadena);
     }
-
-        [HttpGet("plato")]
         public async Task<IActionResult> Index()
         {
-            var platos = await Ado.TodosPlatos();
+
+            var platos = await Ado.buscarPlato(nombre);
             return View("ListaPlatos", platos);
         }
 
@@ -31,8 +30,11 @@ namespace SuperSimple.Mvc.Controllers
             {
                 return NotFound();
             }
-
             return View(plato);
+        }
+        public async Task<IActionResult> BuscarPlato(string? cadena)
+        {
+            
         }
     }
 }
