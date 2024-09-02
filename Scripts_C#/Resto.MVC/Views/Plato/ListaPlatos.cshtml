@@ -6,32 +6,36 @@
 <table>
     <tr>
         <thead>
-        Nombre
+            Nombre
         </thead>
         <thead>
-        Descripcion
+            Descripcion
         </thead>
         <thead>
-        Disponibilidad
+            Disponibilidad
         </thead>
     </tr>
+    <table>
+        <thead></thead>
     @foreach (Plato plato in Model)
     {
         <tr>
-        <td>
-        @plato.plato
-        </td>
-        <td>
-        @plato.descripcion
-        </td>
-        <td>
-        @{
-            if (plato.disponible) 
-            "Disponible" ; else
-            "Indisponible";
-        }
-        </td>
+            <td>
+                @plato.plato
+            </td>
+            <td>
+                @plato.descripcion
+            </td>
+            @if (plato.disponible)
+            {
+                <td>Disponible</td>
+            }
+            else
+            {
+                <td>No Disponible</td>
+            }
         </tr>
     }
-        </table>
-    </tbody>
+    </table>
+</table>
+</tbody>
