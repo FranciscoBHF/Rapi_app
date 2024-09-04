@@ -409,3 +409,4 @@ FodyWeavers.xsd
 
 # Built Visual Studio Code Extensions
 *.vsix
+Scripts_C\#/Resto.MVC/appsettings.json
