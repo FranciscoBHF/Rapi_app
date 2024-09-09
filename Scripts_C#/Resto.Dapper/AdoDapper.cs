@@ -132,9 +132,9 @@ public class AdoDapper : IAdo
     public async Task<List<Plato>> TodosPlatosAsync()
         => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
 
-    public async Task<List<Plato>> buscarPlato(string nombre)
+    public async Task<List<Plato>> buscarPlato(string plato)
     {
-        var platos = await _conexion.QueryAsync<Plato>(_queryBuscarPlato, new { nombre = $"%{nombre}%" });
+        var platos = await _conexion.QueryAsync<Plato>(_queryBuscarPlato, new { plato = $"%{plato}%" });
         return platos.ToList();
     }
 

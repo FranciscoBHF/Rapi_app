@@ -26,12 +26,12 @@ namespace SuperSimple.Mvc.Controllers
         {
             if(cadena is null)
                 return NotFound();
-            var platos = await Ado.buscarPlato(cadena);
-            if (platos == null)
+            var plato = await Ado.buscarPlato(cadena);
+            if (plato == null)
             {
                 return NotFound();
             }
-            return View(platos);
+            return View(plato);
         }
 
         public async Task<IActionResult> Detalle(string? cadena)
