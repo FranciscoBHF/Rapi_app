@@ -9,10 +9,10 @@ public interface IAdo
     Task <List<Plato>> TodosPlatosAsync();
 
     //cliente
-    void AltaCliente(Cliente cliente);
+    void AltaCliente(Cliente cliente, string pasword);
     Cliente? ClientePorPass(string email, string pass);
     Task<Cliente?> ClientePorPassAsync(string email, string pass);    List<Cliente> ObtenerCliente();
     // Métodos asíncronos
-    Task AltaClienteAsync(Cliente cliente);
+    Task AltaClienteAsync(Cliente cliente, string pasword);
     Task<List<Cliente>> ObtenerClientesAsync();
 }

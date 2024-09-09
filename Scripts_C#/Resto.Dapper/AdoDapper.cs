@@ -121,7 +121,7 @@ public class AdoDapper : IAdo
     private static readonly string _queryBuscarPlato
         = @"select *
             from Plato
-            where nombre like @nombre";
+            where plato like @plato";
 
     // public async Task<List<Plato>> TodosPlatos()
     // {
