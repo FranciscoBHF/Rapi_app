@@ -20,16 +20,16 @@ public class AdoDapper : IAdo
             LIMIT 1";
 
     private static readonly string _queryAltaCliente
-        = "CALL AltaCliente(@email, @nombre, @apellido, @password)";
+        = "CALL AltaCliente(@email, @cliente, @apellido, @password)";
 
     private static readonly string _queryTodosClientes
-        = "SELECT * FROM Cliente ORDER BY nombre ASC, apellido ASC";
+        = "SELECT * FROM Cliente ORDER BY cliente ASC, apellido ASC";
 
     public void AltaCliente(Cliente cliente, string password)
     {
         var parametros = new DynamicParameters();
         parametros.Add("@email", cliente.email);
-        parametros.Add("@nombre", cliente.cliente);
+        parametros.Add("@cliente", cliente.cliente);
         parametros.Add("@apellido", cliente.apellido);
         parametros.Add("@password", password);
 
@@ -52,7 +52,7 @@ public class AdoDapper : IAdo
     {
         var parametros = new DynamicParameters();
         parametros.Add("@email", cliente.email);
-        parametros.Add("@nombre", cliente.cliente);
+        parametros.Add("@cliente", cliente.cliente);
         parametros.Add("@apellido", cliente.apellido);
         parametros.Add("@password", password);
 

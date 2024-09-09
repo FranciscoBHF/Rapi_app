@@ -19,7 +19,7 @@ public class ClienteController : Controller
     public async Task<IActionResult> ObtenerClientes()
     {
         var clientes = await _ado.ObtenerClientesAsync();
-        return View("../Cliente/ListaClientes", clientes);
+        return View("../Cliente/ListaCliente", clientes);
     }
 
     [HttpGet]
@@ -37,20 +37,6 @@ public class ClienteController : Controller
         return RedirectToAction(nameof(GetAltaCliente));
     }
 
-    [HttpGet]
-    public async Task<IActionResult> BuscarCliente(string email, string password)
-    {
-        var cliente = await _ado.ClientePorPassAsync(email, password);
-        if (cliente != null)
-        {
-            return View("../Cliente/DetalleCliente", cliente);
-        }
-        else
-        {
-            ViewBag.Error = "No se encontró el cliente";
-            return View("../Cliente/NuevoCliente");
-        }
-    }
     [HttpGet]
     public IActionResult Error()
     {
