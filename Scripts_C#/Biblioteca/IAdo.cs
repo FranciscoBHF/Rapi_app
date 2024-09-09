@@ -22,4 +22,5 @@ public interface IAdo
     // Metodo Asincronico
     Task AltaRestauranteAsync(Restaurant restaurant);
     Task <List<Restaurant>>ObtenerRestauranteAsync();
+    Task AltaClienteAsync(Cliente cliente);
 }
