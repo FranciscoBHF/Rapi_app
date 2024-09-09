@@ -11,45 +11,64 @@ public class AdoDapper : IAdo
     public AdoDapper(string cadena)
         => _conexion = new MySqlConnection(cadena);
 
-    #region Cliente ("Terminado")
-    private static readonly string _queryClientePass
-        = @"select *
-        from Cliente
-        where email = @unEmail
-        and pasword = SHA2(@unPass, 256)
-        LIMIT 1";
-    private static readonly string _queryAltaCliente
-    = @"CALL RegistrarCliente1(@email, @cliente, @apellido, @pasword)";
-    public void AltaCliente(Cliente cliente, string pasword)
-    => _conexion.Execute(
-            _queryAltaCliente,
-            new
-            {
-                email = cliente.email,
-                cliente = cliente.cliente,
-                apellido = cliente.apellido,
-                pasword = pasword
-            }
-        );
+    #region Cliente
 
-    public Cliente? ClientePorPass(string email, string pasword)
-        => _conexion.QueryFirstOrDefault<Cliente>(_queryClientePass, new { unEmail = email, unPass = pasword });
-    public async Task<Cliente?> ClientePorPassAsync(string email, string pass)
+    private static readonly string _queryClientePassword
+        = @"SELECT *
+            FROM Cliente
+            WHERE email = @email AND password = SHA2(@password, 256)
+            LIMIT 1";
+
+    private static readonly string _queryAltaCliente
+        = "CALL AltaCliente(@email, @nombre, @apellido, @password)";
+
+    private static readonly string _queryTodosClientes
+        = "SELECT * FROM Cliente ORDER BY nombre ASC, apellido ASC";
+
+    public void AltaCliente(Cliente cliente, string password)
     {
-        var cliente = await _conexion.QueryFirstOrDefaultAsync<Cliente>(_queryClientePass,
-                                                                        new { unEmail = email, unPass = pass });
+        var parametros = new DynamicParameters();
+        parametros.Add("@email", cliente.email);
+        parametros.Add("@nombre", cliente.cliente);
+        parametros.Add("@apellido", cliente.apellido);
+        parametros.Add("@password", password);
+
+        _conexion.Execute(_queryAltaCliente, parametros, commandType: CommandType.StoredProcedure);
+    }
+
+    public Cliente? ClientePorPassword(string email, string password)
+    {
+        var cliente = _conexion.QueryFirstOrDefault<Cliente>(_queryClientePassword,
+                                                            new { email, password });
         return cliente;
     }
-    public async Task AltaClienteAsync(Cliente cliente, string pasword)
+
+    public List<Cliente> ObtenerClientes()
+        => _conexion.Query<Cliente>(_queryTodosClientes).ToList();
+
+    // Métodos asíncronos
+
+    public async Task AltaClienteAsync(Cliente cliente, string password)
     {
-        await _conexion.QueryAsync(_queryAltaCliente, new
-        {
-            Unemail = cliente.email,
-            Uncliente = cliente.cliente,
-            Unapellido = cliente.apellido,
-            Unpasword = pasword
-        });
+        var parametros = new DynamicParameters();
+        parametros.Add("@email", cliente.email);
+        parametros.Add("@nombre", cliente.cliente);
+        parametros.Add("@apellido", cliente.apellido);
+        parametros.Add("@password", password);
+
+        await _conexion.ExecuteAsync(_queryAltaCliente, parametros, commandType: CommandType.StoredProcedure);
     }
+
+    public async Task<Cliente?> ClientePorPasswordAsync(string email, string password)
+    {
+        var cliente = await _conexion.QueryFirstOrDefaultAsync<Cliente>(_queryClientePassword,
+                                                                        new { email, password });
+        return cliente;
+    }
+
+    public async Task<List<Cliente>> ObtenerClientesAsync()
+        => (await _conexion.QueryAsync<Cliente>(_queryTodosClientes)).ToList();
+
     #endregion
 
     #region Restaurant ("Terminado")
@@ -110,7 +129,7 @@ public class AdoDapper : IAdo
     //     return platos.ToList();
     // }
 
-    public async Task<List<Plato>> TodosPlatos()
+    public async Task<List<Plato>> TodosPlatosAsync()
         => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
 
     public async Task<List<Plato>> buscarPlato(string nombre)
@@ -120,6 +139,21 @@ public class AdoDapper : IAdo
     }
 
     public Task AltaRestaurantAsync(Restaurant restaurant, string pasword)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Cliente? ClientePorPass(string email, string pass)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Cliente?> ClientePorPassAsync(string email, string pass)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AltaClienteAsync(Cliente cliente)
     {
         throw new NotImplementedException();
     }
