@@ -31,11 +31,11 @@
         <thead>
             hola
         </thead>
-    @foreach (Restaurant restaurant in Model)
-    {
-        <tbody>
-            <th>
-                @restaurant.restaurante
-            </th>
-        </tbody>
-    }
+            @foreach (var restaurant in Model)
+            {
+                <tr>
+                    <td>@restaurant.restaurante</td>
+                    <td>@restaurant.domicilio</td>
+                    <td>@restaurant.email</td>
+                </tr>
+            }

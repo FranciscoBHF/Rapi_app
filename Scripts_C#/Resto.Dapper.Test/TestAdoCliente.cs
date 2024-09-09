@@ -31,7 +31,7 @@ public class TestAdoCliente : TestAdo
 
     var nuevoBasualdo = new Cliente(email,cliente,apellido);
 
-    Ado.AltaCliente(nuevoBasualdo, pasword);
+    Ado.AltaCliente (nuevoBasualdo, pasword);
 
     var mismoCliente = Ado.ClientePorPass (email, pasword);
 
