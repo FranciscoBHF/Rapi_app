@@ -157,5 +157,20 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
+
+    public void Restaurante(Restaurant restaurant)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AltaRestauranteAsync(Restaurant restaurant)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Restaurant>> ObtenerRestauranteAsync()
+    {
+        throw new NotImplementedException();
+    }
     #endregion
 }
