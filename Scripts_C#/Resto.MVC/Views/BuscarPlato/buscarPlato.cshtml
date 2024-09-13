@@ -1,4 +1,28 @@
 @using Biblioteca
 @model IEnumerable<Plato>
 
-    <h1>Plato</h1>
+<h1>Platos</h1>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <tr class="bg-dark text-white">
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Disponibilidad</th>
+            </tr>
+            @foreach (var plato in Model)
+            {
+                <tr>
+                    <td>@plato.plato</td>
+                    <td>@plato.descripcion</td>
+                    @if (plato.disponible)
+                    {
+                        <td>Disponible</td>
+                    }
+                    else
+                    {
+                        <td>No Disponible</td>
+                    }
+                </tr>
+            }
+        </table>
+    </div> 
