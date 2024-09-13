@@ -5,23 +5,29 @@ using System.Collections.Generic;
 using Biblioteca;
 using Microsoft.AspNetCore.Mvc;
 
-public class RestauranteController
+public class Restaurante(IAdo ado) : Controller
 {
-    private readonly IAdo _ado;
+    protected readonly IAdo Ado = ado;
 
-    public RestauranteController(IAdo ado)
-    {
-        _ado = ado;
-    }
     [HttpGet]
-    public async Task<IActionResult> ObtenerRestaurante()
+    public async Task<IActionResult> ObtenerRestaurant()
     {
-        var restaurants = await _ado.ObtenerRestauranteAsync();
-        return View("../Restorant/ListaRestorant", restaurants);
+        var restautants = await Ado.TodosRestaurants();
+        
+        return View("ListaRestautants", restautants);
     }
 
-    private IActionResult View(string v, List<Restaurant> restorants)
+    [HttpGet]
+    public async Task<IActionResult> Detalle(int id)
     {
-        throw new NotImplementedException();
+        var restautants = await Ado.TodosRestaurants();
+        var restautant = restautants.FirstOrDefault(p => p.id == id);
+
+        if (restautants == null)
+        {
+            return NotFound();
+        }
+
+        return View(restautants);
     }
 }

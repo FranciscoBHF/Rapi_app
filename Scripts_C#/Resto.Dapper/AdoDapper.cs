@@ -118,6 +118,9 @@ public class AdoDapper : IAdo
         = @"select *
         from Plato";
 
+    private static readonly string _queryTodosRestaurants
+    = @"select *
+    from Restaurant";
     private static readonly string _querybuscarPlato
         = @"select *
         from Plato
@@ -132,6 +135,9 @@ public class AdoDapper : IAdo
 
     public async Task<List<Plato>> TodosPlatosAsync()
         => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
+    
+    public async Task<List<Restaurant>> TodosRestaurants()
+        => (await _conexion.QueryAsync<Restaurant>(_queryTodosRestaurants)).ToList();
 
     public async Task<List<Plato>> buscarPlato(string plato)
     {

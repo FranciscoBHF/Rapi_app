@@ -1,10 +1,6 @@
 namespace Biblioteca;
 public interface IAdo
 {
-   
-    Task <List<Plato>> buscarPlato(string nombre);
-    Task <List<Plato>> TodosPlatosAsync();
-
     //cliente
     void AltaCliente(Cliente cliente, string pasword);
     Cliente? ClientePorPass(string email, string pass);
@@ -21,6 +17,8 @@ public interface IAdo
     Task AltaRestaurantAsync(Restaurant restaurant, string pasword);
     // Metodo Asincronico
     Task AltaRestauranteAsync(Restaurant restaurant);
-    Task <List<Restaurant>>ObtenerRestauranteAsync();
+    Task <List<Plato>> buscarPlato(string nombre);
+    Task <List<Plato>> TodosPlatosAsync();
+    Task <List<Restaurant>> TodosRestaurants();
     Task AltaClienteAsync(Cliente cliente);
 }
