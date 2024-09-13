@@ -118,10 +118,10 @@ public class AdoDapper : IAdo
         = @"select *
         from Plato";
 
-    private static readonly string _queryBuscarPlato
+    private static readonly string _querybuscarPlato
         = @"select *
-            from Plato
-            where plato like @plato";
+        from Plato
+        where plato like @plato";
 
     // public async Task<List<Plato>> TodosPlatos()
     // {
@@ -134,7 +134,7 @@ public class AdoDapper : IAdo
 
     public async Task<List<Plato>> buscarPlato(string plato)
     {
-        var platos = await _conexion.QueryAsync<Plato>(_queryBuscarPlato, new { plato = $"%{plato}%" });
+        var platos = await _conexion.QueryAsync<Plato>(_querybuscarPlato, new { plato = $"%{plato}%" });
         return platos.ToList();
     }
 

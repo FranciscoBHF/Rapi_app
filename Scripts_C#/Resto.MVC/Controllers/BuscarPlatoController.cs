@@ -22,7 +22,7 @@ namespace SuperSimple.Mvc.Controllers
         //    }
         //    return View(plato);
         //}
-        public async Task<IActionResult> BuscarPlato(string? cadena)
+        public async Task<IActionResult> buscarPlato(string? cadena)
         {
             if(cadena is null)
                 return NotFound();
