@@ -195,5 +195,15 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
+
+    public Task<List<Plato>> buscarCliente(string cliente)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Cliente>> TodosClientes()
+    {
+        throw new NotImplementedException();
+    }
     #endregion
 }
