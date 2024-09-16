@@ -120,7 +120,7 @@ public class AdoDapper : IAdo
 
     private static readonly string _queryTodosRestaurants
     = @"select *
-    from Restaurant";
+    from Restaurante";
     private static readonly string _querybuscarPlato
         = @"select *
         from Plato

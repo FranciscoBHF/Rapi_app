@@ -1,33 +1,33 @@
-namespace Resto.MVC.Controllers;
-
-using System;
-using System.Collections.Generic;
 using Biblioteca;
 using Microsoft.AspNetCore.Mvc;
+using Resto.Dapper;
 
-public class Restaurante(IAdo ado) : Controller
+namespace SuperSimple.Mvc.Controllers;
+
+public class RestauranteController : Controller
 {
-    protected readonly IAdo Ado = ado;
+    protected readonly IAdo Ado;
+    public RestauranteController(IAdo ado) => Ado = ado;
 
     [HttpGet]
-    public async Task<IActionResult> ObtenerRestaurant()
+    public async Task<IActionResult> ObtenerRestaurants()
     {
-        var restautants = await Ado.TodosRestaurants();
+        var Restaurantes = await Ado.TodosRestaurants();
         
-        return View("ListaRestautants", restautants);
+        return View("ListaRestaurante", Restaurantes);
     }
 
     [HttpGet]
     public async Task<IActionResult> Detalle(int id)
     {
-        var restautants = await Ado.TodosRestaurants();
-        var restautant = restautants.FirstOrDefault(p => p.id == id);
+        var restaurantes = await Ado.TodosRestaurants();
+        var restaurante = restaurantes.FirstOrDefault(p => p.id == id);
 
-        if (restautants == null)
+        if (restaurantes == null)
         {
             return NotFound();
         }
 
-        return View(restautants);
+        return View(restaurante);
     }
 }
