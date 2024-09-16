@@ -116,7 +116,8 @@ public class AdoDapper : IAdo
     #region Plato (Implementación)
     private static readonly string _queryTodosPlatos
         = @"select *
-        from Plato";
+        from Plato p
+        JOIN Restaurante USING (idRestaurant)";
 
     private static readonly string _queryTodosRestaurants
     = @"select *
@@ -133,9 +134,24 @@ public class AdoDapper : IAdo
     //     return platos.ToList();
     // }
 
-    public async Task<List<Plato>> TodosPlatosAsync()
-        => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
+    //public async Task<List<Plato>> TodosPlatosAsync()
+    //    => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
     
+    public async Task<List<Plato>> TodosPlatosAsync()
+    {
+        var productos = _conexion.Query<Plato,Restaurant, Plato>
+            (_queryTodosPlatos,
+            (plato, Restaurant) =>
+            {
+                Plato.Restaurant = Restaurant;
+                return plato;
+            },
+            splitOn: "idRestaurant")
+            .ToList();
+            var restaurant = plato;
+            return plato;
+
+    }
     public async Task<List<Restaurant>> TodosRestaurants()
         => (await _conexion.QueryAsync<Restaurant>(_queryTodosRestaurants)).ToList();
 

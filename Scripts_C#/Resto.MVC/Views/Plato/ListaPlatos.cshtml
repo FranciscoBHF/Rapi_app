@@ -8,6 +8,7 @@
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Disponibilidad</th>
+                
             </tr>
             @foreach (var plato in Model)
             {
@@ -23,6 +24,7 @@
                         <td>No Disponible</td>
                     }
                 </tr>
+                <td>@plato.idRestaurant</td>
             }
         </table>
     </div> 
