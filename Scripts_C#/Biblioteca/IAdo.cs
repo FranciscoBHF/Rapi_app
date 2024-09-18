@@ -21,6 +21,8 @@ public interface IAdo
     Task <List<Plato>> buscarPlato(string nombre);
     Task <List<Cliente>> buscarCliente(string cliente);
     Task <List<Plato>> TodosPlatosAsync();
+    void AltaPlato(Plato plato, Plato idRestaurant);
+    Task AltaPlatoAsync(Plato plato, Plato idRestaurant);
     Task <List<Restaurant>> TodosRestaurants();
     Task<List<Cliente>>TodosClientes();
     Task AltaClienteAsync(Cliente cliente);

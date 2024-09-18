@@ -49,15 +49,16 @@ public class AdoDapper : IAdo
 
     // Métodos asíncronos
 
-    public async Task AltaClienteAsync(Cliente cliente, string password)
+    private static readonly string _queryAltaPlato
+        = "CALL AltaPlato(@Plato, @descripcion, @precio, @idRestaurant)";
+    public async Task AltaPlatoAsync(Plato plato, Plato idRestaurant)
     {
         var parametros = new DynamicParameters();
-        parametros.Add("@email", cliente.email);
-        parametros.Add("@cliente", cliente.cliente);
-        parametros.Add("@apellido", cliente.apellido);
-        parametros.Add("@password", password);
-
-        await _conexion.ExecuteAsync(_queryAltaCliente, parametros, commandType: CommandType.StoredProcedure);
+        parametros.Add("@Plato", plato.plato);
+        parametros.Add("@descripcion", plato.descripcion);
+        parametros.Add("@precio", plato.precio);
+        parametros.Add("@idRestaurant", idRestaurant);
+        await _conexion.ExecuteAsync(_queryAltaPlato, parametros, commandType: CommandType.StoredProcedure);
     }
 
     public async Task<Cliente?> ClientePorPasswordAsync(string email, string password)
@@ -211,11 +212,13 @@ public class AdoDapper : IAdo
     }
 
     Task<List<Restaurant>> IAdo.buscarRestaurant(string restaurante)
+    public Task AltaClienteAsync(Cliente cliente, string pasword)
     {
         throw new NotImplementedException();
     }
 
     public Task<List<Plato>> TodosPlatosAsync()
+    public void AltaPlato(Plato plato, Plato idRestaurant)
     {
         throw new NotImplementedException();
     }
