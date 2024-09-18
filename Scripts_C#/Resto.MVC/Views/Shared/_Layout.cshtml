@@ -66,11 +66,22 @@
             
                 </div>
             </nav>
+            <!-- Buscar Plato -->
             <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
                     <form class="d-flex" role="Buscar comida" asp-controller="BuscarPlato" asp-action="BuscarPlato" method="get">
                         <input class="form-control me-2" type="text" placeholder="Buscar comida"
                             aria-label="Buscar comida" name="cadena">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </nav>
+            <!-- Buscar Cliente -->
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <form class="d-flex" role=" asp-controller="BuscarCliente" asp-action="" method="get">
+                        <input class="form-control me-2" type="text" placeholder="Buscar cliente"
+                            aria-label="" name="cadena">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
                 </div>

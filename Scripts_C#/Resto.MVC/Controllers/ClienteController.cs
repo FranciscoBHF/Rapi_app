@@ -30,16 +30,16 @@ public class ClienteController : Controller
         return View("../Cliente/NuevoCliente", ordenados);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> AltaCliente(Cliente cliente)
-    {
-        await _ado.AltaClienteAsync(cliente);
-        return RedirectToAction(nameof(GetAltaCliente));
-    }
+    // [HttpPost]
+    // public async Task<IActionResult> AltaCliente(Cliente cliente)
+    // {
+    //     await _ado.AltaClienteAsync(cliente);
+    //     return RedirectToAction(nameof(GetAltaCliente));
+    // }
 
-    [HttpGet]
-    public IActionResult Error()
-    {
-        return View();
-    }
+    // [HttpGet]
+    // public IActionResult Error()
+    // {
+    //     return View();
+    // }
 }

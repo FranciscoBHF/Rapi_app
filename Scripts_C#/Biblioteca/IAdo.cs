@@ -18,7 +18,7 @@ public interface IAdo
     // Metodo Asincronico
     Task AltaRestauranteAsync(Restaurant restaurant);
     Task <List<Plato>> buscarPlato(string nombre);
-    Task <List<Plato>> buscarCliente(string cliente);
+    Task <List<Cliente>> buscarCliente(string cliente);
     Task <List<Plato>> TodosPlatosAsync();
     Task <List<Restaurant>> TodosRestaurants();
     Task<List<Cliente>>TodosClientes();
