@@ -134,14 +134,14 @@ public class AdoDapper : IAdo
         from Restaurante
         where restaurante like @restaurante";
 
-    // public async Task<List<Plato>> TodosPlatos()
-    // {
-    //     var platos = await _conexion.QueryAsync<Plato>(_queryTodosPlatos);
-    //     return platos.ToList();
-    // }
+    public async Task<List<Plato>> TodosPlatos()
+    {
+        var platos = await _conexion.QueryAsync<Plato>(_queryTodosPlatos);
+        return platos.ToList();
+    }
 
-    //public async Task<List<Plato>> TodosPlatosAsync()
-    //    => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
+    public async Task<List<Plato>> TodosPlatosAsync()
+    => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
     
     // public async Task<List<Plato>> TodosPlatosAsync()
     // {
@@ -190,12 +190,6 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
-
-    public Task AltaRestaurantAsync(Restaurant restaurant, string pasword)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task AltaRestauranteAsync(Restaurant restaurant)
     {
         throw new NotImplementedException();
@@ -210,15 +204,21 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
-
-    Task<List<Restaurant>> IAdo.buscarRestaurant(string restaurante)
     public Task AltaClienteAsync(Cliente cliente, string pasword)
     {
         throw new NotImplementedException();
     }
-
-    public Task<List<Plato>> TodosPlatosAsync()
     public void AltaPlato(Plato plato, Plato idRestaurant)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<List<Cliente>> IAdo.buscarCliente(string cliente)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AltaClienteAsync(Cliente cliente)
     {
         throw new NotImplementedException();
     }
