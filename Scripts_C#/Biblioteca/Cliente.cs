@@ -15,7 +15,7 @@ public class Cliente
             this.pasword = pasword;
         }
 
-    public Cliente(string email, string? cliente, string apellido)
+    public Cliente(string email, string? cliente, string apellido, Guid id)
     {
         this.email = email;
         this.cliente = cliente;

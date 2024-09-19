@@ -1,0 +1,58 @@
+@using Biblioteca
+@model IEnumerable<Cliente>
+
+@{
+    ViewData["Title"] = "Alta Cliente";
+}
+
+<div class="container">
+    <form asp-action="AltaCliente" method="post" class="was-validated">
+        <div class="row mb-2">
+            <label for="email" class="col-sm-2 col-form-label">Correo electrónico</label>
+            <div class="col-sm-10">
+                <input type="email" id="email" name="Email" value="" required placeholder="Ingrese su correo electrónico" class="form-control">
+                <div class="invalid-feedback">Por favor, ingrese un correo electrónico válido.</div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+            <div class="col-sm-10">
+                <input type="text" id="nombre" name="Nombre" value="" required placeholder="Ingrese su nombre" class="form-control">
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+            <div class="col-sm-10">
+                <input type="text" id="apellido" name="Apellido" value="" required placeholder="Ingrese su apellido" class="form-control">
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+            <div class="col-sm-10">
+                <input type="password" id="password" name="Password" value="" required placeholder="Ingrese una contraseña" class="form-control">
+                <div class="invalid-feedback">Por favor, ingrese una contraseña.</div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="cliente" class="col-sm-2 col-form-label">Nombre del cliente</label>
+            <div class="col-sm-10">
+                <input type="text" id="cliente" name="Cliente" value="" required placeholder="Ingrese el nombre del cliente" class="form-control">
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="pasword" class="col-sm-2 col-form-label">Confirmar contraseña</label>
+            <div class="col-sm-10">
+                <input type="password" id="pasword" name="Pasword" value="" required placeholder="Confirme la contraseña" class="form-control">
+                <div class="invalid-feedback">Las contraseñas deben coincidir.</div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Resto.MVC</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Resto.MVC.styles.css" asp-append-version="true" />
 </head>
@@ -43,8 +43,11 @@
                                     Cliente
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarEquipoMenu">
-                                    <li><a class="dropdown-item" asp-controller="Cliente" asp-action="ObtenerClientes"><i
-                                                class="bi bi-list-nested"></i> Listado</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Cliente"
+                                            asp-action="ObtenerClientes"><i class="bi bi-list-nested"></i> Listado</a>
+                                    </li>
+                                    <li><a class="dropdown-item" asp-controller="Cliente" asp-action="AltaCliente"><i
+                                                class="bi bi-plus-circle"></i> Alta</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -57,19 +60,21 @@
                                     Restaurant
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarEquipoMenu">
-                                    <li><a class="dropdown-item" asp-controller="Restaurante" asp-action="ObtenerRestaurants"><i
-                                                class="bi bi-list-nested"></i> Listado</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Restaurante"
+                                            asp-action="ObtenerRestaurants"><i class="bi bi-list-nested"></i>
+                                            Listado</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
-            
+
                 </div>
             </nav>
             <!-- Buscar Plato -->
             <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
-                    <form class="d-flex" role="Buscar comida" asp-controller="BuscarPlato" asp-action="BuscarPlato" method="get">
+                    <form class="d-flex" role="Buscar comida" asp-controller="BuscarPlato" asp-action="BuscarPlato"
+                        method="get">
                         <input class="form-control me-2" type="text" placeholder="Buscar comida"
                             aria-label="Buscar comida" name="cadena">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
@@ -79,9 +84,9 @@
             <!-- Buscar Cliente -->
             <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
-                    <form class="d-flex" role=" asp-controller="BuscarCliente" asp-action="" method="get">
-                        <input class="form-control me-2" type="text" placeholder="Buscar cliente"
-                            aria-label="" name="cadena">
+                    <form class="d-flex" role=" asp-controller=" Cliente" asp-action="" method="get">
+                        <input class="form-control me-2" type="text" placeholder="Buscar cliente" aria-label=""
+                            name="cadena">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
                 </div>

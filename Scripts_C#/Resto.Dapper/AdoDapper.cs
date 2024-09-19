@@ -180,16 +180,16 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
-
-    public Task<Cliente?> ClientePorPassAsync(string email, string pass)
-    {
-        throw new NotImplementedException();
-    }
-
     public void Restaurante(Restaurant restaurant)
     {
         throw new NotImplementedException();
     }
+
+    // public Task AltaRestaurantAsync(Restaurant restaurant, string pasword)
+    // {
+    //     throw new NotImplementedException();
+    // }
+
     public Task AltaRestauranteAsync(Restaurant restaurant)
     {
         throw new NotImplementedException();
@@ -204,10 +204,12 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
-    public Task AltaClienteAsync(Cliente cliente, string pasword)
+
+    public Task<List<Restaurant>> BuscarRestaurant(string restaurante)
     {
         throw new NotImplementedException();
     }
+
     public void AltaPlato(Plato plato, Plato idRestaurant)
     {
         throw new NotImplementedException();
