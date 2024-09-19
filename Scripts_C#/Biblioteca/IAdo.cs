@@ -3,11 +3,12 @@ public interface IAdo
 {
     //cliente
     void AltaCliente(Cliente cliente, string pasword);
-    Cliente? ClientePorPass(string email, string pass);
-    Task<Cliente?> ClientePorPassAsync(string email, string pass);    List<Cliente> ObtenerCliente();
     // Métodos asíncronos
-    Task AltaClienteAsync(Cliente cliente, string pasword);
+    Task<List<Cliente>>TodosClientes();
+    Task AltaClienteAsync(Cliente cliente);
     Task<List<Cliente>> ObtenerClientesAsync();
+    Task <List<Cliente>> buscarCliente(string cliente);
+
 
     //Restaurante
     void Restaurante(Restaurant restaurant);
@@ -19,11 +20,8 @@ public interface IAdo
     Task AltaRestauranteAsync(Restaurant restaurant);
     Task <List<Restaurant>> buscarRestaurant (string restaurante);
     Task <List<Plato>> buscarPlato(string nombre);
-    Task <List<Cliente>> buscarCliente(string cliente);
     Task <List<Plato>> TodosPlatosAsync();
     void AltaPlato(Plato plato, Plato idRestaurant);
     Task AltaPlatoAsync(Plato plato, Plato idRestaurant);
     Task <List<Restaurant>> TodosRestaurants();
-    Task<List<Cliente>>TodosClientes();
-    Task AltaClienteAsync(Cliente cliente);
 }
