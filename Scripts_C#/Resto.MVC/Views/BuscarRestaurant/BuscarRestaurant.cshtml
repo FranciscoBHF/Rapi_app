@@ -1,0 +1,21 @@
+@using Biblioteca
+@model IEnumerable<Restaurant>
+
+<h1>Restaurantes</h1>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <tr class="bg-dark text-white">
+                <th>Nombre</th>
+                <th>Domicilio</th>
+                <th>Email</th>
+            </tr>
+            @foreach (var resto in Model)
+            {
+                <tr>
+                    <td>@resto.restaurante</td>
+                    <td>@resto.domicilio</td>
+                    <td>@resto.email</td>
+                </tr>
+            }
+        </table>
+    </div>  

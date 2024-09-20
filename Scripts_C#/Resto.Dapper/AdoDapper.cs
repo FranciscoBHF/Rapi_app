@@ -205,11 +205,6 @@ public class AdoDapper : IAdo
         throw new NotImplementedException();
     }
 
-    public Task<List<Restaurant>> BuscarRestaurant(string restaurante)
-    {
-        throw new NotImplementedException();
-    }
-
     public void AltaPlato(Plato plato, Plato idRestaurant)
     {
         throw new NotImplementedException();

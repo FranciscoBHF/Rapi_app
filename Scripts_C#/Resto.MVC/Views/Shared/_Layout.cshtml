@@ -91,6 +91,17 @@
                     </form>
                 </div>
             </nav>
+            <!-- Buscar Restaurant -->
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <form class="d-flex" role="Buscar Restaurant" asp-controller="BuscarRestaurant" asp-action="BuscarRestaurant"
+                        method="get">
+                        <input class="form-control me-2" type="text" placeholder="Buscar Restaurante"
+                            aria-label="Buscar restaurante" name="cadena">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </nav>
         </nav>
     </header>
     <div class="container">

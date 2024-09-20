@@ -26,24 +26,24 @@ namespace SuperSimple.Mvc.Controllers
         {
             if(cadena is null)
                 return NotFound();
-            var plato = await Ado.buscarRestaurant(cadena);
-            if (plato == null)
+            var restaurant = await Ado.buscarRestaurant(cadena);
+            if (restaurant == null)
             {
                 return NotFound();
             }
-            return View(plato);
+            return View(restaurant);
         }
 
         public async Task<IActionResult> Detalle(string? cadena)
         {
             if (cadena == null)
                 return NotFound();
-            var platos = await Ado.buscarPlato(cadena);
-            if (platos == null)
+            var restaurants = await Ado.buscarRestaurant(cadena);
+            if (restaurants == null)
             {
                 return NotFound();
             }
-            return View("ListaPlatos", platos);
+            return View("ListaRestaurante", restaurants);
         }
     }
 }

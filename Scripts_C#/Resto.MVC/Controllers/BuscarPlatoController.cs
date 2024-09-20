@@ -11,17 +11,6 @@ namespace SuperSimple.Mvc.Controllers
             Ado = ado;
         }
         [HttpGet]
-        //public async Task<IActionResult> Detalle(int id)
-        //{
-        //    var platos = await Ado.TodosPlatos();
-        //    var plato = platos.FirstOrDefault(p => p.id == id);
-
-        //    if (plato == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(plato);
-        //}
         public async Task<IActionResult> buscarPlato(string? cadena)
         {
             if(cadena is null)
