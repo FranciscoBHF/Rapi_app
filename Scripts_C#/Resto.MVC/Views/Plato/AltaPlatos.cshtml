@@ -1,0 +1,17 @@
+@using Biblioteca
+@model IEnumerable<Plato>
+
+@{
+    ViewData["Title"] = "Alta plato";
+}
+
+<div class="container">
+    <form asp-action="AltaPlato" method="post" class="was-validated">
+            <div class="row mb-2">
+                <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                <div class="col-sm-10">
+                    <input type="nombre">
+                </div>
+            </div>
+    </form>
+</div>
