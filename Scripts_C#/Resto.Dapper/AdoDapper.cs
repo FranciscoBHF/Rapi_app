@@ -22,6 +22,9 @@ public class AdoDapper : IAdo
 
     private static readonly string _queryAltaCliente
         = "CALL AltaCliente(@email, @cliente, @apellido, @password)";
+    
+        private static readonly string _queryAltaPlato
+        = "CALL AltaPlato(@idRestaurant, @plato, @descripcion, @precio, @disponible )";
 
     private static readonly string _queryTodosClientes
         = "SELECT * FROM Cliente ORDER BY cliente ASC, apellido ASC";
@@ -37,6 +40,18 @@ public class AdoDapper : IAdo
         _conexion.Execute(_queryAltaCliente, parametros, commandType: CommandType.StoredProcedure);
     }
 
+        public void AltaPlato(Plato plato, UInt16 idRestaurant)
+    {
+        var parametros = new DynamicParameters();
+        parametros.Add("@idRestaurant", idRestaurant);
+        parametros.Add("@plato", plato.plato);
+        parametros.Add("@descripcion", plato.descripcion);
+        parametros.Add("@precio", plato.precio);
+        parametros.Add("@disponible", plato.disponible);
+
+        _conexion.Execute(_queryAltaPlato, parametros, commandType: CommandType.StoredProcedure);
+    }
+
     public Cliente? ClientePorPassword(string email, string password)
     {
         var cliente = _conexion.QueryFirstOrDefault<Cliente>(_queryClientePassword,
@@ -48,18 +63,6 @@ public class AdoDapper : IAdo
         => _conexion.Query<Cliente>(_queryTodosClientes).ToList();
 
     // Métodos asíncronos
-
-    private static readonly string _queryAltaPlato
-        = "CALL AltaPlato(@Plato, @descripcion, @precio, @idRestaurant)";
-    public async Task AltaPlatoAsync(Plato plato)
-    {
-        var parametros = new DynamicParameters();
-        parametros.Add("@Plato", plato.plato);
-        parametros.Add("@descripcion", plato.descripcion);
-        parametros.Add("@precio", plato.precio);
-        parametros.Add("@idRestaurant", plato.idRestaurant);
-        await _conexion.ExecuteAsync(_queryAltaPlato, parametros, commandType: CommandType.StoredProcedure);
-    }
 
     public async Task<Cliente?> ClientePorPasswordAsync(string email, string password)
     {
@@ -207,15 +210,15 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
-
-    public void AltaPlato(Plato plato, Plato idRestaurant)
-    {
-        throw new NotImplementedException();
-    }
     public Task AltaClienteAsync(Cliente cliente)
     {
         DynamicParameters parametros = ParametrosParaAltaCliente(cliente);
         return _conexion.ExecuteAsync("altaCliente", parametros, commandType: CommandType.StoredProcedure);
+    }
+        public Task AltaPlatoAsync(Plato plato)
+    {
+        DynamicParameters parametros = ParametrosParaAltaPlato(plato);
+        return _conexion.ExecuteAsync("altaPlato", parametros, commandType: CommandType.StoredProcedure);
     }
     private static DynamicParameters ParametrosParaAltaCliente(Cliente cliente)
     {
@@ -227,15 +230,16 @@ public class AdoDapper : IAdo
         parametros.Add("@unPasword", cliente.pasword);
         return parametros;
     }
-
-    public Task AltaPlatoAsync(Plato plato, int idRestaurant)
+        private static DynamicParameters ParametrosParaAltaPlato(Plato plato)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task AltaPlatoAsync(Plato plato, Plato idRestaurant)
-    {
-        throw new NotImplementedException();
+        var parametros = new DynamicParameters();
+        parametros.Add("@unidPlato", direction: ParameterDirection.Output);
+        parametros.Add("@unplato", plato.plato);
+        parametros.Add("@undescripcionp", plato.descripcion);
+        parametros.Add("@unprecio", plato.descripcion);
+        parametros.Add("@undisponible", plato.disponible);
+        parametros.Add("@unidRestaurant", plato.idRestaurant);
+        return parametros;
     }
 
     #endregion

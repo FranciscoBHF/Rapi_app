@@ -36,10 +36,10 @@ END $$
 
 DELIMITER $$
 
-CREATE PROCEDURE AltaPlato(In unidPlato mediumint UNSIGNED,in unidRestaurant SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcionP VARCHAR(45),in unprecio DECIMAL(7,2),in undisponible bool)
+CREATE PROCEDURE AltaPlato(in unidRestaurant SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcionP VARCHAR(45),in unprecio DECIMAL(7,2),in undisponible bool)
 begin
-	Insert into Plato (idPlato, idRestaurant, Plato, descripcion, precio, disponible)
-	values (unidPlato, unidRestaurant, unplato, undescripcionP, unprecio, undisponible);
+	Insert into Plato (idRestaurant, Plato, descripcion, precio, disponible)
+	values (unidRestaurant, unplato, undescripcionP, unprecio, undisponible);
 end$$
 
 DELIMITER $$

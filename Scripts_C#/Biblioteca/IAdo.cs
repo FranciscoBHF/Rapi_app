@@ -22,7 +22,6 @@ public interface IAdo
     //platos
     Task <List<Plato>> buscarPlato(string nombre);
     Task <List<Plato>> TodosPlatosAsync();
-    void AltaPlato(Plato plato, Plato idRestaurant);
-    Task AltaPlatoAsync(Plato plato, Plato idRestaurant);
-    Task AltaPlatoAsync(Plato plato, int idRestaurant);
+    void AltaPlato(Plato plato, UInt16 idRestaurant);
+    Task AltaPlatoAsync(Plato plato);
 }
