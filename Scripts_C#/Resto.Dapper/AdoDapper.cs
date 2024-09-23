@@ -214,11 +214,6 @@ public class AdoDapper : IAdo
     }
     public Task AltaClienteAsync(Cliente cliente)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task AltaPlatoAsync(Plato plato, int idRestaurant)
-    {
         DynamicParameters parametros = ParametrosParaAltaCliente(cliente);
         return _conexion.ExecuteAsync("altaCliente", parametros, commandType: CommandType.StoredProcedure);
     }
@@ -233,9 +228,15 @@ public class AdoDapper : IAdo
         return parametros;
     }
 
-    public void AltaPlato(Plato plato)
+    public Task AltaPlatoAsync(Plato plato, int idRestaurant)
     {
         throw new NotImplementedException();
     }
+
+    public Task AltaPlatoAsync(Plato plato, Plato idRestaurant)
+    {
+        throw new NotImplementedException();
+    }
+
     #endregion
 }
