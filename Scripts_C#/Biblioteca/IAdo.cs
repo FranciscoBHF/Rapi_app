@@ -25,4 +25,5 @@ public interface IAdo
     void AltaPlato(Plato plato, Plato idRestaurant);
     Task AltaPlatoAsync(Plato plato, Plato idRestaurant);
     Task AltaPlatoAsync(Plato plato, int idRestaurant);
+    Task AltaRestauranteAsync(Restaurant restaurante);
 }
