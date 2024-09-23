@@ -31,18 +31,5 @@ public class PlatoController : Controller
 
         return View(plato);
     }
-
-    public async Task<IActionResult> GetAltaPlato()
-    {
-        var plato = await _Ado.TodosPlatosAsync();
-        var ordenados = plato.OrderBy(x => x.plato).ThenBy(x => x.plato).ToList();
-        return View("../Plato/NuevoPlato", ordenados);
-    }
-        [HttpGet]
-    public async Task<IActionResult> AltaPlato(Plato plato)
-    {
-        await _Ado.AltaPlatoAsync(plato);
-        return View("ListaPlatos");
-    }
-
 }
+
