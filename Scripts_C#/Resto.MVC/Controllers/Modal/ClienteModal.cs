@@ -6,10 +6,4 @@ public class ClienteModal
     public string? Apellido { get; set; }
     public string? password { get; set; }
     public ClienteModal() {}
-    public ClienteModal(string email, string cliente, string apellido)
-    {
-        Email = email;
-        Cliente = cliente;
-        Apellido = apellido;
-    }
 }

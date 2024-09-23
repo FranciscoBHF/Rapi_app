@@ -21,21 +21,24 @@ public class ClienteController : Controller
     public async Task<IActionResult> ObtenerClientes()
     {
         var clientes = await _ado.ObtenerClientesAsync();
-        return View("../Cliente/ListaCliente", clientes);
+        var ordenarCliente = clientes.OrderBy(x => x.idCliente);
+        return View("../Cliente/ListaCliente", ordenarCliente);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAltaCliente()
+    public IActionResult GetAltaCliente()
     {
-        var clientes = await _ado.ObtenerClientesAsync();
-        var ordenados = clientes.OrderBy(x => x.cliente).ThenBy(x => x.apellido).ToList();
-        return View("../Cliente/NuevoCliente", ordenados);
+        // var clientes = await _ado.ObtenerClientesAsync();
+        // var ordenados = clientes.OrderBy(x => x.cliente).ThenBy(x => x.apellido).ToList();
+        return View("../Cliente/AltaCliente");
     }
-    [HttpGet]
-    public async Task<IActionResult> AltaCliente(Cliente cliente)
+
+    [HttpPost]
+    public async Task<IActionResult> AltaCliente(ClienteModal clienteModal)
     {
+        var cliente = new Cliente(clienteModal.Email, clienteModal.Cliente, clienteModal.Apellido, clienteModal.password);
         await _ado.AltaClienteAsync(cliente);
-        return View("../Cliente/ListaCliente");
+        return RedirectToAction(nameof(GetAltaCliente));
     }
     // [HttpPost]
     // public async Task<IActionResult> AltaCliente(ClienteModal clienteModal)
@@ -54,5 +57,20 @@ public class ClienteController : Controller
 
     //     await _ado.AltaClienteAsync(cliente);
     //     return RedirectToAction("ListaCliente");
+    // }
+    // [HttpGet]
+    // public async Task<IActionResult> GetAltaClienteAsync()
+    // {
+    //     var clientes = await _ado.ObtenerClientesAsync();
+    //     var ordenados = clientes.OrderBy(x => x.email).ToList();
+    //     ClienteModal clienteModal = new ClienteModal();
+    //     return View("AltaCliente", clienteModal);
+    // }
+
+    // [HttpPost]
+    // public async Task<IActionResult> AltaClienteAsync(Cliente cliente, string password)
+    // {
+    //     await _ado.AltaClienteAsync(cliente);
+    //     return RedirectToAction(nameof(GetAltaClienteAsync));
     // }
 }

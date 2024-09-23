@@ -4,7 +4,7 @@ use 5to_comidapp $$
 DELIMITER $$
 DROP PROCEDURE IF EXISTS altaCliente $$
 CREATE PROCEDURE altaCliente (OUT unIdCliente MEDIUMINT UNSIGNED, unEmail VARCHAR(45)
-							, unCliente VARCHAR(45), apellido VARCHAR(45), unPasword char(45))
+							, unCliente VARCHAR(45), unApellido VARCHAR(45), unPasword char(45))
 BEGIN
 	INSERT INTO Cliente (email, cliente, apellido, pasword) 
 				VALUE (unEmail, unCliente, unApellido, unPasword);

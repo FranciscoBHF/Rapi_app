@@ -142,7 +142,7 @@ public class AdoDapper : IAdo
 
     public async Task<List<Plato>> TodosPlatosAsync()
     => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
-    
+
     // public async Task<List<Plato>> TodosPlatosAsync()
     // {
     //     var productos = _conexion.Query<Plato,Restaurant, Plato>
@@ -217,7 +217,18 @@ public class AdoDapper : IAdo
 
     public Task AltaClienteAsync(Cliente cliente)
     {
-        throw new NotImplementedException();
+        DynamicParameters parametros = ParametrosParaAltaCliente(cliente);
+        return _conexion.ExecuteAsync("altaCliente", parametros, commandType: CommandType.StoredProcedure);
+    }
+    private static DynamicParameters ParametrosParaAltaCliente(Cliente cliente)
+    {
+        var parametros = new DynamicParameters();
+        parametros.Add("@unIdCliente", direction: ParameterDirection.Output);
+        parametros.Add("@unEmail", cliente.email);
+        parametros.Add("@unCliente", cliente.cliente);
+        parametros.Add("@unApellido", cliente.apellido);
+        parametros.Add("@unPasword", cliente.pasword);
+        return parametros;
     }
     #endregion
 }

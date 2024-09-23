@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Biblioteca;
+using Resto.MVC.Controllers.Modal;
 namespace Resto.MVC.Controllers;
 
 public class BuscarClienteController : Controller
@@ -22,4 +23,5 @@ public class BuscarClienteController : Controller
             }
             return View(cliente);
         }
+    
 }
