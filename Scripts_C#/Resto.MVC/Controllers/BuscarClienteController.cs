@@ -12,16 +12,26 @@ public class BuscarClienteController : Controller
     }
     [HttpGet]
 
-    public async Task<IActionResult> buscarCliente(string nombre)
+        public async Task<IActionResult> buscarCliente(string? cadena)
         {
-            if(nombre is null)
+            if(cadena is null)
                 return NotFound();
-            var cliente = await Ado.buscarCliente(nombre);
+            var cliente = await Ado.buscarCliente(cadena);
             if (cliente == null)
             {
                 return NotFound();
             }
             return View(cliente);
         }
-    
+        public async Task<IActionResult> Detalle(string? cadena)
+        {
+            if (cadena == null)
+                return NotFound();
+            var clientes = await Ado.buscarCliente(cadena);
+            if (clientes == null)
+            {
+                return NotFound();
+            }
+            return View("ListaClientes", clientes);
+        }
 }

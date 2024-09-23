@@ -133,6 +133,10 @@ public class AdoDapper : IAdo
         = @"select *
         from Restaurante
         where restaurante like @restaurante";
+        private static readonly string _querybuscarCliente
+        = @"select *
+        from Cliente
+        where cliente like @cliente";
 
     public async Task<List<Plato>> TodosPlatos()
     {
@@ -165,6 +169,11 @@ public class AdoDapper : IAdo
         var platos = await _conexion.QueryAsync<Plato>(_querybuscarPlato, new { plato = $"%{plato}%" });
         return platos.ToList();
     }
+    public async Task<List<Cliente>> buscarCliente(string cliente)
+    {
+        var clientes = await _conexion.QueryAsync<Cliente>(_querybuscarCliente, new { cliente = $"%{cliente}%" });
+        return clientes.ToList();
+    }
 
     public async Task<List<Restaurant>> buscarRestaurant(string restaurante)
     {
@@ -194,12 +203,6 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
-
-    public Task<List<Plato>> buscarCliente(string cliente)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<List<Cliente>> TodosClientes()
     {
         throw new NotImplementedException();
@@ -209,13 +212,12 @@ public class AdoDapper : IAdo
     {
         throw new NotImplementedException();
     }
-
-    Task<List<Cliente>> IAdo.buscarCliente(string cliente)
+    public Task AltaClienteAsync(Cliente cliente)
     {
         throw new NotImplementedException();
     }
 
-    public Task AltaClienteAsync(Cliente cliente)
+    public Task AltaPlatoAsync(Plato plato, int idRestaurant)
     {
         DynamicParameters parametros = ParametrosParaAltaCliente(cliente);
         return _conexion.ExecuteAsync("altaCliente", parametros, commandType: CommandType.StoredProcedure);

@@ -2,8 +2,6 @@ namespace Biblioteca;
 
 public class Plato
 {
-    public static Restaurant restaurant;
-
     public uint id {get ; set ;}
     public string plato {get ; set ;}
     public string descripcion {get ; set ;}
