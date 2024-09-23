@@ -204,7 +204,18 @@ public class AdoDapper : IAdo
 
     public Task AltaRestauranteAsync(Restaurant restaurant)
     {
-        throw new NotImplementedException();
+        DynamicParameters parametros = ParametrosParaAltaRestaurante(restaurant);
+        return _conexion.ExecuteAsync("altaRestaurante", parametros, commandType: CommandType.StoredProcedure);
+    }
+    private static DynamicParameters ParametrosParaAltaRestaurante(Restaurant restaurant)
+    {
+        var parametros = new DynamicParameters();
+        parametros.Add("@unIdRestaurante", direction: ParameterDirection.Output);
+        parametros.Add("@unEmail", restaurant.email);
+        parametros.Add("@unRestaurante", restaurant.restaurante);
+        parametros.Add("@unDomicilio", restaurant.domicilio);
+        parametros.Add("@unPasword", restaurant.pasword);
+        return parametros;
     }
     public Task<List<Cliente>> TodosClientes()
     {

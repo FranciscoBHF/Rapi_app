@@ -1,0 +1,43 @@
+@model Resto.MVC.Controllers.Modal.RestauranteModal
+
+@{
+    ViewData["Title"] = "Alta Restaurante";
+}
+
+<div class="container">
+    <form asp-action="AltaRestaurante" method="post" class="was-validated">
+        <div class="row mb-2">
+            <label for="email" class="col-sm-2 col-form-label">Correo electrónico</label>
+            <div class="col-sm-10">
+                <input type="email" id="email" asp-for="Email" required placeholder="Ingrese su correo electrónico" class="form-control">
+                <div class="invalid-feedback">Por favor, ingrese un correo electrónico válido.</div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="nombre" class="col-sm-2 col-form-label">Nombre de restaurante</label>
+            <div class="col-sm-10">
+                <input type="text" id="nombre" asp-for="restaurante" required placeholder="Ingrese su nombre" class="form-control">
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="Domicilio" class="col-sm-2 col-form-label">Domicilio</label>
+            <div class="col-sm-10">
+                <input type="text" id="Domicilio" asp-for="domicilio" required placeholder="Ingrese su domicilio" class="form-control">
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+            <div class="col-sm-10">
+                <input type="password" id="password" asp-for="password" required placeholder="Ingrese una contraseña" class="form-control">
+                <div class="invalid-feedback">Por favor, ingrese una contraseña.</div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>

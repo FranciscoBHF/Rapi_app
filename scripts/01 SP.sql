@@ -18,10 +18,10 @@ begin
 end$$
 
 DELIMITER $$
-CREATE PROCEDURE AltaRestaurante(in unrestaurante varchar(45),in undomicilio varchar(45),in unpasword char(64), in unemail varchar(45))
+CREATE PROCEDURE AltaRestaurante(in unrestaurante varchar(45),in undomicilio varchar(45), in unemail varchar(45), in unpasword char(64))
 begin
-	Insert into Restaurante (domicilio,restaurante,email,pasword)
-	VALUES (undomicilio, unrestaurante, unemail, unpasword);
+	Insert into Restaurante (restaurante, domicilio, email, pasword)
+	VALUES ( unrestaurante, undomicilio, unemail, unpasword);
 end$$
 
 DELIMITER $$
