@@ -33,7 +33,7 @@ public class PlatoController : Controller
     public async Task<IActionResult> GetAltaPlato()
     {
         var restaurantes = await _Ado.TodosRestaurants();
-        var orderRestaurantes = restaurantes.OrderBy(x => x.id).ToList();
+        var orderRestaurantes = restaurantes.OrderBy(x => x.idRestaurant).ToList();
         var platoModal = new PlatoModal();
         platoModal.restaurants = orderRestaurantes;
         return View("../Plato/AltaPlato", platoModal);

@@ -16,14 +16,12 @@ public interface IAdo
     Restaurant? RestaurantPorPass(string email, string pass);
     Task<Restaurant?> RestaurantPorPassAsync(string email, string pass);
     void AltaRestaurant(Restaurant nuevoPapa, string pasword);
-    Task AltaRestaurantAsync(Restaurant restaurant, string pasword);
+    Task AltaRestauranteAsync(Restaurant restaurante);
     Task <List<Restaurant>> buscarRestaurant (string restaurante);
 
     //platos
     Task <List<Plato>> buscarPlato(string nombre);
     Task <List<Plato>> TodosPlatosAsync();
-    void AltaPlato(Plato plato, Plato idRestaurant);
-    Task AltaPlatoAsync(Plato plato, Plato idRestaurant);
-    Task AltaPlatoAsync(Plato plato, int idRestaurant);
-    Task AltaRestauranteAsync(Restaurant restaurante);
+    void AltaPlato(Plato plato, ushort idRestaurant);
+    Task AltaPlatoAsync(Plato plato);
 }
