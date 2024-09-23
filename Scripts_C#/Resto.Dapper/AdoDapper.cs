@@ -51,13 +51,13 @@ public class AdoDapper : IAdo
 
     private static readonly string _queryAltaPlato
         = "CALL AltaPlato(@Plato, @descripcion, @precio, @idRestaurant)";
-    public async Task AltaPlatoAsync(Plato plato, Plato idRestaurant)
+    public async Task AltaPlatoAsync(Plato plato)
     {
         var parametros = new DynamicParameters();
         parametros.Add("@Plato", plato.plato);
         parametros.Add("@descripcion", plato.descripcion);
         parametros.Add("@precio", plato.precio);
-        parametros.Add("@idRestaurant", idRestaurant);
+        parametros.Add("@idRestaurant", plato.idRestaurant);
         await _conexion.ExecuteAsync(_queryAltaPlato, parametros, commandType: CommandType.StoredProcedure);
     }
 
@@ -216,6 +216,11 @@ public class AdoDapper : IAdo
     }
 
     public Task AltaClienteAsync(Cliente cliente)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AltaPlato(Plato plato)
     {
         throw new NotImplementedException();
     }
