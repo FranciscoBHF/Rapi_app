@@ -4,7 +4,6 @@
 <div class="table-responsive">
     <table class="table table-striped table-hover">
         <tr class="bg-dark text-white">
-            <th>id</th>
             <th>Email</th>
             <th>Cliente</th>
             <th>Apellido</th>
@@ -12,7 +11,6 @@
         @foreach (var cliente in Model)
             {
                 <tr>
-                    <td>@cliente.idCliente</td>
                     <td>@cliente.email</td>
                     <td>@cliente.cliente</td>
                     <td>@cliente.apellido</td>
