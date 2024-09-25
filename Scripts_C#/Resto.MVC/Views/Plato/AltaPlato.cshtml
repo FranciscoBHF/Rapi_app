@@ -58,3 +58,9 @@
         </div>
     </form>
 </div>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @Html.ValidationSummary(true)
+    </div>
+}

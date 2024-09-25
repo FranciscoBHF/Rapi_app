@@ -4,6 +4,13 @@
     ViewData["Title"] = "Alta Restaurante";
 }
 
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @Html.ValidationSummary()
+    </div>
+}
+
 <div class="container">
     <form asp-action="AltaRestaurante" method="post" class="was-validated">
         <div class="row mb-2">

@@ -39,11 +39,28 @@ public class PlatoController : Controller
         return View("../Plato/AltaPlato", platoModal);
     }
 
-    public async Task<IActionResult> AltaPlato(PlatoModal platoModal)
+public async Task<IActionResult> AltaPlato(PlatoModal platoModal)
+{
+    // Comprobar si el plato ya existe
+    var platos = await _Ado.TodosPlatosAsync();
+    var existePlato = platos.Any(p => p.plato == platoModal.plato && p.idRestaurant == platoModal.idRestaurant);
+
+    if (existePlato)
     {
-        var plato = new Plato(platoModal.plato, platoModal.descripcion, platoModal.precio, platoModal.idRestaurant, platoModal.disponible);
-        await _Ado.AltaPlatoAsync(plato);
-        return RedirectToAction(nameof(ObtenerPlato)); 
+
+        ModelState.AddModelError("", "El plato ya existe en este restaurante.");
+        
+        var restaurantes = await _Ado.TodosRestaurants();
+        var orderRestaurantes = restaurantes.OrderBy(x => x.idRestaurant).ToList();
+        platoModal.restaurants = orderRestaurantes;
+
+        return View("../Plato/AltaPlato", platoModal);
     }
+
+
+    var plato = new Plato(platoModal.plato, platoModal.descripcion, platoModal.precio, platoModal.idRestaurant, platoModal.disponible);
+    await _Ado.AltaPlatoAsync(plato);
+    return RedirectToAction(nameof(ObtenerPlato)); 
+}
 }
 

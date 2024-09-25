@@ -42,6 +42,22 @@ public class RestauranteController : Controller
     [HttpPost]
     public async Task<IActionResult> AltaRestaurante(RestauranteModal restauranteModal)
     {
+
+        var restaurantesExistentes = await Ado.TodosRestaurants();
+
+        var restauranteExistente = restaurantesExistentes
+            .FirstOrDefault(r => 
+                r.restaurante == restauranteModal.restaurante || 
+                r.email == restauranteModal.Email || 
+                r.domicilio == restauranteModal.domicilio);
+
+        if (restauranteExistente != null)
+        {
+
+            ModelState.AddModelError(string.Empty, "Ya existe un restaurante con ese nombre, email o domicilio.");
+            return View("../Restaurante/AltaRestaurante", restauranteModal);
+        }
+
         var restaurante = new Restaurant(restauranteModal.Email, restauranteModal.restaurante, restauranteModal.domicilio, restauranteModal.password);
         await Ado.AltaRestauranteAsync(restaurante);
         return RedirectToAction(nameof(ObtenerRestaurants));
