@@ -35,7 +35,7 @@ public class ClienteController : Controller
     {
         var cliente = new Cliente(clienteModal.Email, clienteModal.Cliente, clienteModal.Apellido, clienteModal.password);
         await _ado.AltaClienteAsync(cliente);
-        return RedirectToAction(nameof(GetAltaCliente));
+        return RedirectToAction(nameof(ObtenerClientes));
     }
     // [HttpPost]
     // public async Task<IActionResult> AltaCliente(ClienteModal clienteModal)

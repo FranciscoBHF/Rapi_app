@@ -44,6 +44,6 @@ public class RestauranteController : Controller
     {
         var restaurante = new Restaurant(restauranteModal.Email, restauranteModal.restaurante, restauranteModal.domicilio, restauranteModal.password);
         await Ado.AltaRestauranteAsync(restaurante);
-        return RedirectToAction(nameof(GetAltaRestaurante));
+        return RedirectToAction(nameof(ObtenerRestaurants));
     }
 }
