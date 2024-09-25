@@ -7,44 +7,44 @@
 <div class="container">
     <form asp-action="AltaPlato" method="post" class="was-validated">
         <div class="row mb-2">
-            <label for="text" class="col-sm-2 col-form-label">Nombre</label>
+            <label for="text" class="col-sm-2 col-form-label">Nombre del plato</label>
             <div class="col-sm-10">
-                <input type="text" id="Nombre" asp-for="plato" required placeholder="Ingrese el nombre del plato"
+                <input type="text" id="plato" asp-for="plato" required placeholder="Ingrese el nombre del plato"
                     class="form-control">
                 <div class="invalid-feedback">Por favor, ingrese un nombre válido.</div>
             </div>
         </div>
         <div class="row mb-2">
-            <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
+            <label for="des" class="col-sm-2 col-form-label">Descripcion</label>
             <div class="col-sm-10">
-                <input type="text" id="descripcion" asp-for="descripcion" required placeholder="Ingrese una decripcion del plato"
+                <input type="text" id="descripcion" asp-for="descripcion" required placeholder="Ingrese una Descripcion"
                     class="form-control">
                 <div class="invalid-feedback">Este campo es requerido.</div>
             </div>
         </div>
         <div class="row mb-2">
-            <label for="precio" class="col-sm-2 col-form-label">Precio</label>
+            <label for="apellido" class="col-sm-2 col-form-label">Precio</label>
             <div class="col-sm-10">
-                <input type="number" id="precio" asp-for="precio" required placeholder="Ingrese el precio del plato"
+                <input type="number" id="precio" asp-for="precio" required placeholder="Ingrese el precio"
                     class="form-control">
                 <div class="invalid-feedback">Este campo es requerido.</div>
             </div>
         </div>
         <div class="row mb-2">
-            <label for="disponible" class="col-sm-2 col-form-label">El plato esta disponible?</label>
+            <label for="password" class="col-sm-2 col-form-label">Disponibilidad</label>
             <div class="col-sm-10">
                 <select asp-for="disponible" class="form-control">
                     <option value="">Disponibilidad</option>
-                    <option value="1">true</option>
-                    <option value="0">false</option>
+                    <option value="True">Disponible</option>
+                    <option value="False">No disponible</option>
                 </select>
             </div>
         </div>
         <div class="row mb-2">
-            <label for="restaurante" class="col-sm-2 col-form-label">restaurante</label>
+            <label for="idRestaurant" class="col-sm-2 col-form-label">Restaurante</label>
             <div class="col-sm-10">
                 <select asp-for="idRestaurant" id="" class="form-control">
-                    <option value="">Elija el su restaurante</option>
+                    <option value="">Elija el restaurante</option>
                     @foreach (var restaurant in Model.restaurants)
                     {
                         <option value="@restaurant.idRestaurant">@restaurant.restaurante</option>

@@ -247,7 +247,7 @@ public class AdoDapper : IAdo
         parametros.Add("@unidPlato", direction: ParameterDirection.Output);
         parametros.Add("@unplato", plato.plato);
         parametros.Add("@undescripcionp", plato.descripcion);
-        parametros.Add("@unprecio", plato.descripcion);
+        parametros.Add("@unprecio", plato.precio);
         parametros.Add("@undisponible", plato.disponible);
         parametros.Add("@unidRestaurant", plato.idRestaurant);
         return parametros;

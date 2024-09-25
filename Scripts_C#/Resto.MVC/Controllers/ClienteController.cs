@@ -9,9 +9,6 @@ namespace Biblio.Mvc.Controllers;
 public class ClienteController : Controller
 {
     private readonly IAdo _ado;
-    private static readonly string _cadena =
-    @"Server=Server=localhost;Database=5to_comidapp;User=5to_agbd;Password=Trigg3rs!";
-
     public ClienteController(IAdo ado)
     {
         _ado = ado;
