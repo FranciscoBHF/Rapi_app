@@ -33,10 +33,22 @@ public class ClienteController : Controller
     [HttpPost]
     public async Task<IActionResult> AltaCliente(ClienteModal clienteModal)
     {
+        // Verificar si ya existe un cliente con el mismo email
+        var clientesExistentes = await _ado.ObtenerClientesAsync();
+        var clienteExistente = clientesExistentes.FirstOrDefault(c => 
+            c.email.Equals(clienteModal.Email, StringComparison.OrdinalIgnoreCase));
+
+        if (clienteExistente != null)
+        {
+            ModelState.AddModelError(string.Empty, "Ya existe un cliente con este email.");
+            return View("../Cliente/AltaCliente", clienteModal); // Devuelve la vista con el error
+        }
+
         var cliente = new Cliente(clienteModal.Email, clienteModal.Cliente, clienteModal.Apellido, clienteModal.password);
         await _ado.AltaClienteAsync(cliente);
-        return RedirectToAction(nameof(ObtenerClientes));
+        return RedirectToAction(nameof(ObtenerClientes)); 
     }
+
     // [HttpPost]
     // public async Task<IActionResult> AltaCliente(ClienteModal clienteModal)
     // {

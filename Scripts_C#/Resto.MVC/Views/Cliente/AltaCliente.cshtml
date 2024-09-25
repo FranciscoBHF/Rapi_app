@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "Alta Cliente";
 }
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @Html.ValidationSummary(true)
+    </div>
+}
 
 <div class="container">
     <form asp-action="AltaCliente" method="post" class="was-validated">
