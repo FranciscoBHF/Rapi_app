@@ -139,7 +139,9 @@ public class AdoDapper : IAdo
         private static readonly string _querybuscarCliente
         = @"select *
         from Cliente
-        where cliente like @cliente";
+        where cliente like @cliente
+        or apellido like @cliente
+        or email like @cliente";
 
     public async Task<List<Plato>> TodosPlatos()
     {
