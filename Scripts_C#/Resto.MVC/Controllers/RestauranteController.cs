@@ -58,7 +58,7 @@ public class RestauranteController : Controller
             return View("../Restaurante/AltaRestaurante", restauranteModal);
         }
 
-        var restaurante = new Restaurant(restauranteModal.Email, restauranteModal.restaurante, restauranteModal.domicilio, restauranteModal.password);
+        var restaurante = new Restaurant(restauranteModal.restaurante!, restauranteModal.domicilio!, restauranteModal.Email!, restauranteModal.password!);
         await Ado.AltaRestauranteAsync(restaurante);
         return RedirectToAction(nameof(ObtenerRestaurants));
     }

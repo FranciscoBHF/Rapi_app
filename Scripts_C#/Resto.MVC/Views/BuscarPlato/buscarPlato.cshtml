@@ -16,13 +16,16 @@
             <tr class="bg-dark text-white">
                 <th>Nombre</th>
                 <th>Descripcion</th>
+                <th>Precio</th>
                 <th>Disponibilidad</th>
+                
             </tr>
             @foreach (var plato in Model)
             {
                 <tr>
                     <td>@plato.plato</td>
                     <td>@plato.descripcion</td>
+                    <td>@plato.precio</td>
                     @if (plato.disponible)
                     {
                         <td>Disponible</td>
