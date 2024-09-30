@@ -1,21 +1,31 @@
 @using Biblioteca
 @model IEnumerable<Restaurant>
-
-<h1>Restaurantes</h1>
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <tr class="bg-dark text-white">
-                <th>Nombre</th>
-                <th>Domicilio</th>
-                <th>Email</th>
+<!-- Buscar Restaurant -->
+<nav class="navbar bg-body-tertiary">
+    <h1>Restaurantes</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <form class="d-flex" role="Buscar Restaurant" asp-controller="BuscarRestaurant" asp-action="BuscarRestaurant"
+            method="get">
+            <input class="form-control me-2" type="text" placeholder="Buscar Restaurante"
+                aria-label="Buscar restaurante" name="cadena">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+    </div>
+</nav>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <tr class="bg-dark text-white">
+            <th>Nombre</th>
+            <th>Domicilio</th>
+            <th>Email</th>
+        </tr>
+        @foreach (var resto in Model)
+        {
+            <tr>
+                <td>@resto.restaurante</td>
+                <td>@resto.domicilio</td>
+                <td>@resto.email</td>
             </tr>
-            @foreach (var resto in Model)
-            {
-                <tr>
-                    <td>@resto.restaurante</td>
-                    <td>@resto.domicilio</td>
-                    <td>@resto.email</td>
-                </tr>
-            }
-        </table>
-    </div>  
+        }
+    </table>
+</div>
