@@ -128,6 +128,7 @@ public class AdoDapper : IAdo
         =@"select Plato, descripcion, precio, idRestaurant, disponible, count(idPlato)
         from Plato
         where idPLato = @unidPLato
+        GROUP BY Plato, descripcion, precio, idRestaurant, disponible;
         
         select restaurante
         from Restaurante
