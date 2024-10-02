@@ -24,4 +24,6 @@ public interface IAdo
     Task <List<Plato>> TodosPlatosAsync();
     void AltaPlato(Plato plato, ushort idRestaurant);
     Task AltaPlatoAsync(Plato plato);
+    void DetallePlato(Plato plato);
+    Task DetallePlatoAsync(Plato plato);
 }

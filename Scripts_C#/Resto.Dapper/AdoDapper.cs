@@ -25,6 +25,7 @@ public class AdoDapper : IAdo
     
         private static readonly string _queryAltaPlato
         = "CALL AltaPlato(@idRestaurant, @plato, @descripcion, @precio, @disponible )";
+        
 
     private static readonly string _queryTodosClientes
         = "SELECT * FROM Cliente ORDER BY cliente ASC, apellido ASC";
@@ -123,6 +124,15 @@ public class AdoDapper : IAdo
         = @"select *
         from Plato p";
 
+        private static readonly string _queryDetallePlato
+        =@"select Plato, descripcion, precio, idRestaurant, disponible, count(idPlato)
+        from Plato
+        where idPLato = @unidPLato
+        
+        select restaurante
+        from Restaurante
+        where idRestaurant = @unidRestaurant";
+
     private static readonly string _queryTodosRestaurants
     = @"select *
     from Restaurante";
@@ -180,6 +190,11 @@ public class AdoDapper : IAdo
         return clientes.ToList();
     }
 
+    public async Task<List<Plato>> DetallePlatoAsync(Plato plato)
+    {
+        var platos = await _conexion.QueryAsync<Plato>(_queryDetallePlato);
+        return platos.ToList(); 
+    }
     public async Task<List<Restaurant>> buscarRestaurant(string restaurante)
     {
         var restaurantes = await _conexion.QueryAsync<Restaurant>(_querybuscarRestaurant, new { restaurante = $"%{restaurante}%" });
@@ -253,6 +268,16 @@ public class AdoDapper : IAdo
         parametros.Add("@undisponible", plato.disponible);
         parametros.Add("@unidRestaurant", plato.idRestaurant);
         return parametros;
+    }
+
+    public void DetallePlato(Plato plato)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task IAdo.DetallePlatoAsync(Plato plato)
+    {
+        throw new NotImplementedException();
     }
 
     #endregion
