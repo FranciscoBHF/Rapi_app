@@ -191,7 +191,7 @@ public class AdoDapper : IAdo
         return clientes.ToList();
     }
 
-    public async Task<List<Plato>> DetallePlatoAsync(Plato plato)
+    public async Task<List<Plato>> DetallePlatoAsync()
     {
         var platos = await _conexion.QueryAsync<Plato>(_queryDetallePlato);
         return platos.ToList(); 
