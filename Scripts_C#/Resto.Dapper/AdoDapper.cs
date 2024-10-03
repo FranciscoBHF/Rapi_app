@@ -125,12 +125,12 @@ public class AdoDapper : IAdo
         from Plato p";
 
         private static readonly string _queryDetallePlato
-        =@"select Plato, descripcion, precio, idRestaurant, disponible, count(idPlato)
+        =@"select Plato, descripcion, precio, idRestaurant, idPLato
         from Plato
         where idPLato = @unidPLato
         GROUP BY Plato, descripcion, precio, idRestaurant, disponible;
         
-        select restaurante
+        select restaurante, idRestaurant, domicilio, email, pasword
         from Restaurante
         where idRestaurant = @unidRestaurant";
 
