@@ -9,17 +9,20 @@
             method="get">
             <input class="form-control me-2" type="text" placeholder="Buscar Restaurante"
                 aria-label="Buscar restaurante" name="cadena">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
+            <button type="submit" class="btn btn-primary">Buscar</button>
         </form>
     </div>
 </nav>
     <div class="table-responsive">
         <table class="table table-striped table-hover">
-            <tr class="bg-dark text-white">
+            <thead>
+                <tr>
                 <th>Nombre</th>
                 <th>Domicilio</th>
                 <th>Email</th>
             </tr>
+            </thead>
+            
             @foreach (var resto in Model)
             {
                 <tr>

@@ -7,19 +7,21 @@
         <form class="d-flex" role="Buscar comida" asp-controller="BuscarPlato" asp-action="BuscarPlato" method="get">
             <input class="form-control me-2" type="text" placeholder="Buscar comida" aria-label="Buscar comida"
                 name="cadena">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
+            <button type="submit" class="btn btn-primary">Buscar</button>
         </form>
     </div>
 </nav>
-<div class="table-responsive">
+<div class="container mt-3">
     <table class="table table-striped table-hover">
-        <tr class="bg-dark text-white">
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Precio</th>
-            <th>Disponibilidad</th>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Disponibilidad</th>
+            </tr>
+        </thead>
 
-        </tr>
         @foreach (var plato in Model)
         {
             <tr>
