@@ -25,7 +25,10 @@
         @foreach (var plato in Model)
         {
             <tr>
-                <td>@plato.plato</td>
+                <td>
+                    <a class="dropdown-item" asp-controller="Plato" asp-action="GetAltaPlato"><i
+                    class="bi bi-list-nested"></i>@plato.plato</a>
+                </td>
                 <td>@plato.descripcion</td>
                 <td>@plato.precio</td>
                 @if (plato.disponible)
