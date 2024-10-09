@@ -125,14 +125,13 @@ public class AdoDapper : IAdo
         from Plato p";
 
         private static readonly string _queryDetallePlato
-        =@"select Plato, descripcion, precio, idRestaurant, idPlato
-        from Plato
-        where idPlato = @unidPlato
-        GROUP BY Plato, descripcion, precio, idRestaurant, disponible;
-        
-        select restaurante, idRestaurant, domicilio, email, pasword
-        from Restaurante
-        where idRestaurant = @unidRestaurant";
+    = @"SELECT p.idPlato, p.plato, p.descripcion, p.precio, p.idRestaurant, p.disponible
+        FROM Plato p
+        WHERE p.idPlato = @unidPlato;
+
+        SELECT r.idRestaurant, r.restaurante, r.domicilio, r.email, r.pasword
+        FROM Restaurante r
+        WHERE r.idRestaurant = (SELECT idRestaurant FROM Plato WHERE idPlato = @unidPlato);";
 
     private static readonly string _queryTodosRestaurants
     = @"select *
