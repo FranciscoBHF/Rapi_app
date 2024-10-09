@@ -65,8 +65,8 @@ public class PlatoController : Controller
     [HttpGet]
     public async Task<IActionResult> ObtenerDetalle(int id)
     {
-        var platos = await _Ado.DetallePlatoAsync(id);
-        return View("../Plato/DetallePlato");
+        var plato = await _Ado.DetallePlatoAsync(id);
+        return View("../Plato/DetallePlato", plato);
     }
 }
 

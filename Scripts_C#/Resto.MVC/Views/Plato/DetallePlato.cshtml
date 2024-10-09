@@ -1,4 +1,10 @@
-@using Biblioteca
-@model IEnumerable<Plato>
+@model Biblioteca.Plato
 
-<h1>hola</h1>
+@if (Model != null)
+{
+    <h1>@Model.precio</h1>
+}
+else
+{
+    <h1>Plato no encontrado.</h1>
+}
