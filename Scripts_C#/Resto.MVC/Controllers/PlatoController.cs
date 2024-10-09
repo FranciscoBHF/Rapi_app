@@ -39,28 +39,34 @@ public class PlatoController : Controller
         return View("../Plato/AltaPlato", platoModal);
     }
 
-public async Task<IActionResult> AltaPlato(PlatoModal platoModal)
-{
-    // Comprobar si el plato ya existe
-    var platos = await _Ado.TodosPlatosAsync();
-    var existePlato = platos.Any(p => p.plato == platoModal.plato && p.idRestaurant == platoModal.idRestaurant);
-
-    if (existePlato)
+    public async Task<IActionResult> AltaPlato(PlatoModal platoModal)
     {
+        // Comprobar si el plato ya existe
+        var platos = await _Ado.TodosPlatosAsync();
+        var existePlato = platos.Any(p => p.plato == platoModal.plato && p.idRestaurant == platoModal.idRestaurant);
 
-        ModelState.AddModelError("", "El plato ya existe en este restaurante.");
-        
-        var restaurantes = await _Ado.TodosRestaurants();
-        var orderRestaurantes = restaurantes.OrderBy(x => x.idRestaurant).ToList();
-        platoModal.restaurants = orderRestaurantes;
+        if (existePlato)
+        {
 
-        return View("../Plato/AltaPlato", platoModal);
+            ModelState.AddModelError("", "El plato ya existe en este restaurante.");
+
+            var restaurantes = await _Ado.TodosRestaurants();
+            var orderRestaurantes = restaurantes.OrderBy(x => x.idRestaurant).ToList();
+            platoModal.restaurants = orderRestaurantes;
+
+            return View("../Plato/AltaPlato", platoModal);
+        }
+
+
+        var plato = new Plato(platoModal!.plato!, platoModal!.descripcion!, platoModal.precio, platoModal.idRestaurant, platoModal.disponible);
+        await _Ado.AltaPlatoAsync(plato);
+        return RedirectToAction(nameof(ObtenerPlato));
     }
-
-
-    var plato = new Plato(platoModal.plato, platoModal.descripcion, platoModal.precio, platoModal.idRestaurant, platoModal.disponible);
-    await _Ado.AltaPlatoAsync(plato);
-    return RedirectToAction(nameof(ObtenerPlato)); 
-}
+    [HttpGet]
+    public async Task<IActionResult> ObtenerDetalle(int id)
+    {
+        var platos = await _Ado.DetallePlatoAsync(id);
+        return View("../Plato/DetallePlato");
+    }
 }
 
