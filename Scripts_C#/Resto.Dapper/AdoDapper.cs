@@ -190,14 +190,21 @@ public class AdoDapper : IAdo
         return clientes.ToList();
     }
 
-    public async Task<Plato> DetallePlatoAsync(int idPlato)
-    {
-        var parametros = new DynamicParameters();
-        parametros.Add("@unidPlato", idPlato);
+public async Task<Plato?> DetallePlatoAsync(int idPlato)
+{
+    using var multi = await _conexion.QueryMultipleAsync(_queryDetallePlato, new { unidPlato = idPlato });
 
-        var plato = await _conexion.QuerySingleOrDefaultAsync<Plato>(_queryDetallePlato, parametros);
-        return plato;
+    var plato = await multi.ReadSingleOrDefaultAsync<Plato>();
+    var restaurant = await multi.ReadSingleOrDefaultAsync<Restaurant>();
+
+    if (plato != null)
+    {
+        plato.Restaurant = restaurant;
     }
+    
+    return plato;
+}
+
     public async Task<List<Restaurant>> buscarRestaurant(string restaurante)
     {
         var restaurantes = await _conexion.QueryAsync<Restaurant>(_querybuscarRestaurant, new { restaurante = $"%{restaurante}%" });
