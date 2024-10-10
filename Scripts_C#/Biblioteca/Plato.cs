@@ -9,6 +9,7 @@ public class Plato
     public decimal? precio {get ; set ;}
     public ushort idRestaurant {get ; set ;}
     public bool disponible {get ; set ;}
+    public Restaurant? Restaurant { get; set; } 
     public Plato(string plato, string descripcion, decimal? precio,ushort idRestaurant ,bool disponible)
     {
         this.plato = plato;
