@@ -26,7 +26,7 @@ public class TestAdoRestaurant : TestAdo
 
     Assert.Null(restaurante1);
 
-    var nuevoPapa = new Restaurant(restaurante,domicilio,email);
+    var nuevoPapa = new Restaurant(restaurante,domicilio,email,pasword);
 
     Ado.AltaRestaurant (nuevoPapa, pasword);
 

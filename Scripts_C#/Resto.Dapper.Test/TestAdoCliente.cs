@@ -29,7 +29,7 @@ public class TestAdoCliente : TestAdo
 
     Assert.Null(cliente1);
 
-    var nuevoBasualdo = new Cliente(email,cliente,apellido);
+    var nuevoBasualdo = new Cliente(email,cliente,apellido,pasword);
 
     Ado.AltaCliente (nuevoBasualdo, pasword);
 

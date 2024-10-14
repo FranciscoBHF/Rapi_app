@@ -90,17 +90,16 @@ public class AdoDapper : IAdo
 
     #region Plato (Implementación)
     private static readonly string _queryTodosPlatos
-        = @"select *
-        from Plato p";
+        = @"select * from Plato p";
 
     private static readonly string _queryDetallePlato
-    = @"SELECT p.idPlato, p.plato, p.descripcion, p.precio, p.idRestaurant, p.disponible
+    = @"SELECT p.id, p.plato, p.descripcion, p.precio, p.idRestaurant, p.disponible
         FROM Plato p
-        WHERE p.idPlato = @unidPlato;
+        WHERE p.id = @unidPlato;
 
         SELECT r.idRestaurant, r.restaurante, r.domicilio, r.email, r.pasword
         FROM Restaurante r
-        WHERE r.idRestaurant = (SELECT idRestaurant FROM Plato WHERE idPlato = @unidPlato);";
+        WHERE r.idRestaurant = (SELECT idRestaurant FROM Plato WHERE id = @unidPlato);";
 
     private static readonly string _queryTodosRestaurants
     = @"select *
@@ -199,7 +198,10 @@ public class AdoDapper : IAdo
     //------------------------------
 
     public async Task<List<Plato>> TodosPlatosAsync()
-    => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
+    {
+        var platos = await _conexion.QueryAsync<Plato>(_queryTodosPlatos);
+        return platos.ToList();
+    }
 
     public async Task<List<Plato>> buscarPlato(string plato)
     {
@@ -248,6 +250,10 @@ public class AdoDapper : IAdo
         );
     public Restaurant? RestaurantPorPass(string email, string pasword)
         => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
+
+public Restaurant? ClientePorPass(string email, string pasword)
+        => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
+        
     public void Restaurante(Restaurant restaurant)
     {
         throw new NotImplementedException();
@@ -279,6 +285,11 @@ public class AdoDapper : IAdo
     {
         DynamicParameters parametros = ParametrosParaAltaRestaurante(restaurant);
         return _conexion.ExecuteAsync("altaRestaurante", parametros, commandType: CommandType.StoredProcedure);
+    }
+
+    Cliente? IAdo.ClientePorPass(string email, string pass)
+    {
+        throw new NotImplementedException();
     }
     // private static DynamicParameters ParametrosParaAltaRestaurante(Restaurant restaurant)
     // {

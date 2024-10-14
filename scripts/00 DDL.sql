@@ -18,8 +18,8 @@ descripcion varchar (45),
 precio decimal(7,2),
 idRestaurant SMALLINT UNSIGNED,
 disponible bool,
-idPLato mediumint unsigned AUTO_INCREMENT,
-primary key(idPlato),
+id mediumint unsigned AUTO_INCREMENT,
+primary key(id),
 CONSTRAINT FK_Restaurante_Plato FOREIGN KEY (idRestaurant)
 REFERENCES Restaurante(idRestaurant),
 FULLTEXT (Plato,descripcion)
@@ -38,7 +38,7 @@ create table Pedido
 idCliente mediumint unsigned,
 numero mediumint unsigned not null,
 idRestaurant SMALLINT UNSIGNED,
-idPlato int,
+id int,
 fecha datetime,
 valoracion float(10)not null,
 descripcion varchar(45)not null,
@@ -50,26 +50,26 @@ references Cliente(idCliente)
 );
 create table PlatoPedido
 (
-idPlato mediumint unsigned,
+id mediumint unsigned,
 numero mediumint unsigned,
 cantPlatos tinyint unsigned,
 detalle decimal(7,2),
-constraint pk_PlatoPedido primary key(idPlato,numero),
-constraint FK_PlatoPed foreign key(idPlato)
-references Plato(idPlato),
+constraint pk_PlatoPedido primary key(id,numero),
+constraint FK_PlatoPed foreign key(id)
+references Plato(id),
 constraint fk_PlatoPedi foreign key(numero)
 references Pedido(numero)
 );
 create table VentaResto
 (
 idRestaurant SMALLINT UNSIGNED,
-idPlato mediumint unsigned,
+id mediumint unsigned,
 mes tinyint unsigned,
 ano YEAR,
 monto DECIMAL(9,2),
-constraint pk_VentaResto primary key(idRestaurant,idPlato,mes,ano),
+constraint pk_VentaResto primary key(idRestaurant,id,mes,ano),
 constraint Fk_VentaRestaurant foreign key (idRestaurant)
 references Restaurante(idRestaurant),
-constraint fk_VentaPlatoPedido foreign key (idPlato)
-references PlatoPedido(idPlato)
+constraint fk_VentaPlatoPedido foreign key (id)
+references PlatoPedido(id)
 );
