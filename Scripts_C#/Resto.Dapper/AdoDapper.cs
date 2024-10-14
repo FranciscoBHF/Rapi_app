@@ -1,4 +1,4 @@
-﻿using Biblioteca;
+﻿﻿using Biblioteca;
 using MySqlConnector;
 using System.Data;
 using Dapper;
@@ -53,18 +53,9 @@ public class AdoDapper : IAdo
         DynamicParameters parametros = ParametrosParaAltaCliente(cliente);
         return _conexion.ExecuteAsync("altaCliente", parametros, commandType: CommandType.StoredProcedure);
     }
-    public Task<List<Cliente>> TodosClientes()
-    {
-        throw new NotImplementedException();
-    }
 
     public List<Cliente> ObtenerClientes()
         => _conexion.Query<Cliente>(_queryTodosClientes).ToList();
-
-    public List<Cliente> ObtenerCliente()
-    {
-        throw new NotImplementedException();
-    }
 
     public Task<List<Cliente>> DetalleClienteAsync(int idCliente)
     {
@@ -142,87 +133,22 @@ public class AdoDapper : IAdo
         parametros.Add("@disponible", plato.disponible);
 
         _conexion.Execute(_queryAltaPlato, parametros, commandType: CommandType.StoredProcedure);
+    }
     public async Task<List<Plato>> TodosPlatos()
     {
         var platos = await _conexion.QueryAsync<Plato>(_queryTodosPlatos);
         return platos.ToList();
     }
 
-    public async Task<List<Plato>> TodosPlatosAsync()
-    => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
-
-    // public async Task<List<Plato>> TodosPlatosAsync()
-    // {
-    //     var productos = _conexion.Query<Plato,Restaurant, Plato>
-    //         (_queryTodosPlatos,
-    //         (plato, Restaurant) =>
-    //         {
-    //             Plato.Restaurant = Restaurant;
-    //             return plato;
-    //         },
-    //         splitOn: "idRestaurant")
-    //         .ToList();
-    //         var restaurant = plato;
-    //         return plato;
-    // }
     public async Task<List<Restaurant>> TodosRestaurants()
         => (await _conexion.QueryAsync<Restaurant>(_queryTodosRestaurants)).ToList();
-
-    public async Task<List<Plato>> buscarPlato(string plato)
-    {
-        var platos = await _conexion.QueryAsync<Plato>(_querybuscarPlato, new { plato = $"%{plato}%" });
-        return platos.ToList();
-    }
-    public async Task<List<Cliente>> buscarCliente(string cliente)
-    {
-        var clientes = await _conexion.QueryAsync<Cliente>(_querybuscarCliente, new { cliente = $"%{cliente}%" });
-        return clientes.ToList();
-    }
-
-public async Task<Plato?> DetallePlatoAsync(int idPlato)
-{
-    using var multi = await _conexion.QueryMultipleAsync(_queryDetallePlato, new { unidPlato = idPlato });
-
-    var plato = await multi.ReadSingleOrDefaultAsync<Plato>();
-    var restaurant = await multi.ReadSingleOrDefaultAsync<Restaurant>();
-
-    if (plato != null)
-    {
-        plato.Restaurant = restaurant;
-    }
-    
-    return plato;
-}
 
     public async Task<List<Restaurant>> buscarRestaurant(string restaurante)
     {
         var restaurantes = await _conexion.QueryAsync<Restaurant>(_querybuscarRestaurant, new { restaurante = $"%{restaurante}%" });
         return restaurantes.ToList();
     }
-    public Task AltaRestaurantAsync(Restaurant restaurant, string pasword)
-    {
-        throw new NotImplementedException();
-    }
 
-    public Cliente? ClientePorPass(string email, string pass)
-    {
-        throw new NotImplementedException();
-    }
-    public void Restaurante(Restaurant restaurant)
-    {
-        throw new NotImplementedException();
-    }
-
-    // public Task AltaRestaurantAsync(Restaurant restaurant, string pasword)
-    // {
-    //     throw new NotImplementedException();
-    // }
-
-    public Task AltaRestauranteAsync(Restaurant restaurant)
-    {
-        DynamicParameters parametros = ParametrosParaAltaRestaurante(restaurant);
-        return _conexion.ExecuteAsync("altaRestaurante", parametros, commandType: CommandType.StoredProcedure);
-    }
     private static DynamicParameters ParametrosParaAltaRestaurante(Restaurant restaurant)
     {
         var parametros = new DynamicParameters();
@@ -237,12 +163,7 @@ public async Task<Plato?> DetallePlatoAsync(int idPlato)
     {
         throw new NotImplementedException();
     }
-    public Task AltaClienteAsync(Cliente cliente)
-    {
-        DynamicParameters parametros = ParametrosParaAltaCliente(cliente);
-        return _conexion.ExecuteAsync("altaCliente", parametros, commandType: CommandType.StoredProcedure);
-    }
-        public Task AltaPlatoAsync(Plato plato)
+    public Task AltaPlatoAsync(Plato plato)
     {
         DynamicParameters parametros = ParametrosParaAltaPlato(plato);
         return _conexion.ExecuteAsync("altaPlato", parametros, commandType: CommandType.StoredProcedure);
@@ -272,21 +193,10 @@ public async Task<Plato?> DetallePlatoAsync(int idPlato)
         parametros.Add("@unidRestaurant", plato.idRestaurant);
         return parametros;
     }
-    public async Task<List<Plato>> TodosPlatos()
-    {
-        var platos = await _conexion.QueryAsync<Plato>(_queryTodosPlatos);
-        return platos.ToList();
-    }
-
 
     //------------------------------
     // Métodos asíncronos
     //------------------------------
-    public Task AltaPlatoAsync(Plato plato)
-    {
-        DynamicParameters parametros = ParametrosParaAltaPlato(plato);
-        return _conexion.ExecuteAsync("altaPlato", parametros, commandType: CommandType.StoredProcedure);
-    }
 
     public async Task<List<Plato>> TodosPlatosAsync()
     => (await _conexion.QueryAsync<Plato>(_queryTodosPlatos)).ToList();
@@ -296,14 +206,20 @@ public async Task<Plato?> DetallePlatoAsync(int idPlato)
         var platos = await _conexion.QueryAsync<Plato>(_querybuscarPlato, new { plato = $"%{plato}%" });
         return platos.ToList();
     }
-    public async Task<Plato> DetallePlatoAsync(int idPlato)
-    {
-        var parametros = new DynamicParameters();
-        parametros.Add("@unidPlato", idPlato);
+    public async Task<Plato?> DetallePlatoAsync(int idPlato)
+{
+    using var multi = await _conexion.QueryMultipleAsync(_queryDetallePlato, new { unidPlato = idPlato });
 
-        var plato = await _conexion.QuerySingleOrDefaultAsync<Plato>(_queryDetallePlato, parametros);
-        return plato;
+    var plato = await multi.ReadSingleOrDefaultAsync<Plato>();
+    var restaurant = await multi.ReadSingleOrDefaultAsync<Restaurant>();
+
+    if (plato != null)
+    {
+        plato.Restaurant = restaurant;
     }
+
+    return plato;
+}
 
     //-----------------------------
     //Restaurante
@@ -318,16 +234,7 @@ public async Task<Plato?> DetallePlatoAsync(int idPlato)
         LIMIT 1";
     private static readonly string _queryAltaResto
     = @"CALL AltaRestaurante(@restaurante, @domicilio, @pasword, @email)";
-    private static DynamicParameters ParametrosParaAltaRestaurante(Restaurant restaurant)
-    {
-        var parametros = new DynamicParameters();
-        parametros.Add("@unIdRestaurante", direction: ParameterDirection.Output);
-        parametros.Add("@unEmail", restaurant.email);
-        parametros.Add("@unRestaurante", restaurant.restaurante);
-        parametros.Add("@unDomicilio", restaurant.domicilio);
-        parametros.Add("@unPasword", restaurant.pasword);
-        return parametros;
-    }
+    
     public void AltaRestaurant(Restaurant restaurante, string pasword)
     => _conexion.Execute(
             _queryAltaResto,
@@ -354,13 +261,13 @@ public async Task<Plato?> DetallePlatoAsync(int idPlato)
         throw new NotImplementedException();
     }
 
-    public async Task<List<Restaurant>> TodosRestaurants()
-        => (await _conexion.QueryAsync<Restaurant>(_queryTodosRestaurants)).ToList();
-    public async Task<List<Restaurant>> buscarRestaurant(string restaurante)
-    {
-        var restaurantes = await _conexion.QueryAsync<Restaurant>(_querybuscarRestaurant, new { restaurante = $"%{restaurante}%" });
-        return restaurantes.ToList();
-    }
+    // public async Task<List<Restaurant>> TodosRestaurants()
+    //     => (await _conexion.QueryAsync<Restaurant>(_queryTodosRestaurants)).ToList();
+    // public async Task<List<Restaurant>> buscarRestaurant(string restaurante)
+    // {
+    //     var restaurantes = await _conexion.QueryAsync<Restaurant>(_querybuscarRestaurant, new { restaurante = $"%{restaurante}%" });
+    //     return restaurantes.ToList();
+    // }
     public async Task<Restaurant?> RestaurantPorPassAsync(string email, string pasword)
     {
         var restaurant = await _conexion.QueryFirstOrDefaultAsync<Restaurant>(_queryRestoPass,
@@ -373,5 +280,15 @@ public async Task<Plato?> DetallePlatoAsync(int idPlato)
         DynamicParameters parametros = ParametrosParaAltaRestaurante(restaurant);
         return _conexion.ExecuteAsync("altaRestaurante", parametros, commandType: CommandType.StoredProcedure);
     }
+    // private static DynamicParameters ParametrosParaAltaRestaurante(Restaurant restaurant)
+    // {
+    //     var parametros = new DynamicParameters();
+    //     parametros.Add("@unIdRestaurante", direction: ParameterDirection.Output);
+    //     parametros.Add("@unEmail", restaurant.email);
+    //     parametros.Add("@unRestaurante", restaurant.restaurante);
+    //     parametros.Add("@unDomicilio", restaurant.domicilio);
+    //     parametros.Add("@unPasword", restaurant.pasword);
+    //     return parametros;
+    // }
     #endregion
 }
