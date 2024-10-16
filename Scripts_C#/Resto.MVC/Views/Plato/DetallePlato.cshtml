@@ -2,7 +2,22 @@
 
 @if (Model != null)
 {
-    <h1>@Model.descripcion</h1>
+    <h1>@Model.plato</h1>
+    <hr>
+    <h4>@Model.descripcion</h4>
+    @if (Model.disponible)
+    {
+        <h6>el plato esta disponible para pedir</h6>
+    }
+    else
+    {
+        <h6>el plato no esta disponible</h6>
+    }
+    <hr>
+    <h3>
+    <a class="dropdown-item" asp-controller="Plato" asp-action="ObtenerDetalle" asp-route-id="Los creadores de esta exiquisites son: @Model.Restaurant.restaurante"><i
+    class="bi bi-list-nested"></i>Los creadores de esta exiquisites son: @Model.Restaurant.restaurante</a>
+    </h3>
 }
 else
 {
