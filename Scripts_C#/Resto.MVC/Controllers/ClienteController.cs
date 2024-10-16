@@ -8,16 +8,16 @@ namespace Biblio.Mvc.Controllers;
 
 public class ClienteController : Controller
 {
-    private readonly IAdo _ado;
+    private readonly IAdo _Ado;
     public ClienteController(IAdo ado)
     {
-        _ado = ado;
+        _Ado = ado;
     }
 
     [HttpGet]
     public async Task<IActionResult> ObtenerClientes()
     {
-        var clientes = await _ado.ObtenerClientesAsync();
+        var clientes = await _Ado.ObtenerClientesAsync();
         var ordenarCliente = clientes.OrderBy(x => x.idCliente);
         return View("../Cliente/ListaCliente", ordenarCliente);
     }
@@ -34,7 +34,7 @@ public class ClienteController : Controller
     public async Task<IActionResult> AltaCliente(ClienteModal clienteModal)
     {
         // Verificar si ya existe un cliente con el mismo email
-        var clientesExistentes = await _ado.ObtenerClientesAsync();
+        var clientesExistentes = await _Ado.ObtenerClientesAsync();
         var clienteExistente = clientesExistentes.FirstOrDefault(c => 
             c.email.Equals(clienteModal.Email, StringComparison.OrdinalIgnoreCase));
 
@@ -44,11 +44,11 @@ public class ClienteController : Controller
             return View("../Cliente/AltaCliente", clienteModal); // Devuelve la vista con el error
         }
 
-        var cliente = new Cliente(clienteModal.Email, clienteModal.Cliente, clienteModal.Apellido, clienteModal.password);
-        await _ado.AltaClienteAsync(cliente);
+        var cliente = new Cliente(clienteModal.Email!, clienteModal.Cliente!, clienteModal.Apellido!, clienteModal.password!);
+        await _Ado.AltaClienteAsync(cliente);
         return RedirectToAction(nameof(ObtenerClientes)); 
     }
-
+    
     // [HttpPost]
     // public async Task<IActionResult> AltaCliente(ClienteModal clienteModal)
     // {
@@ -82,4 +82,30 @@ public class ClienteController : Controller
     //     await _ado.AltaClienteAsync(cliente);
     //     return RedirectToAction(nameof(GetAltaClienteAsync));
     // }
+
+    
+    // [HttpGet]
+    // public async Task<IActionResult> ObtenerDetalle()
+    // {
+    //     var cliente = await _Ado.AltaClienteAsync();
+    //     return View("../Cliente/AltaCliente", cliente);
+    // }
+    public async Task<IActionResult> Detalle(int id)
+    {
+        var clientes = await _Ado.TodosClientes();
+        var cliente = clientes.FirstOrDefault(c => c.idCliente == id);
+
+        if (cliente == null)
+        {
+            return NotFound();
+        }
+
+        return View(cliente);
+    }
+    [HttpGet]
+    public async Task<IActionResult> ObtenerDetalle(int id)
+    {
+        var cliente = await _Ado.DetalleClienteAsync(id);
+        return View("../Cliente/DetalleCliente", cliente);
+    }
 }

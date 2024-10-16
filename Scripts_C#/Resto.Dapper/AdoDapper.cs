@@ -40,8 +40,12 @@ public class AdoDapper : IAdo
     }
     public void DetalleCliente(int idCliente)
     {
-        throw new NotImplementedException();
+        // using var multi = await _conexion.QueryMultipleAsync(_queryDetalleCliente, new { unidCliente = idCliente });
+        // var cliente = await multi.ReadSingleOrDefaultAsync<Cliente>();
+
+        // return cliente;
     }
+
     public Cliente? ClientePorPassword(string email, string password)
     {
         var cliente = _conexion.QueryFirstOrDefault<Cliente>(_queryClientePassword,
@@ -56,11 +60,13 @@ public class AdoDapper : IAdo
 
     public List<Cliente> ObtenerClientes()
         => _conexion.Query<Cliente>(_queryTodosClientes).ToList();
-
-    public Task<List<Cliente>> DetalleClienteAsync(int idCliente)
+    public async Task<Cliente> DetalleClienteAsync(int idCliente)
     {
-        throw new NotImplementedException();
+        using var multi = await _conexion.QueryMultipleAsync(_queryDetalleCliente, new { idCliente });
+        var cliente = await multi.ReadSingleOrDefaultAsync<Cliente>();
+        return cliente;
     }
+
 
     //------------------------------
     // Métodos asíncronos
@@ -100,7 +106,10 @@ public class AdoDapper : IAdo
         SELECT r.idRestaurant, r.restaurante, r.domicilio, r.email, r.pasword
         FROM Restaurante r
         WHERE r.idRestaurant = (SELECT idRestaurant FROM Plato WHERE id = @unidPlato);";
-
+    private static readonly string _queryDetalleCliente
+    = @"SELECT  c.idCliente,c.cliente,c.apellido,c.email,c.pasword
+        FROM Cliente c
+        WHERE c.idCliente = @idCliente";
     private static readonly string _queryTodosRestaurants
     = @"select *
     from Restaurante";
@@ -208,20 +217,20 @@ public class AdoDapper : IAdo
         var platos = await _conexion.QueryAsync<Plato>(_querybuscarPlato, new { plato = $"%{plato}%" });
         return platos.ToList();
     }
-    public async Task<Plato?> DetallePlatoAsync(int idPlato)
-{
-    using var multi = await _conexion.QueryMultipleAsync(_queryDetallePlato, new { unidPlato = idPlato });
-
-    var plato = await multi.ReadSingleOrDefaultAsync<Plato>();
-    var restaurant = await multi.ReadSingleOrDefaultAsync<Restaurant>();
-
-    if (plato != null)
+    public async Task<Plato> DetallePlatoAsync(int idPlato)
     {
-        plato.Restaurant = restaurant;
-    }
+        using var multi = await _conexion.QueryMultipleAsync(_queryDetallePlato, new { unidPlato = idPlato });
 
-    return plato;
-}
+        var plato = await multi.ReadSingleOrDefaultAsync<Plato>();
+        var restaurant = await multi.ReadSingleOrDefaultAsync<Restaurant>();
+
+        if (plato != null)
+        {
+            plato.Restaurant = restaurant;
+        }
+
+        return plato;
+    }
 
     //-----------------------------
     //Restaurante
@@ -236,7 +245,7 @@ public class AdoDapper : IAdo
         LIMIT 1";
     private static readonly string _queryAltaResto
     = @"CALL AltaRestaurante(@restaurante, @domicilio, @pasword, @email)";
-    
+
     public void AltaRestaurant(Restaurant restaurante, string pasword)
     => _conexion.Execute(
             _queryAltaResto,
@@ -251,9 +260,9 @@ public class AdoDapper : IAdo
     public Restaurant? RestaurantPorPass(string email, string pasword)
         => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
 
-public Restaurant? ClientePorPass(string email, string pasword)
-        => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
-        
+    public Restaurant? ClientePorPass(string email, string pasword)
+            => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
+
     public void Restaurante(Restaurant restaurant)
     {
         throw new NotImplementedException();
@@ -288,6 +297,11 @@ public Restaurant? ClientePorPass(string email, string pasword)
     }
 
     Cliente? IAdo.ClientePorPass(string email, string pass)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AltaClienteAsync(int idCliente)
     {
         throw new NotImplementedException();
     }

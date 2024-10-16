@@ -5,14 +5,12 @@ public interface IAdo
     void AltaCliente(Cliente cliente, string pasword);
     void DetalleCliente(int idCliente);
 
-
     // Métodos asíncronos
     Task AltaClienteAsync(Cliente cliente);
     Task<List<Cliente>>TodosClientes();
     Task<List<Cliente>> ObtenerClientesAsync();
     Task <List<Cliente>> buscarCliente(string cliente);
-    Task<List<Cliente>>DetalleClienteAsync(int idCliente);
-
+    Task<Cliente>DetalleClienteAsync(int idCliente);
     //platos
     void AltaPlato(Plato plato, ushort idRestaurant);
     void DetallePlato(int idPlato);
