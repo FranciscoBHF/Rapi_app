@@ -62,4 +62,10 @@ public class RestauranteController : Controller
         await Ado.AltaRestauranteAsync(restaurante);
         return RedirectToAction(nameof(ObtenerRestaurants));
     }
+        [HttpGet]
+        public async Task<IActionResult> ObtenerDetalle(int id)
+    {
+        var plato = await Ado.DetallePlatoAsync(id);
+        return View("../Plato/DetallePlato", plato);
+    }
 }

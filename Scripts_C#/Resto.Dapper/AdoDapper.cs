@@ -235,7 +235,6 @@ public class AdoDapper : IAdo
     //-----------------------------
     //Restaurante
     //-----------------------------
-
     #region Restaurant ("Terminado")
     private static readonly string _queryRestoPass
         = @"select *
@@ -245,6 +244,11 @@ public class AdoDapper : IAdo
         LIMIT 1";
     private static readonly string _queryAltaResto
     = @"CALL AltaRestaurante(@restaurante, @domicilio, @pasword, @email)";
+    
+    private static readonly string _queryDetalleRestaurant
+    = @"SELECT r.idRestaurant, r.restaurante, r.domicilio, r.email, r.pasword
+        FROM Restaurant r
+        WHERE r.idRestaurant = @unidRestaurant;";
 
     public void AltaRestaurant(Restaurant restaurante, string pasword)
     => _conexion.Execute(
@@ -260,6 +264,7 @@ public class AdoDapper : IAdo
     public Restaurant? RestaurantPorPass(string email, string pasword)
         => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
 
+    
     public Restaurant? ClientePorPass(string email, string pasword)
             => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
 

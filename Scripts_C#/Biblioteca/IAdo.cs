@@ -26,10 +26,12 @@ public interface IAdo
     void Restaurante(Restaurant restaurant);
     Restaurant? RestaurantPorPass(string email, string pass);
     Cliente? ClientePorPass (string email, string pass);
+    void DetalleRestaurant(int idRestaurant);
 
     // Métodos asíncronos
     Task AltaRestauranteAsync(Restaurant restaurante);
     Task <List<Restaurant>> TodosRestaurants();
     Task <List<Restaurant>> buscarRestaurant (string restaurante);
     Task<Restaurant?> RestaurantPorPassAsync(string email, string pass);
+    Task<Restaurant> DetalleRestaurantAsync (int idRestaurant);
 }
