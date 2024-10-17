@@ -248,7 +248,11 @@ public class AdoDapper : IAdo
     private static readonly string _queryDetalleRestaurant
     = @"SELECT r.idRestaurant, r.restaurante, r.domicilio, r.email, r.pasword
         FROM Restaurant r
-        WHERE r.idRestaurant = @unidRestaurant;";
+        WHERE r.idRestaurant = @unidRestaurant;
+        
+        SELECT p.id, p.plato, p.descripcion, p.precio, p.idRestaurant, p.disponible
+        FROM Plato p
+        WHERE p.id = @unidRestaurant;";
 
     public void AltaRestaurant(Restaurant restaurante, string pasword)
     => _conexion.Execute(
