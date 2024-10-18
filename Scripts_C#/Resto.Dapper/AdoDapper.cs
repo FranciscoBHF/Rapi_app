@@ -67,7 +67,6 @@ public class AdoDapper : IAdo
         return cliente;
     }
 
-
     //------------------------------
     // Métodos asíncronos
     //------------------------------
@@ -107,9 +106,9 @@ public class AdoDapper : IAdo
         FROM Restaurante r
         WHERE r.idRestaurant = (SELECT idRestaurant FROM Plato WHERE id = @unidPlato);";
     private static readonly string _queryDetalleCliente
-    = @"SELECT  c.idCliente,c.cliente,c.apellido,c.email,c.pasword
-        FROM Cliente c
-        WHERE c.idCliente = @idCliente";
+    = @"SELECT  idCliente,cliente,apellido,email,pasword
+        FROM Cliente
+        WHERE idCliente = @idCliente";
     private static readonly string _queryTodosRestaurants
     = @"select *
     from Restaurante";
@@ -248,11 +247,7 @@ public class AdoDapper : IAdo
     private static readonly string _queryDetalleRestaurant
     = @"SELECT r.idRestaurant, r.restaurante, r.domicilio, r.email, r.pasword
         FROM Restaurant r
-        WHERE r.idRestaurant = @unidRestaurant;
-        
-        SELECT p.id, p.plato, p.descripcion, p.precio, p.idRestaurant, p.disponible
-        FROM Plato p
-        WHERE p.id = @unidRestaurant;";
+        WHERE r.idRestaurant = @unidRestaurant;";
 
     public void AltaRestaurant(Restaurant restaurante, string pasword)
     => _conexion.Execute(
@@ -311,6 +306,16 @@ public class AdoDapper : IAdo
     }
 
     public Task AltaClienteAsync(int idCliente)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DetalleRestaurant(int idRestaurant)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Restaurant> DetalleRestaurantAsync(int idRestaurant)
     {
         throw new NotImplementedException();
     }

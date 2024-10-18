@@ -1,10 +1,27 @@
 @model Biblioteca.Cliente
+<div class="container mt-3">
+    @if (Model != null)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h2>Información del cliente</h2>
+            </div>
+            <div class="card-body">
+                <h5>Nombre:</h5>
+                <p>@Model.cliente</p>
 
-@if (Model != null)
-{
-    <h1>Model.Cliente</h1>
-}
-else
-{
-    <h1>Cliente no encontrado.</h1>
-}
+                <h5>Apellido:</h5>
+                <p>@Model.apellido</p>
+
+                <h5>Correo electrónico:</h5>
+                <p>@Model.email</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Cliente no encontrado.
+        </div>
+    }
+</div>

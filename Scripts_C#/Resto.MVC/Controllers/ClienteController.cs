@@ -82,7 +82,6 @@ public class ClienteController : Controller
     //     await _ado.AltaClienteAsync(cliente);
     //     return RedirectToAction(nameof(GetAltaClienteAsync));
     // }
-
     
     // [HttpGet]
     // public async Task<IActionResult> ObtenerDetalle()
@@ -94,12 +93,10 @@ public class ClienteController : Controller
     {
         var clientes = await _Ado.TodosClientes();
         var cliente = clientes.FirstOrDefault(c => c.idCliente == id);
-
         if (cliente == null)
         {
             return NotFound();
         }
-
         return View(cliente);
     }
     [HttpGet]

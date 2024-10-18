@@ -19,23 +19,21 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>Email</th>
                 <th>Cliente</th>
                 <th>Apellido</th>
+                <th>Email</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var cliente in Model)
             {
-
                 <tr>
                     <td>
-                        <a class="dropdown-item" asp-controller="cliente" asp-action="ObtenerDetalle"
-                            asp-route-id="@cliente"><i class="bi bi-list-nested"></i>@cliente.cliente</a>
+                        <a class="dropdown-item" asp-controller="Cliente" asp-action="ObtenerDetalle"
+                            asp-route-id="@cliente.idCliente"><i class="bi bi-list-nested"></i>@cliente.cliente</a>
                     </td>
-                    <td>@cliente.email</td>
                     <td>@cliente.cliente</td>
-                    <td>@cliente.apellido</td>
+                    <td>@cliente.email</td>
                 </tr>
             }
         </tbody>
