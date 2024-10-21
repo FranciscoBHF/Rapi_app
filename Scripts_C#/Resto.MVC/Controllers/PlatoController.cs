@@ -63,7 +63,7 @@ public class PlatoController : Controller
         return RedirectToAction(nameof(ObtenerPlato));
     }
     [HttpGet]
-    public async Task<IActionResult> ObtenerDetalle(int id)
+    public async Task<IActionResult> ObtenerDetallePlato(int id)
     {
         var plato = await _Ado.DetallePlatoAsync(id);
         return View("../Plato/DetallePlato", plato);
