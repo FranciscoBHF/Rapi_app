@@ -1,1 +1,15 @@
-<h1>Hola</h1>
+@model Biblioteca.Restaurant
+
+@if (Model != null)
+{
+    <h1>@Model.restaurante</h1>
+    <hr>
+    <h4>@Model.domicilio</h4>
+    <h4>@Model.email</h4>
+    <hr>
+
+}
+else
+{
+    <h1>Restaurant no encontrado.</h1>
+}
