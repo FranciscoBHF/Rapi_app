@@ -7,6 +7,7 @@ namespace Biblioteca
         public string domicilio {get ; set ;}
         public string email {get ; set ;}
         public string pasword {get ; set ;}
+        public List<Plato> Platos { get; set; } = new List<Plato>();
         public Restaurant(string restaurante, string domicilio, string email,string pasword)
         {
             this.restaurante = restaurante;

@@ -247,7 +247,11 @@ public class AdoDapper : IAdo
     private static readonly string _queryDetalleRestaurant
     = @"SELECT r.idRestaurant, r.restaurante, r.domicilio, r.email, r.pasword
         FROM Restaurant r
-        WHERE r.idRestaurant = @unidRestaurant;";
+        WHERE r.idRestaurant = @unidRestaurant
+        SELECT p.id, p.plato, p.descripcion, p.precio, p.disponible
+        FROM Plato p
+        WHERE p.idRestaurant = @unidRestaurant;;"
+        ;
 
     public void AltaRestaurant(Restaurant restaurante, string pasword)
     => _conexion.Execute(
@@ -317,7 +321,17 @@ public class AdoDapper : IAdo
 
     public Task<Restaurant> DetalleRestaurantAsync(int idRestaurant)
     {
-        throw new NotImplementedException();
+        using var multi = await _conexion.QueryMultipleAsync(_queryDetalleRestaurant, new { unidRestaurant = idRestaurant });
+
+        var plato = await multi.ReadSingleOrDefaultAsync<Plato>();
+        var restaurant = await multi.ReadSingleOrDefaultAsync<Restaurant>();
+
+        if (restaurant != null)
+        {
+            restaurant.Plato = plato;
+        }
+
+        return restaurante;
     }
     // private static DynamicParameters ParametrosParaAltaRestaurante(Restaurant restaurant)
     // {
