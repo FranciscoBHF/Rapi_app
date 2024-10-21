@@ -319,19 +319,19 @@ public class AdoDapper : IAdo
         throw new NotImplementedException();
     }
 
-    public Task<Restaurant> DetalleRestaurantAsync(int idRestaurant)
+    public async Task<Restaurant> DetalleRestaurantAsync(int idRestaurant)
     {
         using var multi = await _conexion.QueryMultipleAsync(_queryDetalleRestaurant, new { unidRestaurant = idRestaurant });
 
-        var plato = await multi.ReadSingleOrDefaultAsync<Plato>();
         var restaurant = await multi.ReadSingleOrDefaultAsync<Restaurant>();
+        var platos = (await multi.ReadAsync<Plato>()).ToList();
 
         if (restaurant != null)
         {
-            restaurant.Plato = plato;
+            restaurant.Platos = platos ;
         }
 
-        return restaurante;
+        return restaurant;
     }
     // private static DynamicParameters ParametrosParaAltaRestaurante(Restaurant restaurant)
     // {
