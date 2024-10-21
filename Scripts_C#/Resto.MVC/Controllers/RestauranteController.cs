@@ -63,9 +63,9 @@ public class RestauranteController : Controller
         return RedirectToAction(nameof(ObtenerRestaurants));
     }
         [HttpGet]
-        public async Task<IActionResult> ObtenerDetalleResto(int idRestaurant)
+        public async Task<IActionResult> ObtenerDetalleResto(int id)
     {
-        var Resto = await Ado.DetalleRestaurantAsync(idRestaurant);
+        var Resto = await Ado.DetalleRestaurantAsync(id);
         return View("../Restaurante/DetalleResto", Resto);
     }
 }
