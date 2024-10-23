@@ -159,7 +159,7 @@ public class AdoDapper : IAdo
     private static DynamicParameters ParametrosParaAltaRestaurante(Restaurant restaurant)
     {
         var parametros = new DynamicParameters();
-        parametros.Add("@unIdRestaurante", direction: ParameterDirection.Output);
+        parametros.Add("@unIdRestaurant", direction: ParameterDirection.Output);
         parametros.Add("@unEmail", restaurant.email);
         parametros.Add("@unRestaurante", restaurant.restaurante);
         parametros.Add("@unDomicilio", restaurant.domicilio);
@@ -243,7 +243,7 @@ public class AdoDapper : IAdo
         LIMIT 1";
     private static readonly string _queryAltaResto
     = @"CALL AltaRestaurante(@restaurante, @domicilio, @pasword, @email)";
-    
+
     private static readonly string _queryDetalleRestaurant
     = @"SELECT r.idRestaurant, r.restaurante, r.domicilio, r.email, r.pasword
         FROM Restaurante r
@@ -268,7 +268,7 @@ public class AdoDapper : IAdo
     public Restaurant? RestaurantPorPass(string email, string pasword)
         => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
 
-    
+
     public Restaurant? ClientePorPass(string email, string pasword)
             => _conexion.QueryFirstOrDefault<Restaurant>(_queryRestoPass, new { unEmail = email, unPass = pasword });
 
@@ -320,19 +320,19 @@ public class AdoDapper : IAdo
         throw new NotImplementedException();
     }
 
-    public async Task<Restaurant> DetalleRestaurantAsync(int idRestaurant)
+    public async Task<Restaurant?> DetalleRestaurantAsync(int idRestaurant)
     {
-        using var multi = await _conexion.QueryMultipleAsync(_queryDetalleRestaurant, new { unidRestaurant = idRestaurant });
-
-        var restaurant = await multi.ReadSingleOrDefaultAsync<Restaurant>();
-        var platos = (await multi.ReadAsync<Plato>()).ToList();
-
-        if (restaurant != null)
+        using (var multi = await _conexion.QueryMultipleAsync(_queryDetalleRestaurant, new { unidRestaurant = idRestaurant }))
         {
-            restaurant.Platos = platos ;
+            var restaurant = await multi.ReadSingleOrDefaultAsync<Restaurant>();
+            if (restaurant != null)
+            {
+                var platos = (await multi.ReadAsync<Plato>()).ToList();
+                restaurant.Platos = platos;
+            }
+            return restaurant;
         }
 
-        return restaurant;
     }
     // private static DynamicParameters ParametrosParaAltaRestaurante(Restaurant restaurant)
     // {

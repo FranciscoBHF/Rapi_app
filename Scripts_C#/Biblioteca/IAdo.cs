@@ -33,5 +33,5 @@ public interface IAdo
     Task <List<Restaurant>> TodosRestaurants();
     Task <List<Restaurant>> buscarRestaurant (string restaurante);
     Task<Restaurant?> RestaurantPorPassAsync(string email, string pass);
-    Task<Restaurant> DetalleRestaurantAsync (int idRestaurant);
+    Task<Restaurant?> DetalleRestaurantAsync (int idRestaurant);
 }
