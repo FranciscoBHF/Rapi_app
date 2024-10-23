@@ -8,17 +8,18 @@
     <h2>@Model.email</h2>
     <hr>
 <h3>Menu</h3>
+
 @if (Model.Platos != null && Model.Platos.Any())
 {
     foreach (var plato in Model.Platos)
     {
-        <div>
-            <h4>
-                <a asp-controller="Plato" asp-action="ObtenerDetallePlato" asp-route-id="@plato.id">
-                    @plato.plato
-                </a>
-            </h4>
-        </div>
+<ul class="list-group">
+<li class="list-group-item">
+    <a asp-controller="Plato" asp-action="ObtenerDetallePlato" asp-route-id="@plato.id">
+    @plato.plato
+    </a>
+</li>
+</ul>
     }
 }
 else
