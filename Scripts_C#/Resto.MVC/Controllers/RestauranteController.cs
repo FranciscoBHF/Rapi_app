@@ -66,12 +66,6 @@ public class RestauranteController : Controller
 public async Task<IActionResult> ObtenerDetalleResto(ushort idRestaurant)
 {
     var resto = await Ado.DetalleRestaurantAsync(idRestaurant);
-
-    if (resto == null)
-    {
-        return NotFound();
-    }
-
     return View("../Restaurante/DetalleResto", resto);
 }
 }
