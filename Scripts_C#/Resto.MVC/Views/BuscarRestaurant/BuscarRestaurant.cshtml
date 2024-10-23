@@ -26,7 +26,10 @@
             @foreach (var resto in Model)
             {
                 <tr>
-                    <td>@resto.restaurante</td>
+                <td>
+                <a class="dropdown-item" asp-controller="Restaurante" asp-action="ObtenerDetalleResto" asp-route-idRestaurant="@resto.idRestaurant"><i
+                class="bi bi-list-nested"></i>@resto.restaurante</a>
+                </td>
                     <td>@resto.domicilio</td>
                     <td>@resto.email</td>
                 </tr>

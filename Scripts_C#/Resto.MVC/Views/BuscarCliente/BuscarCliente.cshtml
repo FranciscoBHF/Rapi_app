@@ -42,7 +42,10 @@
                 @foreach (var cliente in Model)
                 {
                     <tr>
-                        <td>@cliente.email</td>
+                    <td>
+                        <a class="dropdown-item" asp-controller="Cliente" asp-action="ObtenerDetalle"
+                            asp-route-id="@cliente.idCliente"><i class="bi bi-list-nested"></i>@cliente.email</a>
+                    </td>
                         <td>@cliente.cliente</td>
                         <td>@cliente.apellido</td>
                     </tr>
