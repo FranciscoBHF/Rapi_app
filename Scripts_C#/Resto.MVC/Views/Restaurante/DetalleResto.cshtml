@@ -1,34 +1,81 @@
-@model Biblioteca.Restaurant
+@* @model Biblioteca.Restaurant
 
 @if (Model != null)
 {
-    <h1>@Model.restaurante</h1>
-    <hr>
-    <h2>@Model.domicilio</h2>
-    <h2>@Model.email</h2>
-    <hr>
+<h1>@Model.restaurante</h1>
+<hr>
+<h2>@Model.domicilio</h2>
+<h2>@Model.email</h2>
+<hr>
 <h3>Menu</h3>
 
 @if (Model.Platos != null && Model.Platos.Any())
 {
-    foreach (var plato in Model.Platos)
-    {
+foreach (var plato in Model.Platos)
+{
 <ul class="list-group">
 <li class="list-group-item">
-    <a asp-controller="Plato" asp-action="ObtenerDetallePlato" asp-route-id="@plato.id">
-    @plato.plato
-    </a>
+<a asp-controller="Plato" asp-action="ObtenerDetallePlato" asp-route-id="@plato.id">
+@plato.plato
+</a>
 </li>
 </ul>
-    }
+}
 }
 else
 {
-    <p>No hay platos disponibles.</p>
+<p>No hay platos disponibles.</p>
 }
 
 }
 else
 {
-    <h1>Restaurant no encontrado.</h1>
-}
+<h1>Restaurant no encontrado.</h1>
+} *@
+
+@model Biblioteca.Restaurant
+<div class="container mt-3">
+    @if (Model != null)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h2>Información del Restaurante</h2>
+            </div>
+            <div class="card-body">
+                <h5>Nombre del restaurante:</h5>
+                <p>@Model.restaurante</p>
+
+                <h5>Domicilio:</h5>
+                <p>@Model.domicilio</p>
+
+                <h5>Correo electrónico:</h5>
+                <p>@Model.email</p>
+            </div>
+        </div>
+    }
+
+    @if (Model.Platos != null && Model.Platos.Any())
+    {
+        <div class="card">
+            <div class="card-header">
+                <h2>Detalle de Plato</h2>
+            </div>
+        </div>
+        foreach (var plato in Model.Platos)
+        {
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a asp-controller="Plato" asp-action="ObtenerDetallePlato" asp-route-id="@plato.id">
+                        @plato.plato
+                    </a>
+                </li>
+            </ul>
+        }
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Restaurante no encontrado.
+        </div>
+    }
+</div>

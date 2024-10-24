@@ -1,25 +1,76 @@
-@model Biblioteca.Plato
+@* @model Biblioteca.Plato
 
 @if (Model != null)
 {
-    <h1>@Model.plato</h1>
-    <hr>
-    <h4>@Model.descripcion</h4>
-    @if (Model.disponible)
-    {
-        <h6>el plato esta disponible para pedir</h6>
-    }
-    else
-    {
-        <h6>el plato no esta disponible</h6>
-    }
-    <hr>
-    <h3>
-    <a class="dropdown-item" asp-controller="Restaurante" asp-action="ObtenerDetalleResto" asp-route-idRestaurant="@Model.idRestaurant"><i
-    class="bi bi-list-nested"></i>Los creadores de esta exiquisites son: @Model.Restaurant.restaurante</a>
-    </h3>
+<h1>@Model.plato</h1>
+<hr>
+<h4>@Model.descripcion</h4>
+@if (Model.disponible)
+{
+<h6>el plato esta disponible para pedir</h6>
 }
 else
 {
-    <h1>Plato no encontrado.</h1>
+<h6>el plato no esta disponible</h6>
 }
+<hr>
+<h3>
+<a class="dropdown-item" asp-controller="Restaurante" asp-action="ObtenerDetalleResto"
+asp-route-idRestaurant="@Model.idRestaurant"><i
+class="bi bi-list-nested"></i>Los creadores de esta exiquisites son: @Model.Restaurant.restaurante</a>
+</h3>
+}
+else
+{
+<h1>Plato no encontrado.</h1>
+} *@
+
+@model Biblioteca.Plato
+<div class="container mt-3">
+    @if (Model != null)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h2>Información del PLato</h2>
+            </div>
+            <div class="card-body">
+                <h5>Nombre del plato:</h5>
+                <p>@Model.plato</p>
+
+                <h5>Descripcion:</h5>
+                <p>@Model.descripcion</p>
+
+                <h5>Disponible:</h5>
+                @if (Model.disponible)
+                {
+                    <p>si</p>
+                }
+                else
+                {
+                    <p>no</p>
+                }
+            </div>
+        </div>
+    }
+    @if (Model != null)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h2>Los creadores de esta exiquisites son</h2>
+            </div>
+            <div class="card-body">
+                <h5> <a class="dropdown-item" asp-controller="Restaurante" asp-action="ObtenerDetalleResto"
+                        asp-route-idRestaurant="@Model.idRestaurant">
+                        <i class="bi bi-list-nested"></i>Nombre del Restaurante: @Model.Restaurant.restaurante
+                    </a>
+                </h5>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            plato no encontrado.
+        </div>
+    }
+</div>
