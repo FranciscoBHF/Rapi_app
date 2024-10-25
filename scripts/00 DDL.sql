@@ -14,7 +14,7 @@ FULLTEXT (restaurante )
 create table Plato
 (
 Plato varchar(45),
-descripcion varchar (45),
+descripcion varchar (150),
 precio decimal(7,2),
 idRestaurant SMALLINT UNSIGNED,
 disponible bool,
