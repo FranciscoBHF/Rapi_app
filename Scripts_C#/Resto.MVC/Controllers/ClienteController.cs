@@ -30,6 +30,13 @@ public class ClienteController : Controller
         return View("../Cliente/AltaCliente");
     }
 
+    [HttpGet]
+    public IActionResult ObtenerInicioSesion()
+    {
+        // var clientes = await _ado.ObtenerClientesAsync();
+        // var ordenados = clientes.OrderBy(x => x.cliente).ThenBy(x => x.apellido).ToList();
+        return View("../Cliente/InicioSesion");
+    }
     [HttpPost]
     public async Task<IActionResult> AltaCliente(ClienteModal clienteModal)
     {
@@ -46,6 +53,24 @@ public class ClienteController : Controller
 
         var cliente = new Cliente(clienteModal.Email!, clienteModal.Cliente!, clienteModal.Apellido!, clienteModal.password!);
         await _Ado.AltaClienteAsync(cliente);
+        return RedirectToAction(nameof(ObtenerClientes)); 
+    }
+    [HttpPost]
+    public async Task<IActionResult> InicioSesion(ClienteModal clienteModal)
+    {
+        // Verificar si ya existe un cliente con el mismo email
+        var clientesExistentes = await _Ado.ObtenerClientesAsync();
+        var clienteExistente = clientesExistentes.FirstOrDefault(c => 
+            c.email.Equals(clienteModal.Email, StringComparison.OrdinalIgnoreCase));
+
+        if (clienteExistente != null)
+        {
+            ModelState.AddModelError(string.Empty, "Ya existe un cliente con este email.");
+            return View("../Cliente/InicioSesion", clienteModal); // Devuelve la vista con el error
+        }
+
+        var cliente = new Cliente(clienteModal.Email!, clienteModal.Cliente!, clienteModal.Apellido!, clienteModal.password!);
+        await _Ado.InicioSesionAsync(cliente);
         return RedirectToAction(nameof(ObtenerClientes)); 
     }
     

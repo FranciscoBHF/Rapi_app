@@ -20,6 +20,8 @@ public class AdoDapper : IAdo
 
     private static readonly string _queryAltaCliente
         = "CALL AltaCliente(@email, @cliente, @apellido, @password)";
+    private static readonly string _queryInicioSesion
+        = "CALL AltaCliente(@email, @cliente, @apellido, @password)";
 
     private static readonly string _queryAltaPlato
     = "CALL AltaPlato(@idRestaurant, @plato, @descripcion, @precio, @disponible )";
@@ -28,6 +30,16 @@ public class AdoDapper : IAdo
     private static readonly string _queryTodosClientes
         = "SELECT * FROM Cliente ORDER BY cliente ASC, apellido ASC";
 
+    public void InicioSecion (Cliente cliente, string password)
+    {
+        var parametros = new DynamicParameters();
+        parametros.Add("@email", cliente.email);
+        parametros.Add("@cliente", cliente.cliente);
+        parametros.Add("@apellido", cliente.apellido);
+        parametros.Add("@password", password);
+
+        _conexion.Execute(_queryInicioSesion, parametros, commandType: CommandType.StoredProcedure);
+    }
     public void AltaCliente(Cliente cliente, string password)
     {
         var parametros = new DynamicParameters();
@@ -54,10 +66,14 @@ public class AdoDapper : IAdo
     }
     public Task AltaClienteAsync(Cliente cliente)
     {
-        DynamicParameters parametros = ParametrosParaAltaCliente(cliente);
+        DynamicParameters parametros = ParametrosParaInicioSesion(cliente);
         return _conexion.ExecuteAsync("altaCliente", parametros, commandType: CommandType.StoredProcedure);
     }
-
+    public Task InicioSesionAsync(Cliente cliente)
+    {
+        DynamicParameters parametros = ParametrosParaAltaCliente(cliente);
+        return _conexion.ExecuteAsync("InicioSesion", parametros, commandType: CommandType.StoredProcedure);
+    }
     public List<Cliente> ObtenerClientes()
         => _conexion.Query<Cliente>(_queryTodosClientes).ToList();
     public async Task<Cliente> DetalleClienteAsync(int idCliente)
@@ -178,6 +194,16 @@ public class AdoDapper : IAdo
         return _conexion.ExecuteAsync("altaPlato", parametros, commandType: CommandType.StoredProcedure);
     }
     private static DynamicParameters ParametrosParaAltaCliente(Cliente cliente)
+    {
+        var parametros = new DynamicParameters();
+        parametros.Add("@unIdCliente", direction: ParameterDirection.Output);
+        parametros.Add("@unEmail", cliente.email);
+        parametros.Add("@unCliente", cliente.cliente);
+        parametros.Add("@unApellido", cliente.apellido);
+        parametros.Add("@unPasword", cliente.pasword);
+        return parametros;
+    }
+    private static DynamicParameters ParametrosParaInicioSesion(Cliente cliente)
     {
         var parametros = new DynamicParameters();
         parametros.Add("@unIdCliente", direction: ParameterDirection.Output);
