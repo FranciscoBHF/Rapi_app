@@ -130,4 +130,16 @@ public class ClienteController : Controller
         var cliente = await _Ado.DetalleClienteAsync(id);
         return View("../Cliente/DetalleCliente", cliente);
     }
+
+        [HttpPost]
+    public async Task<IActionResult> LoginCliente(ClienteModal clienteModal) 
+    {
+        var clientes = await _Ado.ObtenerClientesAsync();
+        var cliente = clientes.Where(x => x.email == clienteModal.Email && x.pasword == clienteModal.password).ToList();
+        if (cliente == null)
+        {
+            return NotFound();
+        }
+        return RedirectToAction(nameof(ObtenerClientes));
+    }
 }
