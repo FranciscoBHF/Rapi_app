@@ -113,11 +113,13 @@ public class AdoDapper : IAdo
     = @"select *
     from Restaurante";
     private static readonly string _querybuscarPlato
-        = @"select *
-        from Plato
+        = @"select p.id, p.plato, p.descripcion, p.precio, p.idRestaurant, p.disponible, r.idRestaurant, r.restaurante, r.domicilio, r.email, r.pasword
+        from Plato p
+        INNER JOIN Restaurante r
+        ON p.idRestaurant = r.idRestaurant
         where plato like @plato
-        or descripcion like @plato";
-
+        or descripcion like @plato
+        or r.restaurante like @plato;";
     private static readonly string _querybuscarRestaurant
         = @"select *
         from Restaurante
