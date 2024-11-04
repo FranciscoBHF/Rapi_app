@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Biblioteca;
 using Resto.MVC.Controllers.Modal;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Biblio.Mvc.Controllers;
 
@@ -25,17 +27,14 @@ public class ClienteController : Controller
     [HttpGet]
     public IActionResult GetAltaCliente()
     {
-        // var clientes = await _ado.ObtenerClientesAsync();
-        // var ordenados = clientes.OrderBy(x => x.cliente).ThenBy(x => x.apellido).ToList();
         return View("../Cliente/AltaCliente");
     }
 
     [HttpGet]
     public IActionResult ObtenerInicioSesion()
     {
-        // var clientes = await _ado.ObtenerClientesAsync();
-        // var ordenados = clientes.OrderBy(x => x.cliente).ThenBy(x => x.apellido).ToList();
-        return View("../Cliente/InicioSesion");
+        var modal = new ClienteModal();
+        return View("../Cliente/InicioSesion", modal);
     }
     [HttpPost]
     public async Task<IActionResult> AltaCliente(ClienteModal clienteModal)
@@ -56,64 +55,6 @@ public class ClienteController : Controller
         return RedirectToAction(nameof(ObtenerClientes)); 
     }
     [HttpPost]
-    public async Task<IActionResult> InicioSesion(ClienteModal clienteModal)
-    {
-        // Verificar si ya existe un cliente con el mismo email
-        var clientesExistentes = await _Ado.ObtenerClientesAsync();
-        var clienteExistente = clientesExistentes.FirstOrDefault(c => 
-            c.email.Equals(clienteModal.Email, StringComparison.OrdinalIgnoreCase));
-
-        if (clienteExistente != null)
-        {
-            ModelState.AddModelError(string.Empty, "Ya existe un cliente con este email.");
-            return View("../Cliente/InicioSesion", clienteModal); // Devuelve la vista con el error
-        }
-
-        var cliente = new Cliente(clienteModal.Email!, clienteModal.Cliente!, clienteModal.Apellido!, clienteModal.password!);
-        await _Ado.InicioSesionAsync(cliente);
-        return RedirectToAction(nameof(ObtenerClientes)); 
-    }
-    
-    // [HttpPost]
-    // public async Task<IActionResult> AltaCliente(ClienteModal clienteModal)
-    // {
-    //     if (!ModelState.IsValid)
-    //     {
-    //         return View(clienteModal);
-    //     }
-
-    //     var cliente = new Cliente(
-    //         id: Guid.NewGuid(),
-    //         email: clienteModal.Email!,
-    //         cliente: clienteModal.Cliente!,
-    //         apellido: clienteModal.Apellido!
-    //     );
-
-    //     await _ado.AltaClienteAsync(cliente);
-    //     return RedirectToAction("ListaCliente");
-    // }
-    // [HttpGet]
-    // public async Task<IActionResult> GetAltaClienteAsync()
-    // {
-    //     var clientes = await _ado.ObtenerClientesAsync();
-    //     var ordenados = clientes.OrderBy(x => x.email).ToList();
-    //     ClienteModal clienteModal = new ClienteModal();
-    //     return View("AltaCliente", clienteModal);
-    // }
-
-    // [HttpPost]
-    // public async Task<IActionResult> AltaClienteAsync(Cliente cliente, string password)
-    // {
-    //     await _ado.AltaClienteAsync(cliente);
-    //     return RedirectToAction(nameof(GetAltaClienteAsync));
-    // }
-    
-    // [HttpGet]
-    // public async Task<IActionResult> ObtenerDetalle()
-    // {
-    //     var cliente = await _Ado.AltaClienteAsync();
-    //     return View("../Cliente/AltaCliente", cliente);
-    // }
     public async Task<IActionResult> Detalle(int id)
     {
         var clientes = await _Ado.TodosClientes();
@@ -124,6 +65,21 @@ public class ClienteController : Controller
         }
         return View(cliente);
     }
+
+    private string ConvertirAHashSHA256(string texto)
+    {
+        using (SHA256 sha256 = SHA256.Create())
+        {
+            byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(texto));
+            StringBuilder builder = new StringBuilder();
+            foreach (byte b in bytes)
+            {
+                builder.Append(b.ToString("x2"));
+            }
+            return builder.ToString();
+        }
+    }
+
     [HttpGet]
     public async Task<IActionResult> ObtenerDetalle(int id)
     {
@@ -132,14 +88,22 @@ public class ClienteController : Controller
     }
 
         [HttpPost]
-    public async Task<IActionResult> LoginCliente(ClienteModal clienteModal) 
+    public async Task<IActionResult> InicioSesion(ClienteModal clienteModal) 
     {
         var clientes = await _Ado.ObtenerClientesAsync();
-        var cliente = clientes.Where(x => x.email == clienteModal.Email && x.pasword == clienteModal.password).ToList();
-        if (cliente == null)
+        var modal = new ClienteModal();
+        var cliente = clientes.Where(x => x.email == clienteModal.Email && x.pasword == ConvertirAHashSHA256(clienteModal.password)).ToList();
+        if (cliente.Count == 0)
         {
-            return NotFound();
+            modal.error = true;
+            return View("../Cliente/InicioSesion", modal);
         }
-        return RedirectToAction(nameof(ObtenerClientes));
+        return RedirectToAction(nameof(ObtenerDetalleInicio));
+    }
+    [HttpGet]
+    public async Task<IActionResult> ObtenerDetalleInicio(int id)
+    {
+        var cliente = await _Ado.DetalleInicioAsync(id);
+        return View("../Cliente/DetalleInicio", cliente);
     }
 }

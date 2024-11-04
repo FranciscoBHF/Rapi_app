@@ -6,7 +6,7 @@ DROP PROCEDURE IF EXISTS altaCliente $$
 CREATE PROCEDURE altaCliente (OUT unIdCliente MEDIUMINT UNSIGNED, unEmail VARCHAR(45)
 							, unCliente VARCHAR(45), unApellido VARCHAR(45), unPasword char(45))
 BEGIN
-	INSERT INTO Cliente (email, cliente, apellido, pasword) 
+	INSERT INTO Cliente (email, cliente, apellido, pasword)
 				VALUE (unEmail, unCliente, unApellido, unPasword);
 	SET unIdCliente = LAST_INSERT_ID();
 END $$

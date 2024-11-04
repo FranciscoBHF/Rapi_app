@@ -21,7 +21,7 @@ public class AdoDapper : IAdo
     private static readonly string _queryAltaCliente
         = "CALL AltaCliente(@email, @cliente, @apellido, @password)";
     private static readonly string _queryInicioSesion
-        = "CALL AltaCliente(@email, @cliente, @apellido, @password)";
+        = "CALL buscarEmailPassword(@email, @password)";
 
     private static readonly string _queryAltaPlato
     = "CALL AltaPlato(@idRestaurant, @plato, @descripcion, @precio, @disponible )";
@@ -125,6 +125,11 @@ public class AdoDapper : IAdo
     = @"SELECT  idCliente,cliente,apellido,email,pasword
         FROM Cliente
         WHERE idCliente = @idCliente";
+    private static readonly string _queryDetalleInicio
+    = @"SELECT  idCliente,email,pasword
+        FROM Cliente
+        WHERE idCliente = @idCliente";
+
     private static readonly string _queryTodosRestaurants
     = @"select *
     from Restaurante";
@@ -146,6 +151,11 @@ public class AdoDapper : IAdo
         where cliente like @cliente
         or apellido like @cliente
         or email like @cliente";
+    private static readonly string _querybuscarEmailPassword
+    = @"select *
+        from Cliente
+        where cliente like @cliente
+        or pasword like @cliente";
 
     #endregion
     public void AltaPlato(Plato plato, UInt16 idRestaurant)
@@ -361,6 +371,24 @@ public class AdoDapper : IAdo
             return restaurant;
         }
 
+    }
+
+    public void DetalleInicio(int idCliente)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Cliente> DetalleInicioAsync(int idCliente)
+    {
+        using var multi = await _conexion.QueryMultipleAsync(_queryDetalleInicio, new { idCliente });
+        var cliente = await multi.ReadSingleOrDefaultAsync<Cliente>();
+        return cliente;    
+    }
+
+    public async Task<List<Cliente>> buscarEmailPassword(string email, string pasword)
+    {
+        var clientes = await _conexion.QueryAsync<Cliente>(_querybuscarEmailPassword, new { cliente = $"%{email}{pasword}%"});
+        return clientes.ToList();
     }
     // private static DynamicParameters ParametrosParaAltaRestaurante(Restaurant restaurant)
     // {
