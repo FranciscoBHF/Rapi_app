@@ -7,9 +7,9 @@
   <img src="https://et12.edu.ar/imgs/et12.png">
 </p>
 
-# Fulbo12
+# Restp APP
 
-Proyecto en `C#` para generar un simulador de futbol. El proyecto apunta a reforzar los conocimientos de nuestros alumnos en Programación y abordar temáticas extra-curriculares pero presentes en un ámbito laboral: versionado de software y trabajo colaborativo en grupo.
+Proyecto en `C#` para generar una aplicacion para pedir comida.
 
 ## Comenzando 🚀
 
@@ -25,21 +25,37 @@ git clone https://github.com/FranciscoBHF/Rapi_app
 
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
-_Dí cómo será ese paso_
-
-```
-Da un ejemplo
-```
-
-_Y repite_
+_Crear una consola_
 
 ```
-hasta finalizar
+En el archivo scripts haga segundo clic, en el para acto seguido apretar el boton abrir terminal integrado
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+_Inicie sesion en su base de datos local_
+
+```
+Ejemplo del comando: mysql -u 5to_agbd -p. Apriete la tecla enter y luego escriba la contraseña (Trigg3rs!)
+```
+
+_Ejecute el siguiente comando tal como esta escrito_
+
+```
+source Install.sql
+```
+
+Cierre el terminal y abra un nuevo terminal integrado en Resto.MVC
+
+```
+vaya a la siguiente direccion /Rapi_app/Scripts_C#/  y busque el archivo Resto.MVC
+```
+
+_Ejecute el siguiente comando en ese terminal_
+
+```
+dotnet run --project "/mnt/Datos/Rapi_app/Scripts_C#/Resto.MVC/Resto.MVC.csproj
+```
+
 
 ## Despliegue 📦
 
@@ -50,13 +66,6 @@ _Agrega notas adicionales sobre que cosas se debe instalar, configurar y como ha
 * [Visual Studio Code](https://code.visualstudio.com/#alt-downloads) - Editor de código.
 * [Visual Studio 2019 - Comunity Edition](https://visualstudio.microsoft.com/es/vs/community/) - IDE .NET.
 
-## Wiki 📖
-
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
-
-## Versionado 📌
-
-Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/ET12DE1Computacion/Fulbo12/tags).
 
 ## Autores ✒️
 
@@ -66,7 +75,6 @@ Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones
 | Axel Martinez            | Desarrollo              | [AxelMtz1](https://github.com/AxelMtz1)                             |
 | David Quiñones           | Desarrollo              | [David3578](https://github.com/David3578)                           |
 | Sara Castro              | Desarrollo              | [SaraCastro124](https://github.com/SaraCastro124)                   |
-  
 
 
 
