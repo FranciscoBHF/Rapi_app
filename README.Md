@@ -26,13 +26,13 @@ git clone https://github.com/FranciscoBHF/Rapi_app
 ### Instalación 🔧
 
 
-_Crear una consola_
+_Preparación de base de datos_
 
 ```
-En el archivo scripts haga segundo clic, en el para acto seguido apretar el boton abrir terminal integrado
+Abra la terminal integrada en el archivo scripts
 ```
 
-_Inicie sesion en su base de datos local_
+_Inicie la base de datos de _
 
 ```
 Ejemplo del comando: mysql -u 5to_agbd -p. Apriete la tecla enter y luego escriba la contraseña (Trigg3rs!)
@@ -44,16 +44,10 @@ _Ejecute el siguiente comando tal como esta escrito_
 source Install.sql
 ```
 
-Cierre el terminal y abra un nuevo terminal integrado en Resto.MVC
+_Abra un nuevo terminal integrado en el archivo Resto.MVC en la carpeta Scripts_C# Y Ejecute el siguiente comando en ese terminal (usando su propia ubicación de archivo)_
 
 ```
-vaya a la siguiente direccion /Rapi_app/Scripts_C#/  y busque el archivo Resto.MVC
-```
-
-_Ejecute el siguiente comando en ese terminal_
-
-```
-dotnet run --project "/mnt/Datos/Rapi_app/Scripts_C#/Resto.MVC/Resto.MVC.csproj
+dotnet run --project "/mnt/Datos/Rapi_app/Scripts_C#/Resto.MVC/Resto.MVC.csproj 
 ```
 
 
