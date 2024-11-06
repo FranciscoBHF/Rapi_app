@@ -21,7 +21,7 @@ public class AdoDapper : IAdo
     private static readonly string _queryAltaCliente
         = "CALL AltaCliente(@email, @cliente, @apellido, @password)";
     private static readonly string _queryInicioSesion
-        = "CALL buscarEmailPassword(@email, @password)";
+        = @"SELECT * FROM Cliente WHERE email = @unEmail AND pasword = @unPassword";
 
     private static readonly string _queryAltaPlato
     = "CALL AltaPlato(@idRestaurant, @plato, @descripcion, @precio, @disponible )";
@@ -34,8 +34,6 @@ public class AdoDapper : IAdo
     {
         var parametros = new DynamicParameters();
         parametros.Add("@email", cliente.email);
-        parametros.Add("@cliente", cliente.cliente);
-        parametros.Add("@apellido", cliente.apellido);
         parametros.Add("@password", password);
 
         _conexion.Execute(_queryInicioSesion, parametros, commandType: CommandType.StoredProcedure);
@@ -69,11 +67,12 @@ public class AdoDapper : IAdo
         DynamicParameters parametros = ParametrosParaInicioSesion(cliente);
         return _conexion.ExecuteAsync("altaCliente", parametros, commandType: CommandType.StoredProcedure);
     }
-    public Task InicioSesionAsync(Cliente cliente)
+    public async Task<Cliente?> InicioSesionAsync(string email, string password)
     {
-        DynamicParameters parametros = ParametrosParaAltaCliente(cliente);
-        return _conexion.ExecuteAsync("InicioSesion", parametros, commandType: CommandType.StoredProcedure);
+        var parametros = new { unEmail = email, unPassword = password };
+        return await _conexion.QueryFirstOrDefaultAsync<Cliente>(_queryInicioSesion, parametros);
     }
+
     public List<Cliente> ObtenerClientes()
         => _conexion.Query<Cliente>(_queryTodosClientes).ToList();
     public async Task<Cliente> DetalleClienteAsync(int idCliente)
@@ -126,9 +125,9 @@ public class AdoDapper : IAdo
         FROM Cliente
         WHERE idCliente = @idCliente";
     private static readonly string _queryDetalleInicio
-    = @"SELECT  idCliente,email,pasword
+    = @"SELECT  *
         FROM Cliente
-        WHERE idCliente = @idCliente";
+        WHERE idCliente = @unIdCliente";
 
     private static readonly string _queryTodosRestaurants
     = @"select *
@@ -378,11 +377,10 @@ public class AdoDapper : IAdo
         throw new NotImplementedException();
     }
 
-    public async Task<Cliente> DetalleInicioAsync(int idCliente)
+    public async Task<Cliente?> DetalleInicioAsync(int idCliente)
     {
-        using var multi = await _conexion.QueryMultipleAsync(_queryDetalleInicio, new { idCliente });
-        var cliente = await multi.ReadSingleOrDefaultAsync<Cliente>();
-        return cliente;    
+        var parametros = new { unIdCliente = idCliente };
+        return await _conexion.QueryFirstOrDefaultAsync<Cliente>(_queryDetalleInicio, parametros);
     }
 
     public async Task<List<Cliente>> buscarEmailPassword(string email, string pasword)

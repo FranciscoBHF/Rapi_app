@@ -41,7 +41,7 @@ public class ClienteController : Controller
     {
         // Verificar si ya existe un cliente con el mismo email
         var clientesExistentes = await _Ado.ObtenerClientesAsync();
-        var clienteExistente = clientesExistentes.FirstOrDefault(c => 
+        var clienteExistente = clientesExistentes.FirstOrDefault(c =>
             c.email.Equals(clienteModal.Email, StringComparison.OrdinalIgnoreCase));
 
         if (clienteExistente != null)
@@ -52,7 +52,7 @@ public class ClienteController : Controller
 
         var cliente = new Cliente(clienteModal.Email!, clienteModal.Cliente!, clienteModal.Apellido!, clienteModal.password!);
         await _Ado.AltaClienteAsync(cliente);
-        return RedirectToAction(nameof(ObtenerClientes)); 
+        return RedirectToAction(nameof(ObtenerClientes));
     }
     [HttpPost]
     public async Task<IActionResult> Detalle(int id)
@@ -87,23 +87,28 @@ public class ClienteController : Controller
         return View("../Cliente/DetalleCliente", cliente);
     }
 
-        [HttpPost]
-    public async Task<IActionResult> InicioSesion(ClienteModal clienteModal) 
+    [HttpPost]
+    public async Task<IActionResult> InicioSesion(ClienteModal clienteModal)
     {
-        var clientes = await _Ado.ObtenerClientesAsync();
+        // var clientes = await _Ado.ObtenerClientesAsync();
         var modal = new ClienteModal();
-        var cliente = clientes.Where(x => x.email == clienteModal.Email && x.pasword == ConvertirAHashSHA256(clienteModal.password)).ToList();
-        if (cliente.Count == 0)
+        // var cliente = clientes.Where(x => x.email == clienteModal.Email && x.pasword == ConvertirAHashSHA256(clienteModal.password)).ToList();
+        var cliente = await _Ado.InicioSesionAsync(clienteModal.Email, ConvertirAHashSHA256(clienteModal.password));
+        if (cliente == null)
         {
             modal.error = true;
             return View("../Cliente/InicioSesion", modal);
         }
-        return RedirectToAction(nameof(ObtenerDetalleInicio));
+        return RedirectToAction(nameof(ObtenerDetalleInicio), new { id = cliente.idCliente });
     }
+
     [HttpGet]
     public async Task<IActionResult> ObtenerDetalleInicio(int id)
     {
+        System.Console.WriteLine(id);
         var cliente = await _Ado.DetalleInicioAsync(id);
+        System.Console.WriteLine(cliente.cliente);
         return View("../Cliente/DetalleInicio", cliente);
+        // return View("../Cliente/DetalleInicio");
     }
 }
