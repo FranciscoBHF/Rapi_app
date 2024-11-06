@@ -60,11 +60,12 @@ Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones
 
 ## Autores ✒️
 
-| Integrante              | Rol            | User                                                    |
-| :--------:              | :-:             :--:                                                     |
-| Francisco Heffner       | Desarrollo     | [FranciscoBHF](https://github.com/FranciscoBHF)         |
-| Axel martinez           | Desarrollo     | [LucasMedina04](https://github.com/LucasMedina04)       |
-| David Quiñones          | Desarrollo     | [Liono02](https://github.com/Liono02)                   |
+| Integrante               | Rol                     | User                                                    |
+| :--------:               | :-:                     | :--:                                                    |
+| Francisco Basualdo       | Desarrollo              | [FranciscoBHF](https://github.com/FranciscoBHF)         |
+| Axel Martinez            | Desarrollo              |  [AxelMtz1](https://github.com/AxelMtz1)                |
+| David Quiñones           | Desarrollo              | [David3578](https://github.com/David3578)                   |
+  
 
 
 
