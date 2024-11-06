@@ -16,7 +16,7 @@ Proyecto en `C#` para generar un simulador de futbol. El proyecto apunta a refor
 Clonar el repositorio github, desde Github Desktop o ejecutar en la terminal o CMD:
 
 ```
-git clone https://github.com/ET12DE1Computacion/Fulbo12
+git clone https://github.com/FranciscoBHF/Rapi_app
 ```
 
 ### Pre-requisitos 📋
@@ -60,11 +60,12 @@ Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones
 
 ## Autores ✒️
 
-| Integrante               | Rol                     | User                                                    |
-| :--------:               | :-:                     | :--:                                                    |
-| Francisco Basualdo       | Desarrollo              | [FranciscoBHF](https://github.com/FranciscoBHF)         |
-| Axel Martinez            | Desarrollo              |  [AxelMtz1](https://github.com/AxelMtz1)                |
-| David Quiñones           | Desarrollo              | [David3578](https://github.com/David3578)                   |
+| Integrante               | Rol                     | User                                                                |
+| :--------:               | :-:                     | :--:                                                                |
+| Francisco Basualdo       | Desarrollo              | [FranciscoBHF](https://github.com/FranciscoBHF)                     |
+| Axel Martinez            | Desarrollo              | [AxelMtz1](https://github.com/AxelMtz1)                             |
+| David Quiñones           | Desarrollo              | [David3578](https://github.com/David3578)                           |
+| Sara Castro              | Desarrollo              | [SaraCastro124](https://github.com/SaraCastro124)                   |
   
 
 
