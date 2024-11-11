@@ -7,7 +7,7 @@
   <img src="https://et12.edu.ar/imgs/et12.png">
 </p>
 
-# Restp APP
+# Resto APP
 
 Proyecto en `C#` para generar una aplicacion para pedir comida.
 
@@ -69,9 +69,3 @@ _Agrega notas adicionales sobre que cosas se debe instalar, configurar y como ha
 | Axel Martinez            | Desarrollo              | [AxelMtz1](https://github.com/AxelMtz1)                             |
 | David Quiñones           | Desarrollo              | [David3578](https://github.com/David3578)                           |
 | Sara Castro              | Desarrollo              | [SaraCastro124](https://github.com/SaraCastro124)                   |
-
-
-
-## Licencia 📄
-
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
