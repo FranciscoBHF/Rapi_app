@@ -26,16 +26,10 @@ git clone https://github.com/FranciscoBHF/Rapi_app
 ### Instalación 🔧
 
 
-_Preparación de base de datos_
+_Preparación de base de datos, abra la terminal integrada en el archivo scripts y inicie la base de datos. Ejemplo del comando:_
 
 ```
-Abra la terminal integrada en el archivo scripts
-```
-
-_Inicie la base de datos de _
-
-```
-Ejemplo del comando: mysql -u 5to_agbd -p. Apriete la tecla enter y luego escriba la contraseña (Trigg3rs!)
+mysql -u 5to_agbd -p. Apriete la tecla enter y luego escriba la contraseña (Trigg3rs!)
 ```
 
 _Ejecute el siguiente comando tal como esta escrito_
