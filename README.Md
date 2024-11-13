@@ -31,7 +31,7 @@ _Preparación de base de datos, abra la terminal integrada en el archivo scripts
 ```
 mysql -u 5to_agbd -p 
 ```
-_Apriete la tecla enter y luego escriba la contraseña_
+_Apriete la tecla enter y luego escriba la contraseña, en nuestro ejemplo la contraseña es la siguiente_
 ```
 Trigg3rs!
 ```
