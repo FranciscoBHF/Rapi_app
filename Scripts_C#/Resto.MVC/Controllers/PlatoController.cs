@@ -58,7 +58,7 @@ public class PlatoController : Controller
         }
 
 
-        var plato = new Plato(platoModal!.plato!, platoModal!.descripcion!, platoModal.precio, platoModal.idRestaurant, platoModal.disponible);
+        var plato = new Plato(platoModal!.plato!, platoModal!.descripcion!, platoModal.precio, platoModal.idRestaurant, platoModal.disponible, platoModal.foto);
         await _Ado.AltaPlatoAsync(plato);
         return RedirectToAction(nameof(ObtenerPlato));
     }

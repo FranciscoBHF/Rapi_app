@@ -49,6 +49,12 @@
                 </select>
             </div>
         </div>
+                    <label for="foto" class="col-sm-2 col-form-label">foto</label>
+            <div class="col-sm-10">
+                <input type="text" id="foto" asp-for="descripcion" required placeholder="Ingrese url"
+                    class="form-control">
+                <div class="invalid-feedback">Este campo es requerido.</div>
+        </div>
         <div class="row mb-2">
             <div class="col-sm-10 offset-sm-2">
                 <button type="submit" class="btn btn-primary">Guardar</button>

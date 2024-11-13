@@ -9,14 +9,16 @@ public class Plato
     public decimal? precio {get ; set ;}
     public ushort idRestaurant {get ; set ;}
     public bool disponible {get ; set ;}
-    public Restaurant? Restaurant { get; set; } 
-    public Plato(string plato, string descripcion, decimal? precio,ushort idRestaurant ,bool disponible)
+    public Restaurant? Restaurant { get; set; }
+    public string foto {get; set;} 
+    public Plato(string plato, string descripcion, decimal? precio,ushort idRestaurant ,bool disponible, string foto)
     {
         this.plato = plato;
         this.descripcion = descripcion;
         this.precio = precio;
         this.idRestaurant = idRestaurant;
         this.disponible = disponible;
+        this.foto = foto;
         //this.id = idPlato;
     }
     public Plato() { }
