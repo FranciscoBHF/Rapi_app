@@ -48,23 +48,43 @@
                     }
                 </select>
             </div>
-        </div>
-                    <label for="foto" class="col-sm-2 col-form-label">foto</label>
-            <div class="col-sm-10">
-                <input type="text" id="foto" asp-for="descripcion" required placeholder="Ingrese url"
-                    class="form-control">
-                <div class="invalid-feedback">Este campo es requerido.</div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-sm-10 offset-sm-2">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+
+            <body>
+                <h2></h2>
+                <div class="row mb-2">
+                    <label for="imageUrl" class="col-sm-2 col-form-label">URL de la imagen</label>
+                    <div class="col-sm-10">
+                        <input type="url" id="imageUrl" asp-for="imagen" placeholder="Ingrese la URL de la imagen"
+                            class="form-control" required>
+                        <div class="invalid-feedback">Por favor, ingrese una URL válida.</div>
+                    </div>
+                </div>
+
+                <script>
+                    function mostrarImagen() {
+                        const url = document.getElementById("imageUrl").value;
+                        const img = document.getElementById("imagen");
+
+                        if (url.match(/\.(jpeg|jpg|png|gif)$/i)) {
+                            img.src = url;
+                            img.style.display = "block";
+                        } else {
+                            img.style.display = "none";
+                        }
+                    }
+                </script>
+            </body>
+
+            <div class="row mb-2">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
             </div>
-        </div>
     </form>
 </div>
 @if (!ViewData.ModelState.IsValid)
 {
     <div class="alert alert-danger">
-        @Html.ValidationSummary(true)
-    </div>
+    @Html.ValidationSummary(true)
+</div>
 }

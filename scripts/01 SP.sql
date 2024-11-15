@@ -36,24 +36,24 @@ END $$
 
 DELIMITER $$
 
-CREATE PROCEDURE AltaPlato(in unidRestaurant SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcionP VARCHAR(45),in unprecio DECIMAL(7,2),in undisponible bool)
+CREATE PROCEDURE AltaPlato(in unidRestaurant SMALLINT UNSIGNED,in unplato VARCHAR(45),in undescripcion VARCHAR(150),in unprecio DECIMAL(7,2),in undisponible bool, in unimagen varchar(150))
 begin
-	Insert into Plato (idRestaurant, Plato, descripcion, precio, disponible)
-	values (unidRestaurant, unplato, undescripcionP, unprecio, undisponible);
+	Insert into Plato (idRestaurant, Plato, descripcion, precio, disponible, imagen)
+	values (unidRestaurant, unplato, undescripcion, unprecio, undisponible, unimagen);
 end$$
 
 DELIMITER $$
-CREATE PROCEDURE AltaPedido(in unnumero mediumint UNSIGNED, in unfecha DATETIME, in unvaloracion FLOAT,in undescripcionPE VARCHAR(45),in unidRestaurant SMALLINT UNSIGNED,in unidCliente mediumint unsigned)
+CREATE PROCEDURE AltaPedido(in unnumero mediumint UNSIGNED, in unfecha DATETIME, in unvaloracion FLOAT,in undescripcion VARCHAR(45),in unidRestaurant SMALLINT UNSIGNED,in unidCliente mediumint unsigned)
 begin 
 	insert into Pedido(numero,idRestaurant,idCliente,fecha,valoracion,descripcion)
-	values(unnumero,unidRestaurant,unidCliente,unfecha,unvaloracion,undescripcionPE);
+	values(unnumero,unidRestaurant,unidCliente,unfecha,unvaloracion,undescripcion);
 end$$
 
 DELIMITER $$
-CREATE PROCEDURE AltaPlatoPedido(In unidPlato mediumint UNSIGNED,in unnumero mediumint UNSIGNED,in uncantPlatos TINYINT UNSIGNED,in undetalle DECIMAL(7,2))
+CREATE PROCEDURE AltaPlatoPedido(In unid mediumint UNSIGNED,in unnumero mediumint UNSIGNED,in uncantPlatos TINYINT UNSIGNED,in undetalle DECIMAL(7,2))
 begin
-	INSERT into PlatoPedido (idPlato,numero,cantPlatos,detalle)
-	values (unidPlato,unnumero,uncantPlatos,undetalle);
+	INSERT into PlatoPedido (id,numero,cantPlatos,detalle)
+	values (unid,unnumero,uncantPlatos,undetalle);
 END$$
 DELIMITER $$
 CREATE FUNCTION GananciaResto (unidRestaurant SMALLINT UNSIGNED, unfecha1 DATETIME, unfecha2 DATETIME) returns FLOAT  reads sql data

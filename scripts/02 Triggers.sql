@@ -9,17 +9,17 @@ BEGIN
 	set VarAno = YEAR(CURRENT_DATE());
 	if (exists (SELECT *
     	FROM VentaResto
-    	WHERE idPlato = NEW.idPlato
+    	WHERE id = NEW.id
     	and mes = VarMes
         and ano = VarAno ))THEN
         	UPDATE VentaResto
         	SET monto = monto + NEW.detalle
-        	WHERE idPlato = NEW.idPlato
+        	WHERE id = NEW.id
             	and mes = VarMes
         	and ano = VarAno;
 	ELSE
-        	INSERT INTO VentaResto (idRestaurant, idPlato, mes, ano, monto)
-        	VALUES (idRestaurant, NEW.idPlato, mes, ano , (NEW.detalle * NEW.cantPlatos));
+        	INSERT INTO VentaResto (idRestaurant, id, mes, ano, monto)
+        	VALUES (idRestaurant, NEW.id, mes, ano , (NEW.detalle * NEW.cantPlatos));
     END IF;
 END$$
 DELIMITER $$
@@ -28,7 +28,7 @@ FOR EACH ROW
 BEGIN
     UPDATE VentaResto
     SET monto = monto - OLD.detalle
-    WHERE idPlato = OLD.idPlato
+    WHERE id = OLD.id
    	and mes = VarMes
     	and ano = VarAno;
 END$$

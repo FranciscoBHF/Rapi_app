@@ -18,6 +18,7 @@ descripcion varchar (150),
 precio decimal(7,2),
 idRestaurant SMALLINT UNSIGNED,
 disponible bool,
+imagen varchar(150),
 id mediumint unsigned AUTO_INCREMENT,
 primary key(id),
 CONSTRAINT FK_Restaurante_Plato FOREIGN KEY (idRestaurant)

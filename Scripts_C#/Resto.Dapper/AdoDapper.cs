@@ -24,7 +24,7 @@ public class AdoDapper : IAdo
         = @"SELECT * FROM Cliente WHERE email = @unEmail AND pasword = @unPassword";
 
     private static readonly string _queryAltaPlato
-    = "CALL AltaPlato(@idRestaurant, @plato, @descripcion, @precio, @disponible )";
+    = "CALL AltaPlato(@idRestaurant, @plato, @descripcion, @precio, @disponible, @imagen)";
 
 
     private static readonly string _queryTodosClientes
@@ -113,7 +113,7 @@ public class AdoDapper : IAdo
         = @"select * from Plato p";
 
     private static readonly string _queryDetallePlato
-    = @"SELECT p.id, p.plato, p.descripcion, p.precio, p.idRestaurant, p.disponible
+    = @"SELECT p.id, p.plato, p.descripcion, p.precio, p.idRestaurant, p.disponible, p.imagen
         FROM Plato p
         WHERE p.id = @unidPlato;
 
@@ -165,6 +165,8 @@ public class AdoDapper : IAdo
         parametros.Add("@descripcion", plato.descripcion);
         parametros.Add("@precio", plato.precio);
         parametros.Add("@disponible", plato.disponible);
+        parametros.Add("@imagen", plato.imagen);
+
 
         _conexion.Execute(_queryAltaPlato, parametros, commandType: CommandType.StoredProcedure);
     }
@@ -231,10 +233,12 @@ public class AdoDapper : IAdo
         var parametros = new DynamicParameters();
         parametros.Add("@unidPlato", direction: ParameterDirection.Output);
         parametros.Add("@unplato", plato.plato);
-        parametros.Add("@undescripcionp", plato.descripcion);
+        parametros.Add("@undescripcion", plato.descripcion);
         parametros.Add("@unprecio", plato.precio);
         parametros.Add("@undisponible", plato.disponible);
         parametros.Add("@unidRestaurant", plato.idRestaurant);
+        parametros.Add("@unimagen", plato.imagen);
+
         return parametros;
     }
 

@@ -10,6 +10,6 @@ public class PlatoModal
     public ushort idRestaurant { get; set; }
     public bool disponible {get; set;}
     public List<Restaurant> restaurants { get; set; } = new List<Restaurant>();
-    public string foto {get; set;}
+    public string imagen {get; set;}
     public PlatoModal() {}
 }
